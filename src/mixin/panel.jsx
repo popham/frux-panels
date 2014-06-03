@@ -2,6 +2,54 @@
 
 var react = require('react');
 var DragBus = require('../DragBus');
+var Insertion = require('../Insertion');
+
+/**
+ * Default policies
+ */
+function headerUninstaller(array) {
+    array.push(
+        <header>
+            <div>
+                <img url={this.props.uninstallUrl} onClick={this.uninstall} />
+            </div>
+            <p>{this.state.title}</p>
+        </header>
+    );
+
+    return array;
+}
+
+function contentTemplateMethod(array) {
+    if (this.content) {
+        array.push(this.content());
+    }
+
+    return array;
+}
+
+function footerIconicTriggers(array) {
+    function iconify(icon) {
+        return (
+            <li>
+                <img height={this.state.iconHeight}
+                     width={this.state.iconWidth}
+                     url={icon.url}
+                     onClick={icon.onClick} />
+            </li>
+        );
+    }
+
+    if (this.state.icons.length > 0) {
+        array.push(
+            <footer>
+                <ul>{icons.map(iconify.bind(this))}</ul>
+            </footer>
+        );
+    }
+
+    return array;
+}
 
 /**
  * Externally supplied state:
@@ -11,50 +59,55 @@ module.exports = {
     propTypes : {
         panels : react.PropTypes.instanceOf(List).isRequired,
         position : react.PropTypes.number.isRequired,
-        dragBus : react.PropTypes.instanceOf(DragBus)
+        dragBus : react.PropTypes.instanceOf(DragBus),
+
+        headerPolicy : react.PropTypes.func,
+        contentPolicy : react.PropTypes.func,
+        footerPolicy : react.PropTypes.func,
+        uninstallUrl : react.PropTypes.string
     },
 
-    appendHeader : function (array) {
-        if (this.state.title === undefined) { return array; }
-        array.push(<header>{this.state.title}</header>);
-
-        return array;
+    getDefaultProps : function () { return {
+        headerPolicy : headerUninstaller.bind(this),
+        contentPolicy : contentTemplateMethod.bind(this),
+        footerPolicy : footerIconicTriggers.bind(this)
     },
 
-    appendFooter : function (array) {
-        var iconify = function (icon) {
-            return (
-                <li>
-                    <img height={this.state.iconHeight}
-                         width={this.state.iconWidth}
-                         url={icon.url}
-                         onClick={icon.onClick} />
-                </li>
-            );
-        }.bind(this);
+    getInitialState : function () { return {
+        title : ''
+    }; },
 
-        // Easy to get the thing on the screen, but should this be under the
-        // header?
-        var icons = this.state.icons;
-        if (this.state.uninstallIcon){
-            icons = icons.concat([this.state.uninstallIcon]);
+    uninstall : function () {
+        var i = this.props.position;
+        if (i === 0 || i === this.panels.items.length-1) {
+            this.panels.act.remove(i);
+            return;
         }
 
-        array.push(<footer><ul>{icons.map(iconify, this)}</ul></footer>);
+        var pre = this.panels.items[i-1];
+        var post = this.panels.items[i+1];
+        if (pre.cls === Insertion && post.cls === Insertion) {
+            // Use the trailing insertion point for the primary metadata.
+            // Insertion bumped this point, so restore it so that a quick
+            // (insert, remove) yields an identity operation,.
+            pre = Insertion.join(post, pre);
 
-        return array;
+            this.panels.act.remove(i+1);
+            this.panels.act.remove(i);
+            this.panels.act.remove(i-1);
+
+            this.panels.act.insert(pre, i-1);
+        } else {
+            this.panels.act.remove(i);
+        }
     },
 
     render : function () {
         var children = [];
 
-        this.appendHeader(children);
-
-        if (this.content) {
-            children.push(this.content());
-        }
-
-        this.appendFooter(children);
+        this.headerPolicy(children);
+        this.contentPolicy(children);
+        this.footerPolicy(children);
 
         return <section>{children}</section>;
     }
