@@ -23,7 +23,7 @@ module.exports = {
     },
 
     appendFooter : function (array) {
-        function iconify(icon) {
+        (function iconify(icon) {
             return (
                 <li>
                     <img height={this.state.iconHeight}
@@ -32,7 +32,7 @@ module.exports = {
                          onClick={icon.onClick} />
                 </li>
             );
-        }.bind(this)
+        }).bind(this)
 
         // Easy to get the thing on the screen, but should this be under the
         // header?

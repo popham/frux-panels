@@ -14,7 +14,7 @@ var Insertion = react.createClass({
     },
 
     render: function () {
-        function installer(PanelClass) {
+        (function installer(PanelClass) {
             return function (event) {
                 var panels = this.props.panels;
                 var i = this.props.position;
@@ -36,7 +36,7 @@ var Insertion = react.createClass({
                 panels.insert(
                     {
                         cls : Insertion,
-                        key : this.state.nextKey;
+                        key : this.state.nextKey,
                         props : {
                             panelClasses : this.props.panelClasses
                         }
@@ -45,9 +45,9 @@ var Insertion = react.createClass({
                 );
                 this.setState({ nextKey : this.state.nextKey+1 });
             }.bind(this);
-        }.bind(this)
+        }).bind(this)
 
-        function iconify(PanelClass) {
+        (function iconify(PanelClass) {
             return (
                 <li>
                     <img height={this.state.iconHeight}
@@ -56,7 +56,7 @@ var Insertion = react.createClass({
                          onClick={installer(PanelClass)} />
                 </li>
             );
-        }.bind(this)
+        }).bind(this)
 
         return <ul>{this.props.panelClasses.map(iconify, this)}</ul>;
     }

@@ -5,7 +5,7 @@ var merge = require('react/lib/mergeInto');
 var DragBus = require('./DragBus');
 var List = require('../list/Store');
 
-var module.exports = react.createClass({
+module.exports = react.createClass({
     propTypes : function () { return {
         panelStore : react.PropTypes.instanceOf(List),
         dragBus : react.PropTypes.instanceOf(DragBus)
@@ -51,7 +51,7 @@ var module.exports = react.createClass({
     },
 
     render : function () {
-        function panelize(panel, index) {
+        (function panelize(panel, index) {
             // Baseline props that all panels use.
             var props = {
                 panels : this.props.panelStore,
@@ -63,7 +63,7 @@ var module.exports = react.createClass({
             mergeInto(props, panel.props);
 
             return <li key={panel.key}>{panel.cls(props)}</li>;
-        }.bind(this)
+        }).bind(this)
 
         return <ul>{this.state.panels.map(panelize, this)}</ul>;
     }
