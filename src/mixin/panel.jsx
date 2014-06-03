@@ -71,7 +71,7 @@ module.exports = {
         headerPolicy : headerUninstaller.bind(this),
         contentPolicy : contentTemplateMethod.bind(this),
         footerPolicy : footerIconicTriggers.bind(this)
-    },
+    }; },
 
     getInitialState : function () { return {
         title : ''
