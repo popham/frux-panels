@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
 var react = require('react');
-var List = require('../list/Store');
+var List = require('frux-list/Store');
 var DragBus = require('../DragBus');
 
 var Insertion = react.createClass({

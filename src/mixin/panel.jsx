@@ -1,7 +1,6 @@
 /** @jsx react.DOM */
 
 var react = require('react');
-var cloneWithProps = require('react/lib/cloneWithProps');
 var DragBus = require('../DragBus');
 
 /**

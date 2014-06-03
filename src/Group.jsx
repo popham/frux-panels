@@ -2,8 +2,8 @@
 
 var react = require('react');
 var merge = require('react/lib/mergeInto');
+var List = require('frux-list/Store');
 var DragBus = require('./DragBus');
-var List = require('../list/Store');
 
 module.exports = react.createClass({
     propTypes : function () { return {

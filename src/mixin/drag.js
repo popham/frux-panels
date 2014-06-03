@@ -1,9 +1,9 @@
 var react = require('react');
-var Drag = require('../DragBus');
+var DragBus = require('../DragBus');
 
 module.exports = {
     propTypes : function () { return {
-        dragDispatch : react.PropTypes.instanceOf(Drag)
+        dragBus : react.PropTypes.instanceOf(DragBus)
     }; },
 
     getDefaultProps : function () { return {
@@ -15,7 +15,7 @@ module.exports = {
     }; },
 
     handleDragStart : function (event) {
-        this.props.dragDispatch.act.drag(this.props.group, this.props.key);
+        this.props.dragBus.act.drag(this.props.group, this.props.key);
     },
 
     draggableProxy : function () {
