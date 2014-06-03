@@ -55,7 +55,7 @@ var Insertion = react.createClass({
                         cls : Insertion,
                         key : this.state.nextKey,
                         props : {
-                            components : this.props.components.slice(0);
+                            components : this.props.components.slice(0)
                         }
                     },
                     i
