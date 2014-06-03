@@ -51,7 +51,7 @@ module.exports = react.createClass({
     },
 
     render : function () {
-        (function panelize(panel, index) {
+        var panelize = function panelize(panel, index) {
             // Baseline props that all panels use.
             var props = {
                 panels : this.props.panelStore,
@@ -63,7 +63,7 @@ module.exports = react.createClass({
             mergeInto(props, panel.props);
 
             return <li key={panel.key}>{panel.cls(props)}</li>;
-        }).bind(this)
+        }.bind(this);
 
         return <ul>{this.state.panels.map(panelize, this)}</ul>;
     }

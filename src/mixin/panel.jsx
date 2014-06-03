@@ -22,7 +22,7 @@ module.exports = {
     },
 
     appendFooter : function (array) {
-        (function iconify(icon) {
+        var iconify = function (icon) {
             return (
                 <li>
                     <img height={this.state.iconHeight}
@@ -31,12 +31,13 @@ module.exports = {
                          onClick={icon.onClick} />
                 </li>
             );
-        }).bind(this)
+        }.bind(this);
 
         // Easy to get the thing on the screen, but should this be under the
         // header?
+        var icons = this.state.icons;
         if (this.state.uninstallIcon){
-            var icons = this.state.icons.concat([this.state.uninstallIcon]);
+            icons = icons.concat([this.state.uninstallIcon]);
         }
 
         array.push(<footer><ul>{icons.map(iconify, this)}</ul></footer>);
