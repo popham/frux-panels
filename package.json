@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "jsx": "jsx -x jsx src lib"
+    "jsx": "jsx -x jsx src lib",
+    "cp": "rsync -av --include='*/' --include='*.js' --exclude='*' src/ lib/",
+    "build": "npm run cp & npm run jsx"
   },
   "repository": {
     "type": "git",
