@@ -11,7 +11,8 @@ function headerUninstaller(array) {
     array.push(
         <header>
             <div>
-                <img url={this.props.uninstallUrl} onClick={this.uninstall} />
+                <span className="glyphicon glyphicon-remove"
+                      onClick={this.uninstall} />
             </div>
             <p>{this.state.title}</p>
         </header>
@@ -63,8 +64,7 @@ module.exports = {
 
         headerPolicy : react.PropTypes.func,
         contentPolicy : react.PropTypes.func,
-        footerPolicy : react.PropTypes.func,
-        uninstallUrl : react.PropTypes.string
+        footerPolicy : react.PropTypes.func
     },
 
     getDefaultProps : function () { return {
@@ -88,8 +88,9 @@ module.exports = {
         var post = this.panels.items[i+1];
         if (pre.cls === Insertion && post.cls === Insertion) {
             // Use the trailing insertion point for the primary metadata.
-            // Insertion bumped this point, so restore it so that a quick
-            // (insert, remove) yields an identity operation,.
+            // Insertion bumped this point way back when.  Restore it to the
+            // prior state so that a quick (insert, remove) yields an identity
+            // operation.
             pre = Insertion.join(post, pre);
 
             this.panels.act.remove(i+1);
