@@ -3,7 +3,7 @@
 var react = require('react');
 var merge = require('react/lib/merge');
 var List = require('frux-list/lib/Store');
-var DragBus = require('../DragBus');
+var DragBus = require('./DragBus');
 
 var Insertion = react.createClass({
     propTypes : {
