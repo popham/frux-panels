@@ -1,7 +1,6 @@
 /** @jsx react.DOM */
 
 var react = require('react');
-var DragBus = require('../DragBus');
 var Insertion = require('../Insertion');
 
 /**
@@ -57,11 +56,9 @@ function footerIconicTriggers(array) {
  * icons : [{url: 'http://asdf.com', onClick: function (e) {...}}, ...]
  */
 module.exports = {
-    propTypes : {
-        panels : react.PropTypes.instanceOf(List).isRequired,
-        position : react.PropTypes.number.isRequired,
-        dragBus : react.PropTypes.instanceOf(DragBus),
+    mixins : [require('./groupMember'), require('./panelsPublish')],
 
+    propTypes : {
         headerPolicy : react.PropTypes.func,
         contentPolicy : react.PropTypes.func,
         footerPolicy : react.PropTypes.func
@@ -78,28 +75,24 @@ module.exports = {
     }; },
 
     uninstall : function () {
-        var i = this.props.position;
-        if (i === 0 || i === this.panels.items.length-1) {
-            this.panels.act.remove(i);
+        var panels = this.props.panelsPublish;
+        var key = this.props.key;
+        if (!panels.hasPrevious(key) || !panels.hasNext(key)) {
+            // Remove ends of the list without fanfare.
+            this.props.panelsAct.remove(key);
             return;
         }
 
-        var pre = this.panels.items[i-1];
-        var post = this.panels.items[i+1];
+        var priorKey = panels.priorKey(key);
+        var nextKey = panels.nextKey(key);
         if (pre.cls === Insertion && post.cls === Insertion) {
             // Use the trailing insertion point for the primary metadata.
             // Insertion bumped this point way back when.  Restore it to the
             // prior state so that a quick (insert, remove) yields an identity
             // operation.
-            pre = Insertion.join(post, pre);
-
-            this.panels.act.remove(i+1);
-            this.panels.act.remove(i);
-            this.panels.act.remove(i-1);
-
-            this.panels.act.insert(pre, i-1);
+            this.props.panelsAct.remove(priorKey, 2);
         } else {
-            this.panels.act.remove(i);
+            this.props.panelsAct.remove(key, 1);
         }
     },
 
