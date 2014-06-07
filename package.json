@@ -8,7 +8,7 @@
     "jsx": "jsx -x jsx src lib",
     "cp": "rsync -av --include='*/' --include='*.js' --exclude='*' src/ lib/",
     "build": "npm run cp & npm run jsx",
-    "browserify": "mkdir -p dist/ && browserify index.js -x react -x frux-list -x baconjs -o dist/panels"
+    "browserify": "mkdir -p dist/ && browserify index.js -x react -x frux-list -x baconjs -o dist/panels.js"
   },
   "repository": {
     "type": "git",
