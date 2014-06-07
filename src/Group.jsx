@@ -27,7 +27,7 @@ module.exports = react.createClass({
     appendInsertion : function (components) {
         this.props.panelsAct.append([{
             cls : Insertion,
-            { components : components }
+            props : { components : components }
         }]);
     },
 
