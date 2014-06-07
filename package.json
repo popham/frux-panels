@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "jsx": "jsx -x jsx src lib",
     "cp": "rsync -av --include='*/' --include='*.js' --exclude='*' src/ lib/",
-    "build": "npm run cp & npm run jsx",
-    "browserify": "mkdir -p dist/ && browserify index.js -x react -x frux-list -x baconjs -o dist/panels.js"
+    "browserify": "mkdir -p dist/ && browserify index.js -x react -x frux-list -x baconjs -o dist/panels.js",
+    "build": "npm run cp & npm run jsx && npm run browserify"
   },
   "repository": {
     "type": "git",
