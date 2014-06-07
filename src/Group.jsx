@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
 var react = require('react');
-var merge = require('react/lib/mergeInto');
+var extend = require('xtend');
 var Insertion = require('./Insertion');
 
 module.exports = react.createClass({
@@ -12,7 +12,7 @@ module.exports = react.createClass({
      * e.g. the `panelClasses` prop of `Insertion`.
      */
     appendPanel : function (PanelClass, nonBaselineProps) {
-        var props = merge({
+        var props = extend({
             panelsPublish : this.props.panelsPublish,
             panelsAct : this.props.panelsAct,
             dragBus : this.props.dragBus
