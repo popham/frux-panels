@@ -1,7 +1,6 @@
 /** @jsx react.DOM */
 
 var react = require('react');
-var merge = require('react/lib/merge');
 
 var Insertion = react.createClass({
     mixins : [require('./mixin/groupMember')],

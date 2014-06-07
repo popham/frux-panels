@@ -12,11 +12,11 @@ module.exports = react.createClass({
      * e.g. the `panelClasses` prop of `Insertion`.
      */
     appendPanel : function (PanelClass, nonBaselineProps) {
-        var props = extend({
+        var props = extend(nonBaselineProps, {
             panelsPublish : this.props.panelsPublish,
             panelsAct : this.props.panelsAct,
             dragBus : this.props.dragBus
-        }, nonBaselineProps);
+        });
 
         this.props.panelsAct.append([{
             cls : PanelClass,
@@ -33,14 +33,10 @@ module.exports = react.createClass({
 
     render : function () {
         function panelize(panel, key) {
-            // Baseline props that all panels use.
-            var props = {
+            var props = extend(panel.props, {
                 panelsAct : this.props.panelsAct,
                 dragBus : this.props.dragBus
-            };
-
-            // Nonbaseline props for this particular panel.
-            merge(props, panel.props);
+            });
 
             return <li key={key}>{panel.cls(props)}</li>;
         }
