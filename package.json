@@ -8,7 +8,7 @@
     "jsx": "jsx -x jsx src lib",
     "cp": "rsync -av --include='*/' --include='*.js' --exclude='*' src/ lib/",
     "build": "npm run cp & npm run jsx",
-    "browserify": "browserify index.js -x react -x frux-list -o dist/panels"
+    "browserify": "browserify index.js -x react -x frux-list -x baconjs -o dist/panels"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,5 @@
   "bugs": {
     "url": "https://github.com/popham/frux-panels/issues"
   },
-  "homepage": "https://github.com/popham/frux-panels",
+  "homepage": "https://github.com/popham/frux-panels"
 }
