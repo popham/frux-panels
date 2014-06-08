@@ -1,9 +1,9 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-exports.DragBus = require('./lib/DragBus');
-exports.group = require('./lib/install/group');
+!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.fruxPanels=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+exports.DragBus = _dereq_('./lib/DragBus');
+exports.group = _dereq_('./lib/install/group');
 
-},{"./lib/DragBus":2,"./lib/install/group":5}],2:[function(require,module,exports){
-var bacon = require('baconjs');
+},{"./lib/DragBus":2,"./lib/install/group":5}],2:[function(_dereq_,module,exports){
+var bacon = _dereq_('baconjs');
 
 var Act = function () {
     this.streams = {
@@ -34,15 +34,15 @@ module.exports = function () {
     };
 };
 
-},{}],3:[function(require,module,exports){
+},{}],3:[function(_dereq_,module,exports){
 /** @jsx react.DOM */
 
-var react = require('react');
-var extend = require('xtend');
-var Insertion = require('./Insertion');
+var react = _dereq_('react');
+var extend = _dereq_('xtend');
+var Insertion = _dereq_('./Insertion');
 
 module.exports = react.createClass({
-    mixins : [require('./mixin/panelsPublish'), require('./mixin/groupMember')],
+    mixins : [_dereq_('./mixin/panelsPublish'), _dereq_('./mixin/groupMember')],
 
     /**
      * @param {object} props - Non-standard props for `PanelClass` consumption,
@@ -82,13 +82,13 @@ module.exports = react.createClass({
     }
 });
 
-},{"./Insertion":4,"./mixin/groupMember":6,"./mixin/panelsPublish":7,"xtend":8}],4:[function(require,module,exports){
+},{"./Insertion":4,"./mixin/groupMember":6,"./mixin/panelsPublish":7,"xtend":8}],4:[function(_dereq_,module,exports){
 /** @jsx react.DOM */
 
-var react = require('react');
+var react = _dereq_('react');
 
 var Insertion = react.createClass({
-    mixins : [require('./mixin/groupMember')],
+    mixins : [_dereq_('./mixin/groupMember')],
 
     propTypes : {
         components : react.PropTypes.arrayOf(react.PropTypes.object).isRequired
@@ -127,10 +127,10 @@ var Insertion = react.createClass({
 
 module.exports = Insertion;
 
-},{"./mixin/groupMember":6}],5:[function(require,module,exports){
+},{"./mixin/groupMember":6}],5:[function(_dereq_,module,exports){
 /** @jsx react.DOM */
 
-var Group = require('../Group');
+var Group = _dereq_('../Group');
 
 module.exports = function (element, panelsStore, dragBus) {
     var group = Group( {panelsPublish:panelsStore.publish,
@@ -142,10 +142,10 @@ module.exports = function (element, panelsStore, dragBus) {
     return group;
 };
 
-},{"../Group":3}],6:[function(require,module,exports){
-var react = require('react');
-var list = require('frux-list');
-var DragBus = require('../DragBus');
+},{"../Group":3}],6:[function(_dereq_,module,exports){
+var react = _dereq_('react');
+var list = _dereq_('frux-list');
+var DragBus = _dereq_('../DragBus');
 
 module.exports = {
     propTypes : {
@@ -154,8 +154,8 @@ module.exports = {
     }
 };
 
-},{"../DragBus":2}],7:[function(require,module,exports){
-var list = require('frux-list');
+},{"../DragBus":2}],7:[function(_dereq_,module,exports){
+var list = _dereq_('frux-list');
 
 module.exports = {
     propTypes : {
@@ -185,7 +185,7 @@ module.exports = {
     }
 };
 
-},{}],8:[function(require,module,exports){
+},{}],8:[function(_dereq_,module,exports){
 module.exports = extend
 
 function extend() {
@@ -204,6 +204,8 @@ function extend() {
     return target
 }
 
-},{}],9:[function(require,module,exports){
+},{}],9:[function(_dereq_,module,exports){
 
 },{}]},{},[1])
+(1)
+});
