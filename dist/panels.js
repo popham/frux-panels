@@ -82,7 +82,7 @@ module.exports = react.createClass({
     }
 });
 
-},{"./Insertion":4,"./mixin/groupMember":6,"./mixin/panelsPublish":7,"xtend":8}],4:[function(_dereq_,module,exports){
+},{"./Insertion":4,"./mixin/groupMember":6,"./mixin/panelsPublish":7}],4:[function(_dereq_,module,exports){
 /** @jsx react.DOM */
 
 var react = _dereq_('react');
@@ -184,27 +184,6 @@ module.exports = {
         this.setState({ panelsPublishUnsubscribe : null });
     }
 };
-
-},{}],8:[function(_dereq_,module,exports){
-module.exports = extend
-
-function extend() {
-    var target = {}
-
-    for (var i = 0; i < arguments.length; i++) {
-        var source = arguments[i]
-
-        for (var key in source) {
-            if (source.hasOwnProperty(key)) {
-                target[key] = source[key]
-            }
-        }
-    }
-
-    return target
-}
-
-},{}],9:[function(_dereq_,module,exports){
 
 },{}]},{},[1])
 (1)
