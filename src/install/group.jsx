@@ -1,13 +1,15 @@
 /** @jsx react.DOM */
 
-var Group = require('../Group');
+if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-module.exports = function (element, panelsStore, dragBus) {
-    var group = <Group panelsPublish={panelsStore.publish}
-                       panelsAct={panelsStore.act}
-                       dragBus={dragBus} />;
+define(['react', '../Group'], function (react, Group) {
+    return function (element, panelsStore, dragBus) {
+        var group = <Group panelsPublish={panelsStore.publish}
+                           panelsAct={panelsStore.act}
+                           dragBus={dragBus} />;
 
-    react.renderComponent(group, element);
+        react.renderComponent(group, element);
 
-    return group;
-};
+        return group;
+    };
+});

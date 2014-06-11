@@ -1,10 +1,12 @@
-var react = require('react');
-var list = require('frux-list');
-var DragBus = require('../DragBus');
+if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-module.exports = {
-    propTypes : {
-        panelsAct : react.PropTypes.instanceOf(list.Act).isRequired,
-        dragBus : react.PropTypes.instanceOf(DragBus)
-    }
-};
+define(['react', 'frux-list', '../DragBus'], function (
+         react,        list,      DragBus) {
+
+    return {
+        propTypes : {
+            panelsAct : react.PropTypes.instanceOf(list.Act).isRequired,
+            dragBus : react.PropTypes.instanceOf(DragBus)
+        }
+    };
+});

@@ -1,24 +1,25 @@
-var react = require('react');
-var DragBus = require('../DragBus');
+if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-module.exports = {
-    propTypes : function () { return {
-        dragBus : react.PropTypes.instanceOf(DragBus)
-    }; },
+define(['react', '../DragBus'], function (react, DragBus) {
+    return {
+        propTypes : function () { return {
+            dragBus : react.PropTypes.instanceOf(DragBus)
+        }; },
 
-    getDefaultProps : function () { return {
-        draggable : true
-    }; },
+        getDefaultProps : function () { return {
+            draggable : true
+        }; },
 
-    getInitialState : function () { return {
-        unsubscribe : null
-    }; },
+        getInitialState : function () { return {
+            unsubscribe : null
+        }; },
 
-    handleDragStart : function (event) {
-        this.props.dragBus.act.drag(this.props.group, this.props.key);
-    },
+        handleDragStart : function (event) {
+            this.props.dragBus.act.drag(this.props.group, this.props.key);
+        },
 
-    draggableProxy : function () {
-        return null;/*component placeholder absolute positioned ...*/
-    },
-};
+        draggableProxy : function () {
+            return null;/*component placeholder absolute positioned ...*/
+        },
+    };
+});
