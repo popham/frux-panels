@@ -2,11 +2,9 @@
 
 if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-define(['react'], function (react) {
-    var react = require('react');
-
+define(['react', './mixin/groupMember'], function (react, groupMember) {
     var Insertion = react.createClass({
-        mixins : [require('./mixin/groupMember')],
+        mixins : [groupMember],
 
         propTypes : {
             components : react.PropTypes.arrayOf(react.PropTypes.object).isRequired

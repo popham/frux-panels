@@ -2,7 +2,8 @@
 
 if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-define(['react', '../Insertion'], function (react, Insertion) {
+define(['react', '../Insertion', './groupMember', './panelsPublish'], function (
+         react,      Insertion,     groupMember,     panelsPublish) {
     /**
      * Default policies
      */
@@ -56,7 +57,7 @@ define(['react', '../Insertion'], function (react, Insertion) {
      * icons : [{url: 'http://asdf.com', onClick: function (e) {...}}, ...]
      */
     return {
-        mixins : [require('./groupMember'), require('./panelsPublish')],
+        mixins : [groupMember, panelsPublish],
 
         propTypes : {
             headerPolicy : react.PropTypes.func,

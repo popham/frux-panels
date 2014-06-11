@@ -2,10 +2,10 @@
 
 if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-define(['react', 'lodash', './Insertion'], function (
-         react,        _,     Insertion) {
+define(['react', 'lodash', './Insertion', './mixin/panelsPublish', './mixin/groupMember'], function (
+         react,        _,     Insertion,           panelsPublish,           groupMember) {
     return react.createClass({
-        mixins : [require('./mixin/panelsPublish'), require('./mixin/groupMember')],
+        mixins : [panelsPublish, groupMember],
 
         /**
          * @param {object} props - Non-standard props for `PanelClass` consumption,
