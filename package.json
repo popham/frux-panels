@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "jsx": "jsx -x jsx src lib",
+    "jsx": "node ./node_modules/.bin/jsx -x jsx src lib",
     "cp": "rsync -av --include='*/' --include='*.js' --exclude='*' src/ lib/",
-    "browserify": "mkdir -p dist/ && browserify index.js --no-bundle-external -s frux-panels -o dist/panels.js",
-    "build": "npm run cp & npm run jsx && npm run browserify"
+    "build": "npm run cp & npm run jsx"
   },
   "repository": {
     "type": "git",
@@ -31,7 +30,7 @@
     "url": "https://github.com/popham/frux-panels/issues"
   },
   "homepage": "https://github.com/popham/frux-panels",
-  "dependencies": {
-    "xtend": "^3.0.0"
+  "devDependencies": {
+    "react-tools": "^0.10.0"
   }
 }
