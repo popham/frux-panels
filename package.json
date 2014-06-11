@@ -2,7 +2,7 @@
   "name": "frux-panels",
   "version": "0.0.0",
   "description": "Functional reactive panels UI under React's Flux architecture.",
-  "main": "index.js",
+  "main": "index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "jsx": "node ./node_modules/.bin/jsx -x jsx src lib",
