@@ -1,7 +1,5 @@
 /** @jsx react.DOM */
 
-if (typeof define !== 'function') { var define = require('amdefine')(module); }
-
 define(['react', './mixin/groupMember'], function (react, groupMember) {
     var Insertion = react.createClass({
         mixins : [groupMember],
