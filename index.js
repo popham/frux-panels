@@ -1,7 +1,8 @@
-define(['./lib/DragBus', './lib/install/group'], function (
-               DragBus,                 group ){
+define(['./lib/DragBus', './lib/install/group', './lib/mixin'], function (
+               DragBus,                 group,         mixin){
     return {
         DragBus : DragBus,
-        group : group
+        group : group,
+        mixin : mixin
     };
 });
