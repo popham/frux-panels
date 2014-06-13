@@ -26,6 +26,8 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "src"
+    "src",
+    "bower.json",
+    "package.json"
   ]
 }
