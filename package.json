@@ -30,6 +30,7 @@
     "url": "https://github.com/popham/frux-panels/issues"
   },
   "homepage": "https://github.com/popham/frux-panels",
+  "dojoBuild": "profile.js",
   "devDependencies": {
     "react-tools": "^0.10.0"
   }
