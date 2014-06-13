@@ -1,0 +1,31 @@
+{
+  "name": "frux-panels",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/popham/frux-panels",
+  "authors": [
+    "Tim Popham <popham@uw.edu>"
+  ],
+  "description": "Functional reactive panels UI under React's Flux architecture.",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "frp",
+    "functional",
+    "reactive",
+    "react",
+    "reactjs",
+    "flux",
+    "javascript",
+    "ui",
+    "panels"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "src"
+  ]
+}
