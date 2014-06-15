@@ -11,7 +11,7 @@ define(['react', 'frux-list'], function (react, list) {
         }; },
 
         componentWillMount : function () {
-            var unsubscribe = this.props.panelsPublish.items.subscribe(
+            var unsubscribe = this.props.panelsPublish.items.onValue(
                 function (items) {
                     this.setState({ panels : items });
                 }.bind(this)

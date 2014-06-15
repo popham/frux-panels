@@ -21,7 +21,7 @@ define(['react', '../DragBus'], function (react, DragBus) {
 
         componentWillMount : function () {
             var u1 = this.props.dragBus.publish.drag.subscribe(
-                function (source) {
+                function (source) { // Event => n.g. (use value() or value stream)
                     this.setState({ activeDrop : source !== null });
                 }.bind(this)
             );
