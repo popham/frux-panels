@@ -1,4 +1,4 @@
-define(['react', 'frux-list'], function (list) {
+define(['react', 'frux-list'], function (react, list) {
     return {
         propTypes : {
             panelsPublish : react.PropTypes.instanceOf(list.Publish).isRequired
