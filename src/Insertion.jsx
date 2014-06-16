@@ -1,11 +1,12 @@
 /** @jsx react.DOM */
 
-define(['react', './mixin/groupMember'], function (react, groupMember) {
+define(['react', 'lodash', './mixin/groupMember'], function (react, _, groupMember) {
     var Insertion = react.createClass({
         mixins : [groupMember],
 
         propTypes : {
             components : react.PropTypes.arrayOf(react.PropTypes.object).isRequired,
+            componentBaselineProps : react.PropTypes.object.isRequired,
             iconWidth : react.PropTypes.string,
             iconHeight : react.PropTypes.string
         },
@@ -18,14 +19,16 @@ define(['react', './mixin/groupMember'], function (react, groupMember) {
         render : function () {
             function installer(component) {
                 return function (event) {
-                    var panels = this.props.panelsAct;
+                    var props = _.extend({}, this.props.componentBaselineProps);
+                    _.extend(props, component.props);
+
                     panels.splice(this.props.key, 0, [
                         {
                             cls : Insertion,
                             props : { components : this.props.components }
                         }, {
                             cls : component.cls,
-                            props : component.props
+                            props : props
                         }
                     ]);
                 }.bind(this);
