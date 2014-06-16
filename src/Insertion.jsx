@@ -6,8 +6,8 @@ define(['react', './mixin/groupMember'], function (react, groupMember) {
 
         propTypes : {
             components : react.PropTypes.arrayOf(react.PropTypes.object).isRequired,
-            iconWidth : react.PropTypes.number,
-            iconHeight : react.PropTypes.number
+            iconWidth : react.PropTypes.string,
+            iconHeight : react.PropTypes.string
         },
 
         getDefaultProps : function () { return {
