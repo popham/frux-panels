@@ -5,7 +5,6 @@ define(['react', 'frux-list'], function (react, list) {
         },
 
         getInitialState : function () { return {
-            title : '',
             panels : null,
             panelsPublishUnsubscribe : null
         }; },
