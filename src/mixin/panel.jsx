@@ -33,7 +33,7 @@ define(['react', '../Insertion', './groupMember', './panelsPublish'], function (
                 <li>
                     <img height={this.state.iconHeight}
                          width={this.state.iconWidth}
-                         url={icon.url}
+                         src={icon.url}
                          onClick={icon.onClick} />
                 </li>
             );

@@ -36,7 +36,7 @@ define(['react', './mixin/groupMember'], function (react, groupMember) {
                     <li>
                         <img height={this.props.iconHeight}
                              width={this.props.iconWidth}
-                             url={component.cls.url()}
+                             src={component.cls.url()}
                              onClick={installer.bind(this)(component)} />
                     </li>
                 );
