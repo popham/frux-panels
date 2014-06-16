@@ -42,7 +42,7 @@ define(['react', '../Insertion', './groupMember', './panelsPublish'], function (
         if (this.state.icons.length > 0) {
             array.push(
                 <footer>
-                    <ul>{icons.map(iconify.bind(this))}</ul>
+                    <ul>{this.state.icons.map(iconify.bind(this))}</ul>
                 </footer>
             );
         }
