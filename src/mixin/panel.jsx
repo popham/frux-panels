@@ -94,9 +94,9 @@ define(['react', '../Insertion', './groupMember', './panelsPublish'], function (
         render : function () {
             var children = [];
 
-            this.headerPolicy(children);
-            this.contentPolicy(children);
-            this.footerPolicy(children);
+            this.props.headerPolicy(children);
+            this.props.contentPolicy(children);
+            this.props.footerPolicy(children);
 
             return <section>{children}</section>;
         }
