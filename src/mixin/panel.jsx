@@ -69,14 +69,6 @@ define(['react', '../Insertion', './groupMember', './panelsPublish'], function (
             footerPolicy : footerIconicTriggers.bind(this)
         }; },
 
-        getTitle : function () {
-            return this.state.title ? this.state.title : '';
-        },
-
-        setTitle : function (title) {
-            this.setState({ title : title });
-        },
-
         uninstall : function () {
             var panels = this.props.panelsPublish;
             var key = this.props.key;
