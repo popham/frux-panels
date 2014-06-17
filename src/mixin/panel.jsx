@@ -10,7 +10,7 @@ define(['react', './groupMember'], function (
             <header>
                 <div>
                     <span className="glyphicon glyphicon-remove"
-                          onClick={this.props.panelsAct.uninstall.push(this.props.key)} />
+                          onClick={this.uninstallHandler} />
                 </div>
                 <p>{this.state.title}</p>
             </header>
@@ -68,6 +68,10 @@ define(['react', './groupMember'], function (
             contentPolicy : contentTemplateMethod,
             footerPolicy : footerIconicTriggers
         }; },
+
+        uninstallHandler : function (e) {
+            this.props.panelsAct.uninstall.push(this.props.key);
+        },
 
         render : function () {
             var children = [];
