@@ -29,8 +29,5 @@
     "src",
     "bower.json",
     "package.json"
-  ],
-  "dependencies": {
-    "frux-list": "popham/frux-list#~0.0.3"
-  }
+  ]
 }
