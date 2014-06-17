@@ -10,7 +10,7 @@ define(['react', './groupMember'], function (
             <header>
                 <div>
                     <span className="glyphicon glyphicon-remove"
-                          onClick={this.props.panelsAct.uninstall(this.props.key)} />
+                          onClick={this.props.panelsAct.uninstall.push(this.props.key)} />
                 </div>
                 <p>{this.state.title}</p>
             </header>
