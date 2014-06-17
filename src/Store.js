@@ -56,9 +56,9 @@ define(['baconjs', 'lodash', 'frux-list', './Insertion'], function (
         frux_list.List.call(this);
 
         this.act = {
-            append : new frux_list.act.Append(this);
+            append : new frux_list.act.Append(this),
             install : new Install(this),
-            uninstall : new Uninstall(this),
+            uninstall : new Uninstall(this)
         };
 
         this.publish = new Publish(this);
