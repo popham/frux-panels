@@ -7,7 +7,7 @@ define(['react', './groupMember'], function (
      */
     function headerUninstaller(array) {
         array.push(
-            <header>
+            <header className="title-bar">
                 <div>
                     <span className="glyphicon glyphicon-remove"
                           onClick={this.uninstallHandler} />
@@ -22,7 +22,7 @@ define(['react', './groupMember'], function (
     function contentTemplateMethod(array) {
         if (this.content) {
             array.push(
-                <div>{this.content()}</div>
+                <div className="body-template">{this.content()}</div>
             );
         }
 
@@ -43,8 +43,10 @@ define(['react', './groupMember'], function (
 
         if (this.state.icons.length > 0) {
             array.push(
-                <footer>
-                    <ul>{this.state.icons.map(iconify.bind(this))}</ul>
+                <footer className="iconic-triggers">
+                    <ul>
+                        {this.state.icons.map(iconify.bind(this))}
+                    </ul>
                 </footer>
             );
         }
