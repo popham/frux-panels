@@ -5,11 +5,22 @@ define(['react', 'frux-list'], function (react, list) {
         },
 
         getInitialState : function () { return {
-            panelsPublishUnsubscribe : this.props.panelsPublish.items.onValue(
+            panels : null,
+            panelsPublishUnsubscribe : null
+        }; },
+
+        componentWillMount : function () {
+            var unsubscribe = this.props.panelsPublish.items.onValue(
                 function (items) {
                     this.setState({ panels : items });
                 }.bind(this)
-            )
-        }; }
+            );
+
+            this.setState({ panelsPublishUnsubscribe : unsubscribe});
+        },
+
+        componentWillUnmount : function () {
+            this.state.panelsPublishUnsubscribe();
+        }
     };
 });
