@@ -16,14 +16,12 @@ define(['react', 'lodash', './mixin/groupMember'], function (react, _, groupMemb
         propTypes : {
             components : react.PropTypes.arrayOf(react.PropTypes.object).isRequired,
             iconWidth : react.PropTypes.string,
-            iconHeight : react.PropTypes.string,
-            className : react.PropTypes.string
+            iconHeight : react.PropTypes.string
         },
 
         getDefaultProps : function () { return {
             iconWidth : '50px',
-            iconHeight : '50px',
-            className : 'insertion-point'
+            iconHeight : '50px'
         }; },
 
         render : function () {
@@ -45,10 +43,8 @@ define(['react', 'lodash', './mixin/groupMember'], function (react, _, groupMemb
             }
 
             return (
-                <li key={this.props.key} className={this.props.className}>
-                    <ul>
-                        {this.props.components.map(iconify.bind(this))}
-                    </ul>
+                <li key={this.props.key} className="insertion-point">
+                    <ul>{this.props.components.map(iconify.bind(this))}</ul>
                 </li>
             );
         }
