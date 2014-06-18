@@ -16,12 +16,14 @@ define(['react', 'lodash', './mixin/groupMember'], function (react, _, groupMemb
         propTypes : {
             components : react.PropTypes.arrayOf(react.PropTypes.object).isRequired,
             iconWidth : react.PropTypes.string,
-            iconHeight : react.PropTypes.string
+            iconHeight : react.PropTypes.string,
+            className : react.PropTypes.string
         },
 
         getDefaultProps : function () { return {
             iconWidth : '50px',
-            iconHeight : '50px'
+            iconHeight : '50px',
+            className : 'frux-panel-insertion'
         }; },
 
         render : function () {
@@ -43,7 +45,7 @@ define(['react', 'lodash', './mixin/groupMember'], function (react, _, groupMemb
             }
 
             return (
-                <li key={this.props.key}>
+                <li key={this.props.key} className={this.props.className}>
                     <ul>
                         {this.props.components.map(iconify.bind(this))}
                     </ul>
