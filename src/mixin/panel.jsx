@@ -21,7 +21,9 @@ define(['react', './groupMember'], function (
 
     function contentTemplateMethod(array) {
         if (this.content) {
-            array.push(this.content());
+            array.push(
+                <div>this.content()</div>
+            );
         }
 
         return array;
@@ -80,7 +82,7 @@ define(['react', './groupMember'], function (
             this.props.contentPolicy.bind(this)(children);
             this.props.footerPolicy.bind(this)(children);
 
-            return <section>{children}</section>;
+            return <li key={this.props.key}>{children}</li>;
         }
     };
 });

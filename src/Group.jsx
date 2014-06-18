@@ -8,7 +8,7 @@ define(['react', 'lodash', './Insertion', './mixin/panelsPublish', './mixin/grou
         render : function () {
             function panelize(panel, key) {
                 var props = _.extend(this.groupMemberProps(), panel.props);
-                return <li key={key}>{panel.cls(props)}</li>;
+                return panel.cls(props);
             }
 
             return <ul>{this.state.panels.map(panelize.bind(this))}</ul>;
