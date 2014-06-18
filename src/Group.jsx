@@ -3,6 +3,8 @@
 define(['react', 'lodash', './Insertion', './mixin/panelsPublish', './mixin/groupMember'], function (
          react,        _,     Insertion,           panelsPublish,           groupMember) {
     return react.createClass({
+        displayName : 'Group',
+
         mixins : [panelsPublish, groupMember],
 
         render : function () {
