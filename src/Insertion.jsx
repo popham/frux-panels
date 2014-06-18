@@ -42,7 +42,13 @@ define(['react', 'lodash', './mixin/groupMember'], function (react, _, groupMemb
                 );
             }
 
-            return <ul>{this.props.components.map(iconify.bind(this))}</ul>;
+            return (
+                <li key={this.props.key}>
+                    <ul>
+                        {this.props.components.map(iconify.bind(this))}
+                    </ul>
+                </li>
+            );
         }
     });
 

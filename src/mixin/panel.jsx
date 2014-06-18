@@ -10,7 +10,7 @@ define(['react', './groupMember'], function (
             <header>
                 <div>
                     <span className="glyphicon glyphicon-remove"
-                          onClick={this.uninstallHandler.bind(this)} />
+                          onClick={this.uninstallHandler} />
                 </div>
                 <p>{this.state.title}</p>
             </header>
@@ -22,7 +22,7 @@ define(['react', './groupMember'], function (
     function contentTemplateMethod(array) {
         if (this.content) {
             array.push(
-                <div>this.content()</div>
+                <div>{this.content()}</div>
             );
         }
 
