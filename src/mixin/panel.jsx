@@ -72,7 +72,7 @@ define(['react', './groupMember'], function (
             headerPolicy : headerUninstaller,
             contentPolicy : contentTemplateMethod,
             footerPolicy : footerIconicTriggers,
-            className : 'frux-panel-component'
+            className : 'panel'
         }; },
 
         uninstallHandler : function (e) {
