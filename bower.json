@@ -26,6 +26,7 @@
     "**/.*",
     "node_modules",
     "src",
+    "less",
     "bower.json",
     "package.json"
   ]
