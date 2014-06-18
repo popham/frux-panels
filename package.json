@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "jsx": "mkdir -p lib && node ./node_modules/.bin/jsx -x jsx src lib",
     "cp": "mkdir -p lib && rsync -av --include='*/' --include='*.js' --exclude='*' src/ lib/",
-    "less": "mkdir -p css && node ./node_modules/.bin/lessc --include-path=./node_modules less/frux-panels.less css/frux-panels.css",
+    "less": "mkdir -p css && node ./node_modules/.bin/lessc --include-path=./node_modules less/basic.less css/basic.css",
     "clean": "rm -rf css & rm -rf lib",
     "build": "npm run cp & npm run jsx & npm run less"
   },
