@@ -14,7 +14,7 @@ define(['react', 'lodash', './Insertion', './mixin/panelsPublish', './mixin/grou
                 return panel.cls(props);
             }
 
-            return <ul>{this.state.panels.map(panelize.bind(this))}</ul>;
+            return <ul className="frux-panels">{this.state.panels.map(panelize.bind(this))}</ul>;
         }
     });
 });
