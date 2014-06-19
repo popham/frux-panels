@@ -6,10 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "jsx": "mkdir -p lib && node ./node_modules/.bin/jsx -x jsx src lib",
-    "cp": "mkdir -p lib && rsync -av --include='*/' --include='*.js' --exclude='*' src/ lib/",
-    "less": "mkdir -p css && node ./node_modules/.bin/lessc --include-path=./node_modules less/basic.less css/basic.css",
+    "js": "mkdir -p lib && rsync -av --include='*/' --include='*.js' --exclude='*' src/ lib/",
+    "fonts": "cp -r node_modules/bootstrap/fonts/ fonts",
+    "less": "mkdir -p css && node ./node_modules/.bin/lessc --include-path=./node_modules less/basic.less css/basic.css & node ./node_modules/.bin/lessc --include-path=./node_modules less/glyphicons.less css/glyphicons.css",
     "clean": "rm -rf css & rm -rf lib",
-    "build": "npm run cp & npm run jsx & npm run less"
+    "build": "npm run jsx & npm run js & npm run fonts & npm run less"
   },
   "repository": {
     "type": "git",

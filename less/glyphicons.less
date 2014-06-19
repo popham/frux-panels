@@ -1,0 +1,17 @@
+@icon-font-path:   "/rtc-doc/ext/frux-panels/fonts";
+@icon-font-name:   "glyphicons-halflings-regular";
+@icon-font-svg-id: "glyphicons_halflingsregular";
+
+@import (reference) "bootstrap/less/glyphicons";
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: ~"url('@{icon-font-path}@{icon-font-name}.eot')";
+  src: ~"url('@{icon-font-path}@{icon-font-name}.eot?#iefix') format('embedded-opentype')",
+       ~"url('@{icon-font-path}@{icon-font-name}.woff') format('woff')",
+       ~"url('@{icon-font-path}@{icon-font-name}.ttf') format('truetype')",
+       ~"url('@{icon-font-path}@{icon-font-name}.svg#@{icon-font-svg-id}') format('svg')";
+}
+
+.glyphicon {.glyphicon;}
+.glyphicon-remove {.glyphicon-remove;}
