@@ -1,6 +1,7 @@
+@import "bootstrap/less/type";
+
 @import (reference) "bootstrap/less/panels";
 @import (reference) "bootstrap/less/utilities";
-@import (reference) "bootstrap/less/type";
 @import (reference) "bootstrap/less/mixins";
 @import (reference) "bootstrap/less/variables";
 
@@ -13,6 +14,12 @@ ul.frux-panels {
     .list-unstyled;
 
     .insertion-point {
+        margin-top: @line-height-computed;
+        margin-bottom: @line-height-computed;
+        &:first-child { margin-top:0 };
+        &:last-child { margin-bottom:0 };
+        text-align: center;
+
         ul {
             .list-inline;
         }
@@ -20,9 +27,8 @@ ul.frux-panels {
 
     .panel {
         /* Copied from Bootstrap without tables or list-group coverage. */
-        margin-bottom: @line-height-computed;
         background-color: @panel-bg;
-        text-color: @text-color;
+        color: @text-color;
         border: 1px solid transparent;
         border-radius: @panel-border-radius;
         .box-shadow(0 1px 1px rgba(0,0,0,0.05));
