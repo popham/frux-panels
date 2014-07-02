@@ -18,6 +18,6 @@ define(['react', '../DragBus'], function (react, DragBus) {
 
         draggableProxy : function () {
             return null;/*component placeholder absolute positioned ...*/
-        },
+        }
     };
 });
