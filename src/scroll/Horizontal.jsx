@@ -4,6 +4,20 @@ define(['react'], function (react) {
     return react.creactClass({
         displayName : 'HScrollBar',
 
+        mouseDown : function (e) {
+            document.addEventListener
+        },
+
+        mouseMove : function (e) {
+
+        },
+
+        mouseUp : function (e) {
+
+        },
+
+//shouldComponentUpdate: fixed x => no update
+
         render : function () {
             return this.transferPropsTo(
                 <svg
