@@ -2,10 +2,25 @@
 
 define(['react', 'lodash', './Insertion', './mixin/panelsPublish', './mixin/groupMember'], function (
          react,        _,     Insertion,           panelsPublish,           groupMember) {
+
     return react.createClass({
         displayName : 'Group',
 
         mixins : [panelsPublish, groupMember],
+
+        propTypes : {
+            heightLink : react.PropTypes.object.isRequired
+        },
+
+        componentDidMount : function () {
+            var element = this.getDOMNode();
+            this.props.heightLink.requestChange(element.offsetHeight);
+        },
+
+        componentDidUpdate : function () {
+            var element = this.getDOMNode();
+            this.props.heightLink.requestChange(element.offsetHeight);
+        },
 
         render : function () {
             function panelize(panel, key) {

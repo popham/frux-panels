@@ -1,13 +1,20 @@
 /** @jsx react.DOM */
 
-define(['react', '../Group'], function (react, Group) {
-    return function (element, panelsStore, dragBus) {
-        var group = <Group panelsPublish={panelsStore.publish}
-                           panelsAct={panelsStore.act}
-                           dragBus={dragBus} />;
+define(['react', 'dojo/aspect', 'dijit/registry', '../GroupPane'], function (
+         react,        aspect,         registry,      GroupPane) {
 
-        react.renderComponent(group, element);
+    return function (id, panelsStore, dragBus) {
+        var mount = react.renderComponent(
+            <GroupPane
+                panelsStore={panelsStore}
+                dragBus={dragBus} />,
+            document.getElementById(id)
+        );
 
-        return group;
+        aspect.after(registry.byId(id), "resize", function() {
+            mount();
+        });
+
+        return mount();
     };
 });
