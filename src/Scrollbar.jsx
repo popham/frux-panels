@@ -6,7 +6,7 @@ define(['react', 'affine/lib/2d/primitive'], function (
     return react.createClass({
         displayName : 'Scrollbar',
 
-        propTypes : function () { return {
+        propTypes : {
             start : react.PropTypes.instanceOf(affine.Point).isRequired,
             end : react.PropTypes.instanceOf(affine.Point).isRequired,
             startOffset : react.PropTypes.number.isRequired,
@@ -14,7 +14,7 @@ define(['react', 'affine/lib/2d/primitive'], function (
             contentLength : react.PropTypes.number.isRequired,
             thickness : react.PropTypes.number.isRequired,
             positionLink : react.PropTypes.object.isRequired
-        }; },
+        },
 
         getInitialState : function () { return {
             dragging : false,
