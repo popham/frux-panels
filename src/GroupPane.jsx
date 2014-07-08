@@ -35,10 +35,10 @@ define(['react', './Group', './Scrollbar', 'affine/lib/2d/primitive'], function 
             return (
                 <div style={style}>
                   <Scrollbar
-                      start={new affine.Point(w - 2*t, 0)}
-                      end={new affine.Point(w - 2*t, h)}
-                      startOffset={t}
-                      endOffset={t}
+                      start={new affine.Point(w - t, 0)}
+                      end={new affine.Point(w - t, h)}
+                      startOffset="0"
+                      endOffset="0"
                       contentLength={this.state.contentHeight}
                       thickness={t}
                       positionLink={this.linkState('contentPosition')} />
