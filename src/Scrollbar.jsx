@@ -162,7 +162,7 @@ define(['react', 'affine/lib/2d/primitive'], function (
             var t = this.thickness();
             var length = this.barLength();
 
-            var style = { position : "absolute" };
+            var style = { position:"absolute", overflow:"visible" };
 
             return (
                 <svg
