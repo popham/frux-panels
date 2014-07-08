@@ -162,16 +162,23 @@ define(['react', 'affine/lib/2d/primitive'], function (
             var t = this.thickness();
             var length = this.barLength();
 
-            var style = { position:"absolute", overflow:"visible" };
+            var svgStyle = {
+                position : "absolute",
+                overflow : "visible",
+                'pointer-events' : "none"
+            };
+
+            var barStyle = { 'pointer-events' : "all" };
 
             return (
                 <svg
                     stroke="none"
-                    style={style}>
+                    style={svgStyle}>
                   <g
                       onMouseDown={this.mouseDown}
                       fill="white"
-                      transform={this.transform()}>
+                      transform={this.transform()}
+                      style={barStyle}>
                     <circle cx={r} cy={r} r={r} />
                     <rect width={length - 2*r} height={t} x={r} y={0} />
                     <circle cx={length - r} cy={r} r={r} />
