@@ -154,11 +154,14 @@ define(['react', 'affine/lib/2d/primitive'], function (
             var t = this.thickness();
             var length = this.barLength();
 
+            var style = { position : "absolute" };
+
             return (
                 <svg
                     width={length}
                     height={t}
-                    stroke="none">
+                    stroke="none"
+                    style={style}>
                   <g
                       onMouseDown={this.mouseDown}
                       fill="white"

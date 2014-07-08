@@ -40,17 +40,10 @@ define(['react', './Group', './Scrollbar', 'affine/lib/2d/primitive'], function 
             var h = this.state.height;
             var t = this.props.scrollbarThickness;
 
-            var style = { height : "100%" };
+            var style = { height:"100%", position:"relative"};
 
             return (
                 <div style={style}>
-                  <Group
-                      panelsPublish={this.props.panelsStore.publish}
-                      panelsAct={this.props.panelsStore.act}
-                      dragBus={this.props.dragBus}
-                      heightLink={this.linkState('contentHeight')}
-                      positionLink={this.linkState('contentPosition')}
-                      paneHeight={h} />
                   <Scrollbar
                       start={new affine.Point(w - 2*t, 0)}
                       end={new affine.Point(w - 2*t, h)}
@@ -59,6 +52,13 @@ define(['react', './Group', './Scrollbar', 'affine/lib/2d/primitive'], function 
                       contentLength={this.state.contentHeight}
                       thickness={t}
                       positionLink={this.linkState('contentPosition')} />
+                  <Group
+                      panelsPublish={this.props.panelsStore.publish}
+                      panelsAct={this.props.panelsStore.act}
+                      dragBus={this.props.dragBus}
+                      heightLink={this.linkState('contentHeight')}
+                      positionLink={this.linkState('contentPosition')}
+                      paneHeight={h} />
                 </div>
             );
         }
