@@ -145,15 +145,15 @@ define(['react', 'affine/lib/2d/primitive'], function (
             var props = this.props;
 
             return (
-                props.start.equal(nextProps.start)
-             || props.end.equal(nextProps.end)
+                !props.start.equal(nextProps.start)
+             || !props.end.equal(nextProps.end)
              || props.startOffset !== nextProps.startOffset
              || props.endOffset !== nextProps.endOffset
              || props.contentLength !== nextProps.contentLength
              || props.thickness !== nextProps.thickness
              || props.positionLink.value !== nextProps.positionLink.value
              || this.state.dragging !== nextState.dragging
-             || this.state.pointer === nextState.pointer
+             || this.state.pointer !== nextState.pointer
             );
         },
 
