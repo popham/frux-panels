@@ -18,7 +18,7 @@ define(['react', 'affine/lib/2d/primitive'], function (
 
         getInitialState : function () { return {
             dragging : false,
-            origin : null
+            pointer : null
         }; },
 
         radius : function () {
@@ -74,18 +74,12 @@ define(['react', 'affine/lib/2d/primitive'], function (
 
             // Interpolated position along `this.trackLength()`.
             var offset = this.props.startOffset;
-console.log('offset:'+offset);
             var trackLength = this.length() - this.props.startOffset - this.props.endOffset;
-console.log('trackLength:'+trackLength);
-console.log('length():'+this.length());
             var contentLength = this.props.contentLength;
-console.log('contentLength:'+contentLength);
             if (contentLength > 0) {
                 var position = this.props.positionLink.value;
                 offset += trackLength * (position / contentLength);
             }
-console.log('offset:'+offset);
-console.log('direction():'+this.direction());
             var start = this.props.start.plus(this.direction().scale(offset));
             var t3 = "translate("+start.x+","+start.y+")";
 
@@ -97,7 +91,7 @@ console.log('direction():'+this.direction());
 
             this.setState({
                 dragging : true,
-                origin : new affine.Point(e.pageX, e.pageY)
+                pointer : new affine.Point(e.pageX, e.pageY)
             });
 
             e.stopPropagation();
@@ -107,15 +101,21 @@ console.log('direction():'+this.direction());
         mouseMove : function (e) {
             if (!this.state.dragging) return;
 
-            var n = this.direction();
             var p = new affine.Point(e.pageX, e.pageY);
 
             // Project onto end-start
-            var trackPosition = p.minus(this.props.start).dot(n) - this.props.startOffset;
-            var trackLength = this.length() - this.props.startOffset - this.props.endOffset;
-            var position = Math.round(this.props.contentLength * trackPosition / trackLength);
+            var delta = p.minus(this.state.pointer).dot(this.direction());
+            this.props.positionLink.requestChange(
+                Math.max(
+                    0,
+                    Math.min(
+                        this.maxPosition(),
+                        this.props.positionLink.value + delta
+                    )
+                )
+            );
 
-            this.props.positionLink.requestChange(Math.max(0, Math.min(this.maxPosition(), position)));
+            this.setState({ pointer : p });
 
             e.stopPropagation();
             e.preventDefault();
@@ -124,7 +124,7 @@ console.log('direction():'+this.direction());
         mouseUp : function (e) {
             this.setState({
                 dragging : false,
-                origin : null
+                pointer : null
             });
 
             e.stopPropagation();
@@ -153,7 +153,7 @@ console.log('direction():'+this.direction());
              || props.thickness !== nextProps.thickness
              || props.positionLink.value !== nextProps.positionLink.value
              || this.state.dragging !== nextState.dragging
-             || this.state.origin === nextState.origin
+             || this.state.pointer === nextState.pointer
             );
         },
 
