@@ -15,7 +15,7 @@ define(['react', 'dojo/aspect', 'dijit/registry', '../GroupPane'], function (
                     height={container.offsetHeight} />,
                 element
             );
-        }
+        };
 
         aspect.after(registry.byId(id), "resize", function() {
             mount();
