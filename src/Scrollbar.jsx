@@ -72,9 +72,13 @@ define(['react', 'affine/lib/2d/primitive'], function (
             var ell = this.props.end.minus(this.props.start);
             var t2 = "rotate("+Math.atan2(ell.y, ell.x)*180/Math.PI+")";
 
-            // Interpolated position.
-            var position = this.props.positionLink.value;
-            var offset = this.props.startOffset + (position / this.props.contentLength) * this.trackLength();
+            // Interpolated position along `this.trackLength()`.
+            var offset = this.props.startOffset;
+            var contentLength = this.props.contentLength;
+            if (contentLength > 0) {
+                var position = this.props.positionLink.value;
+                offset += (position / contentLength) * this.trackLength();
+            }
             var start = this.props.start.plus(this.direction().scale(offset));
             var t3 = "translate("+start.x+","+start.y+")";
 
@@ -127,6 +131,22 @@ define(['react', 'affine/lib/2d/primitive'], function (
                 document.removeEventListener('mousemove', this.mouseMove);
                 document.removeEventListener('mouseup', this.mouseUp);
             }
+        },
+
+        shouldComponentUpdate : function (nextProps, nextState) {
+            var props = this.props;
+
+            return (
+                props.start.equal(nextProps.start)
+             || props.end.equal(nextProps.end)
+             || props.startOffset !== nextProps.startOffset
+             || props.endOffset !== nextProps.endOffset
+             || props.contentLength !== nextProps.contentLength
+             || props.thickness !== nextProps.thickness
+             || props.positionLink.value !== nextProps.positionLink.value
+             || this.state.dragging !== nextState.dragging
+             || this.state.origin.equal(nextState.origin)
+            );
         },
 
         render : function () {
