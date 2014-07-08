@@ -158,8 +158,6 @@ define(['react', 'affine/lib/2d/primitive'], function (
 
             return (
                 <svg
-                    width={length}
-                    height={t}
                     stroke="none"
                     style={style}>
                   <g
