@@ -24,7 +24,7 @@ define(['react', 'lodash', './Insertion', './mixin/panelsPublish', './mixin/grou
             this.props.heightLink.requestChange(contentHeight);
 
             var positionLink = this.props.positionLink;
-            var max = contentHeight - this.props.paneHeight;
+            var max = Math.max(0, contentHeight - this.props.paneHeight);
 
             if (positionLink.value > max) {
                 positionLink.requestChange(max);

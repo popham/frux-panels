@@ -82,7 +82,7 @@ define(['react', 'affine/lib/2d/primitive'], function (
             var start = this.props.start.plus(this.direction().scale(offset));
             var t3 = "translate("+start.x+","+start.y+")";
 
-            return [t1, t2, t3].join(' ');
+            return [t3, t2, t1].join(' ');
         },
 
         mouseDown : function (e) {
