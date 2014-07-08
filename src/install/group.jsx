@@ -6,12 +6,13 @@ define(['react', 'dojo/aspect', 'dijit/registry', '../GroupPane'], function (
     return function (id, panelsStore, dragBus) {
         var element = document.getElementById(id);
         var mount = function () {
+            var container = element.children[0];
             react.renderComponent(
                 <GroupPane
                     panelsStore={panelsStore}
                     dragBus={dragBus}
-                    width={element.offsetWidth}
-                    height={element.offsetHeight} />,
+                    width={container.offsetWidth}
+                    height={container.offsetHeight} />,
                 element
             );
         }

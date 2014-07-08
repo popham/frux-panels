@@ -30,10 +30,8 @@ define(['react', './Group', './Scrollbar', 'affine/lib/2d/primitive'], function 
             var h = this.props.height;
             var t = this.props.scrollbarThickness;
 
-            var style = { height:"100%", position:"relative"};
-
             return (
-                <div style={style}>
+                <div>
                   <Scrollbar
                       start={new affine.Point(w - 2*t, 0)}
                       end={new affine.Point(w - 2*t, h)}
