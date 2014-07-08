@@ -173,7 +173,7 @@ console.log('direction():'+this.direction());
                       fill="white"
                       transform={this.transform()}>
                     <circle cx={r} cy={r} r={r} />
-                    <rect width={length - 2*r} height={t} x={r} y="0" />
+                    <rect width={length - 2*r} height={t} x={r} y={0} />
                     <circle cx={length - r} cy={r} r={r} />
                   </g>
                 </svg>
