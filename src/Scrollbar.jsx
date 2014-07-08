@@ -158,9 +158,11 @@ define(['react', 'affine/lib/2d/primitive'], function (
                 <svg
                     width={length}
                     height={t}
-                    stroke="none"
-                    transform={this.transform()}>
-                  <g onMouseDown={this.mouseDown}>
+                    stroke="none">
+                  <g
+                      onMouseDown={this.mouseDown}
+                      fill="white"
+                      transform={this.transform()}>
                     <circle cx={r} cy={r} r={r} />
                     <rect width={length - 2*r} height={t} x={r} y="0" />
                     <circle cx={length - r} cy={r} r={r} />
