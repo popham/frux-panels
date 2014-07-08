@@ -61,7 +61,7 @@ define(['react', 'affine/lib/2d/primitive'], function (
         },
 
         maxPosition : function () {
-            return Math.max(0, this.props.contentLength - Math.floor(this.length));
+            return Math.ceil(Math.max(0, this.props.contentLength - this.length()));
         },
 
         transform : function () {
