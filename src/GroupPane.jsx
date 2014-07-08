@@ -40,8 +40,10 @@ define(['react', './Group', './Scrollbar', 'affine/lib/2d/primitive'], function 
             var h = this.state.height;
             var t = this.props.scrollbarThickness;
 
+            var style = { height : "100%" };
+
             return (
-                <div>
+                <div style={style}>
                   <Group
                       panelsPublish={this.props.panelsStore.publish}
                       panelsAct={this.props.panelsStore.act}

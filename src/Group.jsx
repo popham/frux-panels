@@ -47,8 +47,10 @@ define(['react', 'lodash', './Insertion', './mixin/panelsPublish', './mixin/grou
                 return panel.cls(props);
             }
 
+            var style = { height:"100%", margin:"0" };
+
             return (
-                <ul className="frux-panels">
+                <ul className="frux-panels" style={style} >
                   {this.state.panels.map(panelize.bind(this))}
                 </ul>
             );
