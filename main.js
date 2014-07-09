@@ -1,7 +1,7 @@
-define(['./lib/DragBus', './lib/Insertion', './lib/Store', './lib/install/group', './lib/mixin/index'], function (
-               DragBus,         Insertion,         Store,                 group,         mixin){
+define(['./lib/Escrow', './lib/Insertion', './lib/Store', './lib/install/group', './lib/mixin/index'], function (
+               Escrow,         Insertion,         Store,                 group,         mixin){
     return {
-        DragBus : DragBus,
+        Escrow : Escrow,
         Insertion : Insertion,
         Store : Store,
         group : group,
