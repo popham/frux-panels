@@ -1,24 +1,26 @@
 define([], function () {
 
     var Escrow = function (list) {
-        this.component = null;
+        this.resource = null;
     };
 
-    Escrow.prototype.bind = function (component) {
-        if (this.component !== null) {
-            console.error('Cannot bind more than one resource to a Broker');
+    Escrow.prototype.offer = function (resource, onAccept) {
+        if (this.resource !== null) {
+            console.error('Cannot offer more than one resource for brokerage');
             return;
         }
 
-        this.component = component;
+        this.resource = resource;
+        this.onAccept = onAccept;
     };
 
-    Escrow.prototype.claim = function (key, store) {
-        if (this.component === null) {
-            console.error('Need a bound component to install');
+    Escrow.prototype.accept = function (key, install) {
+        if (this.resource === null) {
+            console.error('Need a resource to accept');
         }
 
-        store.act.install.push(key, this.component);
+        install.push(key, this.resource.mementoComponent());
+        if (this.onAccept) { this.onAccept(); }
     };
 
     return Escrow;
