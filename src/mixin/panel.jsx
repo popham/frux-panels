@@ -26,7 +26,7 @@ define(['react', '../header/icon/index', './groupMember'], function (
 
         className : function () {
             var cls = ['panel'];
-            if (this.state.isMounted) { cls.push('mounted'); }
+            cls.push(this.state.isMounted ? 'mounted' : 'unmounted');
 
             return cls.join(' ');
         },
