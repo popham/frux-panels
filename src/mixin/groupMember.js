@@ -1,14 +1,14 @@
-define(['react', 'frux-list', '../DragBus'], function (
-         react,        list,      DragBus) {
+define(['react', 'frux-list', '../Escrow'], function (
+         react,        list,      Escrow) {
     return {
         propTypes : {
             panelsAct : react.PropTypes.object.isRequired,
-            dragBus : react.PropTypes.instanceOf(DragBus).isRequired
+            panelsEscrow : react.PropTypes.instanceOf(Escrow).isRequired
         },
 
         groupMemberProps : function () { return {
             panelsAct : this.props.panelsAct,
-            dragBus : this.props.dragBus
+            panelsEscrow : this.props.panelsEscrow
         }; }
     };
 });

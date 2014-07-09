@@ -1,5 +1,6 @@
 define(['baconjs', 'lodash', 'frux-list', './Insertion'], function (
          bacon,          _,   frux_list,     Insertion) {
+
     var Install = function (list) {
         this.stream = new bacon.Bus();
         this.stream.onValue(function (o) {
