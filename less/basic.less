@@ -13,9 +13,9 @@
 ul.frux-panels {
     .list-unstyled;
 
-    .insertion-point {
-        margin-top: @line-height-computed;
-        margin-bottom: @line-height-computed;
+    li {
+        margin-top: floor(@line-height-computed / 2);
+        margin-bottom: floor(@line-height-computed / 2);
         &:first-child { margin-top:0 };
         &:last-child { margin-bottom:0 };
         text-align: center;
