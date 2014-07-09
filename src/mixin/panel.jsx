@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../header/icon/index', './groupMember'], function (
-         react,             icon,           groupMember) {
+define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './groupMember'], function (
+         react,   affine,                              icon,           groupMember) {
 
     var Close = icon.Close;
     var Unmount = icon.Unmount;
@@ -12,7 +12,7 @@ define(['react', '../header/icon/index', './groupMember'], function (
      * icons : [{url: 'http://asdf.com', onClick: function (e) {...}}, ...]
      */
     return {
-        mixins : [groupMember],
+        mixins : [groupMember, draggable],
 
         propTypes : {
             headerPolicy : react.PropTypes.func,
@@ -23,15 +23,9 @@ define(['react', '../header/icon/index', './groupMember'], function (
         // Allow other mixins to override policies by leaving `getDefaultProps`
         // unspec'd.
 
-        getInitialState : function () { return {
-            isMounted : true
-        }; },
-
-        className : function () {
-            var cls = ['panel'];
-            cls.push(this.state.isMounted ? 'mounted' : 'unmounted');
-
-            return cls.join(' ');
+        absolutePosition : function () {
+            var rect = this.getDOMNode().getBoundingClientRect();
+            return new affine.Point(rect.left, rect.top);
         },
 
         baseMemento : function () {
@@ -46,7 +40,7 @@ define(['react', '../header/icon/index', './groupMember'], function (
         defaultHeader : function(array) {
             array.push(
                 <header className="title-bar">
-                  <div>
+                  <div onMouseDown={this.draggableMouseDown}>
                     <Unmount className="icon" onClick={this.unmount} />
                     <Fork className="icon" onClick={this.fork} />
                     <Close className="icon" onClick={this.close} />
@@ -111,8 +105,10 @@ define(['react', '../header/icon/index', './groupMember'], function (
             content.bind(this)(children);
             footer.bind(this)(children);
 
+            var classes = ['panel', this.props.isMounted ? 'mounted' : 'unmounted'];
+
             return (
-                <li key={this.props.key} className={this.className()}>
+                <li key={this.props.key} className={classes.join(' ')}>
                     {children}
                 </li>
             );
