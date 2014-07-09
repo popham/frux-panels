@@ -20,6 +20,9 @@ define(['react', '../header/icon/index', './groupMember'], function (
             footerPolicy : react.PropTypes.func
         },
 
+        // Allow other mixins to override policies by leaving `getDefaultProps`
+        // unspec'd.
+
         getInitialState : function () { return {
             isMounted : true
         }; },
@@ -29,6 +32,15 @@ define(['react', '../header/icon/index', './groupMember'], function (
             cls.push(this.state.isMounted ? 'mounted' : 'unmounted');
 
             return cls.join(' ');
+        },
+
+        baseMemento : function () {
+            var m = {};
+            for (var key in ['headerPolicy', 'contentPolicy', 'footerPolicy']) {
+                m[key] = this.props[key];
+            }
+
+            return m;
         },
 
         defaultHeader : function(array) {
