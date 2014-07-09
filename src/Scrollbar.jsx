@@ -174,7 +174,7 @@ define(['react', 'affine/lib/2d/primitive'], function (
                     style={svgStyle}>
                   <g
                       onMouseDown={this.mouseDown}
-                      fill="white"
+                      className="scrollbar"
                       transform={this.transform()}
                       style={barStyle}>
                     <circle cx={r} cy={r} r={r} />
