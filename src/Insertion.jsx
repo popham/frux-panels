@@ -24,11 +24,13 @@ define(['react', 'lodash', './mixin/groupMember'], function (react, _, groupMemb
             iconHeight : '50px'
         }; },
 
+        mount : function (component) {
+            this.props.panelsAct.install.push(this.props.key, component);
+        },
+
         render : function () {
             function installer(component) {
-                return function (event) {
-                    this.props.panelsAct.install.push(this.props.key, component);
-                }.bind(this);
+                return function (event) { this.mount(component); }.bind(this);
             }
 
             function iconify(component) {
