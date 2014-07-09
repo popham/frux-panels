@@ -1,4 +1,4 @@
-define(['react', 'frux-list'], function (react, list) {
+define(['react', 'lodash', 'frux-list'], function (react, _, list) {
     return {
         propTypes : {
             panelsPublish : react.PropTypes.instanceOf(list.Publish).isRequired
@@ -8,6 +8,12 @@ define(['react', 'frux-list'], function (react, list) {
             panels : null,
             panelsPublishUnsubscribe : null
         }; },
+
+        panelize : function (panel, key) {
+            var props = _.extend(this.groupMemberProps(), panel.props);
+            props.key = key;
+            return panel.cls(props);
+        },
 
         componentWillMount : function () {
             var unsubscribe = this.props.panelsPublish.items.onValue(

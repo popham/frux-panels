@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', 'lodash', './Insertion', './mixin/panelsPublish', './mixin/groupMember'], function (
-         react,        _,     Insertion,           panelsPublish,           groupMember) {
+define(['react', './Insertion', './mixin/panelsPublish', './mixin/groupMember'], function (
+         react,     Insertion,           panelsPublish,           groupMember) {
 
     return react.createClass({
         displayName : 'Group',
@@ -48,7 +48,7 @@ define(['react', 'lodash', './Insertion', './mixin/panelsPublish', './mixin/grou
 
             return (
                 <ul className="frux-panels" style={style} >
-                  {this.state.panels.map(panelize.bind(this))}
+                  {this.state.panels.map(this.panelize.bind(this))}
                 </ul>
             );
         }
