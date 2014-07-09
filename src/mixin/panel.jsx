@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../title/icon/index', './groupMember'], function (
-         react,            icon,           groupMember) {
+define(['react', '../header/icon/index', './groupMember'], function (
+         react,             icon,           groupMember) {
 
     var Close = icon.Close;
     var Unmount = icon.Unmount;
