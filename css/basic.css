@@ -354,6 +354,9 @@ ul.frux-panels {
   padding-left: 0;
   list-style: none;
 }
+ul.frux-panels .scrollbar {
+  fill: #428bca;
+}
 ul.frux-panels li {
   margin-top: 10px;
   margin-bottom: 10px;
