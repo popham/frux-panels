@@ -83,6 +83,10 @@ define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItem
             var close = this.defaultClose;
             if (this.props.closePolicy) { close = this.props.closePolicy; }
 
+            var prevent = function (e) {
+                e.preventDefault();
+            };
+
             array.push(
                 <header className="title-bar" onMouseDown={this.draggableMouseDown}>
                   <div>
@@ -90,7 +94,7 @@ define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItem
                     <Fork className="icon" onClick={fork} />
                     <Close className="icon" onClick={close} />
                   </div>
-                  <p>{this.state.title}</p>
+                  <p onMouseOver={prevent}>{this.state.title}</p>
                 </header>
             );
 
