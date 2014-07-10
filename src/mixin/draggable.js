@@ -55,7 +55,7 @@ define(['react', 'affine/lib/2d/primitive'], function (
             bound = bound.minus(this.state.dragElementSize);
 
             var delta = p.minus(this.state.dragOrigin);
-            var position = dragStartPosition.plus(delta);
+            var position = this.state.dragStartPosition.plus(delta);
             position = project(new affine.Point(0,0), position, bound);
 
             this.setState({
