@@ -9,7 +9,7 @@ define(['react', 'frux-list', './panelize', './mixin/panelsPublish', './mixin/st
 
     Install.prototype.push = function (component) {
         this._list._items = this._list._items.clone();
-        this._list.append(component);
+        this._list._items.append([component]);
 
         this._list.publish.push();
     };
@@ -48,9 +48,6 @@ define(['react', 'frux-list', './panelize', './mixin/panelsPublish', './mixin/st
             var style = {
                 margin : 0,
                 padding : 0,
-                position : "absolute",
-                width : "100%",
-                height : "100%",
             };
 
             var panel = panelize.bind(null, {});

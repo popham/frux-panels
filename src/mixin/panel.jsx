@@ -14,13 +14,6 @@ define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItem
     return {
         mixins : [storeItemExclusions, draggable],
 
-        statics : {
-            storeItem : function (props) { return {
-                cls : this,
-                props : props
-            }; },
-        },
-
         propTypes : {
             headerPolicy : react.PropTypes.func,
             contentPolicy : react.PropTypes.func,
@@ -47,14 +40,14 @@ define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItem
             var chrome = ['headerPolicy', 'contentPolicy', 'footerPolicy'];
             var headerActions = ['unmountPolicy', 'forkPolicy', 'closePolicy'];
             for (var key in chrome.concat(headerActions)) {
-                m[key] = this.props[key];
+                if (this.props[key]) { m[key] = this.props[key]; }
             }
 
             return m;
         },
 
         defaultUnmount : function () {
-            this.fork();
+            this.defaultFork();
             this.props.panelsAct.uninstall.push(this.props.key);
         },
 
@@ -149,10 +142,14 @@ define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItem
             footer(children);
 
             var classes = ['panel', this.props.isMounted ? 'mounted' : 'unmounted'];
+            var style = {};
+            if (!this.props.isMounted) { style.position = 'absolute'; }
 
             return (
-                <li key={this.props.key} className={classes.join(' ')}>
-                    {children}
+                <li key={this.props.key}
+                    style={style}
+                    className={classes.join(' ')}>
+                  {children}
                 </li>
             );
         }
