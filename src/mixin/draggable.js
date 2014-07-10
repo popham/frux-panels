@@ -12,6 +12,7 @@ define(['react', 'affine/lib/2d/primitive'], function (
         propTypes : {
             initialLeft : react.PropTypes.number,
             initialTop : react.PropTypes.number,
+            initialWidth : react.PropTypes.number,
             isMounted : react.PropTypes.bool
         },
 
@@ -25,7 +26,8 @@ define(['react', 'affine/lib/2d/primitive'], function (
             dragOrigin : null,
             dragStartPosition : null,
             left : this.props.initialLeft,
-            top : this.props.initialTop
+            top : this.props.initialTop,
+            width : this.props.initialWidth
         }; },
 
         isDragging : function () {
