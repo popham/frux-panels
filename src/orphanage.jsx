@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', './panelize', './mixin/panelsPublish', './mixin/storeItemExclusions'], function (
-         react,     panelize,           panelsPublish,           storeItemExclusions) {
+define(['react', 'frux-list', './panelize', './mixin/panelsPublish', './mixin/storeItemExclusions'], function (
+         react,   frux_list,     panelize,           panelsPublish,           storeItemExclusions) {
 
     var Install = function (list) {
         this._list = list;
