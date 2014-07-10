@@ -1,13 +1,14 @@
-define(['react'], function (
-         react) {
+define(['react'], function (react) {
 
     return {
         propTypes : {
-            panelsAct : react.PropTypes.object.isRequired
+            panelsAct : react.PropTypes.object,
+            orphansAct : react.PropTypes.object
         },
 
-        groupMemberProps : function () { return {
-            panelsAct : this.props.panelsAct
+        storeItemExclusions : function () { return {
+            panelsAct : this.props.panelsAct,
+            orphansAct : this.props.orphansAct
         }; }
     };
 });
