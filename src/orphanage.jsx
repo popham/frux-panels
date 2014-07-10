@@ -1,27 +1,28 @@
 /** @jsx react.DOM */
 
-define(['react'], function () {
+define(['react', './panelize', './mixin/panelsPublish', './mixin/storeItemExclusions'], function (
+         react,     panelize,           panelsPublish,           storeItemExclusions) {
 
     var Install = function (list) {
-        this.list = list;
+        this._list = list;
     };
 
     Install.prototype.push = function (component) {
-        this.list._items = this.list._items.clone();
-        this.list.append(component);
+        this._list._items = this._list._items.clone();
+        this._list.append(component);
 
-        this.list.publish.push();
+        this._list.publish.push();
     };
 
     var Uninstall = function (list) {
-        this.list = list;
+        this._list = list;
     };
 
     Uninstall.prototype.push = function (key) {
-        this.list._items = this.list._items.clone();
-        this.list.remove(key, 1);
+        this._list._items = this.list._items.clone();
+        this._list.remove(key, 1);
 
-        this.list.publish.push();
+        this._list.publish.push();
     };
 
     var Store = function () {
@@ -37,22 +38,13 @@ define(['react'], function () {
 
     Store.prototype = Object.create(frux_list.List.prototype);
 
-    return react.createClass({
+    var Orphanage = react.createClass({
         displayName : 'Orphanage',
 
-        mixins : [panelsPublish, groupMember],
-
-        getDefaultProps : function () {
-            var store = new Store();
-
-            return {
-                panelsAct : store.act,
-                panelsPublish : store.publish
-            };
-        },
+        mixins : [panelsPublish],
 
         render : function () {
-            // Remove from flow and cover the whole workspace.
+            // Cover the whole workspace.
             var style = {
                 margin : 0,
                 padding : 0,
@@ -61,11 +53,17 @@ define(['react'], function () {
                 height : "100%",
             };
 
+            var panel = panelize.bind(null, {});
             return (
                 <ul className="frux-panels" style={style}>
-                  {this.state.panels.map(this.panelize.bind(this))}
+                  {this.state.panels.map(panel)}
                 </ul>
             );
         }
     });
+
+    return {
+        Store : Store,
+        Orphanage : Orphanage
+    };
 });
