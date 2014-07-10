@@ -14,6 +14,13 @@ define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItem
     return {
         mixins : [storeItemExclusions, draggable],
 
+        statics : {
+            storeItem : function (props) { return {
+                cls : this,
+                props : props
+            }; },
+        },
+
         propTypes : {
             headerPolicy : react.PropTypes.func,
             contentPolicy : react.PropTypes.func,
