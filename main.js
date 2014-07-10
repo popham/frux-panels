@@ -1,10 +1,10 @@
-define(['./lib/Escrow', './lib/Insertion', './lib/Store', './lib/install/group', './lib/mixin/index'], function (
-               Escrow,         Insertion,         Store,                 group,         mixin){
+define(['./lib/Insertion', './lib/Store', './lib/install/group', './lib/install/orphanage', './lib/mixin/panel'], function (
+               Insertion,         Store,                 group,                 orphanage,               panel){
     return {
-        Escrow : Escrow,
         Insertion : Insertion,
         Store : Store,
         group : group,
-        mixin : mixin
+        orphanage : orphanage,
+        panelMixin : panel
     };
 });
