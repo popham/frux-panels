@@ -1,13 +1,14 @@
 /** @jsx react.DOM */
 
-define(['react', 'lodash', './mixin/groupMember'], function (react, _, groupMember) {
+define(['react', 'lodash', './mixin/storeItemExclusions'], function (
+         react,        _,           storeItemExclusions) {
     var Insertion = react.createClass({
         displayName : 'Insertion',
 
-        mixins : [groupMember],
+        mixins : [storeItemExclusions],
 
         statics : {
-            groupMeta : function (components) { return {
+            storeItem: function (components) { return {
                 cls : Insertion,
                 props : { components : components }
             }; }
@@ -15,22 +16,27 @@ define(['react', 'lodash', './mixin/groupMember'], function (react, _, groupMemb
 
         propTypes : {
             components : react.PropTypes.arrayOf(react.PropTypes.object).isRequired,
-            iconWidth : react.PropTypes.string,
-            iconHeight : react.PropTypes.string
+            iconWidth : react.PropTypes.number,
+            iconHeight : react.PropTypes.number
         },
 
         getDefaultProps : function () { return {
-            iconWidth : '50px',
-            iconHeight : '50px'
+            iconWidth : 50,
+            iconHeight : 50
         }; },
 
-        mount : function (component) {
-            this.props.panelsAct.install.push(this.props.key, component);
+        mount : function (cls, memento) {
+            var props = _.extend({ isMounted : true }, memento);
+
+            this.props.panelsAct.install.push(this.props.key, cls.storeItem(props));
+            this.props.orphansAct.uninstall.push(this.props.key);
         },
 
         render : function () {
             function installer(component) {
-                return function (event) { this.mount(component); }.bind(this);
+                return function (event) {
+                    this.props.panelsAct.install.push(this.props.key, component);
+                }.bind(this);
             }
 
             function iconify(component) {
