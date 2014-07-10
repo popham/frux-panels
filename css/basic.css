@@ -350,12 +350,12 @@ ul.frux-panels .panel .body-template:after {
  * less and included in the output css.  The bug is mentioned in LESS's issue
  * tracker: https://github.com/less/less.js/issues/1878.
  */
+svg .scrollbar {
+  fill: #428bca;
+}
 ul.frux-panels {
   padding-left: 0;
   list-style: none;
-}
-ul.frux-panels .scrollbar {
-  fill: #428bca;
 }
 ul.frux-panels li {
   margin-top: 10px;

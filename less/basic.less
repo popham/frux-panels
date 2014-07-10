@@ -10,11 +10,13 @@
  * less and included in the output css.  The bug is mentioned in LESS's issue
  * tracker: https://github.com/less/less.js/issues/1878.
  */
+
+svg .scrollbar {
+    fill: @brand-primary;
+}
+
 ul.frux-panels {
     .list-unstyled;
-    .scrollbar {
-        fill: @brand-primary;
-    }
 
     li {
         margin-top: floor(@line-height-computed / 2);
