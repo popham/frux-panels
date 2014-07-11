@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItemExclusions', './draggable'], function (
-         react,   affine,                              icon,           storeItemExclusions,     draggable) {
+define(['react', 'affine/lib/2d/primitive', '../header/icon/index', '../Slot', './storeItemExclusions', './drag'], function (
+         react,   affine,                              icon,            Slot,     storeItemExclusions,     drag) {
 
     var Close = icon.Close;
     var Unmount = icon.Unmount;
@@ -9,10 +9,10 @@ define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItem
 
     /**
      * Externally supplied state:
-     * icons : [{url: 'http://asdf.com', onClick: function (e) {...}}, ...]
+     * icons : [{url: 'http://asdf.com', mouseDown: function (e) {...}}, ...]
      */
     return {
-        mixins : [storeItemExclusions, draggable],
+        mixins : [storeItemExclusions, drag],
 
         propTypes : {
             headerPolicy : react.PropTypes.func,
@@ -64,10 +64,10 @@ define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItem
                 props.initialLeft = this.state.position.x;
                 props.initialTop = this.state.position.y;
                 props.initialWidth = this.state.size.x;
-                props.initailHeight = this.state.size.y;
+                props.initialHeight = this.state.size.y;
             }
 
-            this.props.orphansAct.install.push(this.type.storeItem(props));
+            this.props.orphansAct.install.push(this.type.bundle(props));
         },
 
         defaultClose : function () {
@@ -89,15 +89,20 @@ define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItem
 
             var cursor = { cursor : 'default' };
 
+            var mouseDown = function (e) {
+                this.dragMouseDown(e);
+                this.bindOrphan(e);
+            };
+
             array.push(
                 <header
                     style={headerCursor}
                     className="title-bar"
-                    onMouseDown={this.draggableMouseDown}>
+                    onMouseDown={mouseDown.bind(this)}>
                   <div>
-                    <Unmount style={cursor} className="icon" onClick={unmount} />
-                    <Fork style={cursor} className="icon" onClick={fork} />
-                    <Close style={cursor} className="icon" onClick={close} />
+                    <Unmount style={cursor} className="icon" onMouseDown={unmount} />
+                    <Fork style={cursor} className="icon" onMouseDown={fork} />
+                    <Close style={cursor} className="icon" onMouseDown={close} />
                   </div>
                   <p style={headerCursor}>{this.state.title}</p>
                 </header>
@@ -121,7 +126,7 @@ define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItem
                       <img height={this.state.iconHeight}
                           width={this.state.iconWidth}
                           src={icon.url}
-                          onClick={icon.onClick} />
+                          onMouseDown={icon.mouseDown} />
                     </li>
                 );
             }
@@ -137,6 +142,26 @@ define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItem
             }
 
             return array;
+        },
+
+        bindOrphan : function (e) {
+            if (!this.props.isMounted) {
+                this.props.orphansAct.adoption.select(this.props.key);
+            }
+        },
+
+        unbindOrphan : function (e) {
+            if (!this.props.isMounted) {
+                this.props.orphansAct.adoption.unselect();
+            }
+        },
+
+        componentDidUpdate : function (prevProps, prevState) {
+            if (!this.props.isMounted && prevProps.isMounted) {
+                document.addEventListener('mouseup', this.unbindOrphan);
+            } else if (this.props.isMounted && !prevProps.isMounted) {
+                document.removeEventListener('mouseup', this.unbindOrphan);
+            }
         },
 
         render : function () {
@@ -162,9 +187,29 @@ define(['react', 'affine/lib/2d/primitive', '../header/icon/index', './storeItem
                 style.padding = 0;
                 style.margin = 0;
                 style.zIndex = 100;
-                style.left = this.state.left;
-                style.top = this.state.top;
-                style.width = this.state.width;
+                style.left = this.state.position.x;
+                style.top = this.state.position.y;
+                style.width = this.state.size.x;
+                style.height = this.state.size.y;
+
+                if (this.isDragging()) {
+                    style.pointerEvents = 'none';
+                }
+
+                if (this.props.isVisiting) {
+                    style.display = 'none';
+                }
+            }
+
+            if (this.props.isMounted) {
+                children = (
+                    <Slot
+                        isPlaceholder={false}
+                        panelsAct={this.props.panelsAct}
+                        orphansAct={this.props.orphansAct}>
+                      {children}
+                    </Slot>
+                );
             }
 
             return (

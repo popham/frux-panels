@@ -6,21 +6,18 @@ define(['baconjs', 'lodash', 'frux-list', './Insertion'], function (
         this.stream.onValue(function (o) {
             list._items = list._items.clone();
 
-            // Copy the insertion point [+] to yield
-            // [+] -> [+]' [component] [+].
-            list._items.splice(o.key, 0, [
-                _.extend({}, list.value(o.key)),
-                o.component
-            ]);
+            // Copy the open slot, [+], to yield [+] -> [+]' [component] [+]'.
+            var slot = list.value(o.key);
+            list._items.splice(o.key, 1, [slot, o.bundle, slot]);
 
             list.publish.push();
         });
     };
 
-    Install.prototype.push = function (key, component) {
+    Install.prototype.push = function (key, bundle) {
         this.stream.push({
             key : key,
-            component : component
+            bundle : bundle
         });
     };
 
@@ -31,13 +28,13 @@ define(['baconjs', 'lodash', 'frux-list', './Insertion'], function (
 
             var panel = list.iterator(o.key);
             if (!panel.hasNext || !panel.hasPrior) {
-                // Removing the first or last panel cannot induce adjacent
-                // insertion points.
+                // Removing the first or last slot cannot induce adjacent open
+                // slots.
                 list._items.remove(o.key, 1);
             } else {
                 var prior = panel.clone().decrement();
                 var next = panel.clone().increment();
-                if (prior.value.cls === Insertion && next.value.cls === Insertion) {
+                if (prior.value.component.isPlaceholder() && next.value.component.isPlaceholder()) {
                     // Remove an insertion point also if there would be an
                     // adjacent pair.
                     list._items.remove(prior.key, 2);
