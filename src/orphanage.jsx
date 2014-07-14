@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', 'frux-list', './panelize', './mixin/panelsPublish', './mixin/storeItemExclusions'], function (
-         react,   frux_list,     panelize,           panelsPublish,           storeItemExclusions) {
+define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function (
+         react,        _,   frux_list,     panelize,     mixin) {
 
     var Install = function (list) {
         this._list = list;
@@ -102,7 +102,7 @@ define(['react', 'frux-list', './panelize', './mixin/panelsPublish', './mixin/st
     var Orphanage = react.createClass({
         displayName : 'Orphanage',
 
-        mixins : [panelsPublish, storeItemExclusions],
+        mixins : [mixin.panelsPublish, mixin.storeItemExclusions],
 
         render : function () {
             // Cover the whole workspace.

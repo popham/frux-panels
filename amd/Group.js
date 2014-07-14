@@ -1,12 +1,12 @@
 /** @jsx react.DOM */
 
-define(['react', './Insertion', './panelize', './mixin/panelsPublish', './mixin/storeItemExclusions'], function (
-         react,     Insertion,     panelize,           panelsPublish,           storeItemExclusions) {
+define(['react', './Insertion', './panelize', './mixin/index'], function (
+         react,     Insertion,     panelize,     mixin) {
 
     return react.createClass({
         displayName : 'Group',
 
-        mixins : [panelsPublish, storeItemExclusions],
+        mixins : [mixin.panelsPublish, mixin.storeItemExclusions],
 
         propTypes : {
             heightLink : react.PropTypes.object.isRequired,
