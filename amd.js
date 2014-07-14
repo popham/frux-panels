@@ -6,7 +6,7 @@ define(['./amd/Insertion', './amd/Store', './amd/install/group', './amd/install/
         Store : Store,
         install : {
             group : group,
-            orphange : orphanage
+            orphanage : orphanage
         },
         mixin : mixin
     };
