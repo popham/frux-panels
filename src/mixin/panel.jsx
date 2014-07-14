@@ -42,14 +42,17 @@ define(['react', '../header/icon/index', '../Slot', './storeItemExclusions', './
             return m;
         },
 
-        defaultUnmount : function () {
-            if (!this.props.isMounted) return;
+        defaultUnmount : function (e) {
+            if (this.props.isMounted) {
+                this.defaultFork();
+                this.props.panelsAct.uninstall.push(this.props.key);
+            }
 
-            this.defaultFork();
-            this.props.panelsAct.uninstall.push(this.props.key);
+            e.stopPropagation();
+            e.preventDefault();
         },
 
-        defaultFork : function () {
+        defaultFork : function (e) {
             var props = this.memento();
             props.isMounted = false;
 
@@ -68,10 +71,16 @@ define(['react', '../header/icon/index', '../Slot', './storeItemExclusions', './
             }
 
             this.props.orphansAct.install.push(this.type.bundle(props));
+
+            e.stopPropagation();
+            e.preventDefault();
         },
 
-        defaultClose : function () {
+        defaultClose : function (e) {
             this.props.panelsAct.uninstall.push(this.props.key);
+
+            e.stopPropagation();
+            e.preventDefault();
         },
 
         defaultHeader : function(array) {
@@ -91,7 +100,7 @@ define(['react', '../header/icon/index', '../Slot', './storeItemExclusions', './
 
             var mouseDown = function (e) {
                 this.dragMouseDown(e);
-                this.bindOrphan(e);
+                this.selectOrphan(e);
             };
 
             array.push(
@@ -144,13 +153,13 @@ define(['react', '../header/icon/index', '../Slot', './storeItemExclusions', './
             return array;
         },
 
-        bindOrphan : function (e) {
+        selectOrphan : function (e) {
             if (!this.props.isMounted) {
                 this.props.orphansAct.adoption.select(this.props.key);
             }
         },
 
-        unbindOrphan : function (e) {
+        unselectOrphan : function (e) {
             if (!this.props.isMounted) {
                 this.props.orphansAct.adoption.unselect();
             }
@@ -158,9 +167,9 @@ define(['react', '../header/icon/index', '../Slot', './storeItemExclusions', './
 
         componentDidUpdate : function (prevProps, prevState) {
             if (!this.props.isMounted && prevProps.isMounted) {
-                document.addEventListener('mouseup', this.unbindOrphan);
+                document.addEventListener('mouseup', this.unselectOrphan);
             } else if (this.props.isMounted && !prevProps.isMounted) {
-                document.removeEventListener('mouseup', this.unbindOrphan);
+                document.removeEventListener('mouseup', this.unselectOrphan);
             }
         },
 
