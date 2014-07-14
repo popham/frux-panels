@@ -29,13 +29,13 @@ define(['react', 'lodash', './mixin/storeItemExclusions'], function (
 
         mouseOver : function (e) {
             if (this.isOpen()) {
-                this.setState({
-                    orphan : this.props.orphansAct.adoption.current
-                });
+                var orphan = this.props.orphansAct.adoption.current;
 
-                if (this.state.orphan !== null) {
+                if (orphan !== null) {
                     this.props.orphansAct.adoption.visit();
                 }
+
+                this.setState({ orphan : orphan });
             }
         },
 
