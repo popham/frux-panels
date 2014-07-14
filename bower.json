@@ -28,6 +28,8 @@
     "src",
     "bower.json",
     "package.json",
-    "scripts"
+    "scripts",
+    "lib",
+    "test"
   ]
 }

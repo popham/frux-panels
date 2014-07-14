@@ -1,12 +1,9 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-var _ = require('lodash');
-var Insertion = require('./Insertion');
-var panelsPublish = require('./mixin/panelsPublish');
-var groupMember = require('./mixin/groupMember');
+define(['react', 'lodash', './Insertion', './mixin/panelsPublish', './mixin/groupMember'], function (
+         react,        _,     Insertion,           panelsPublish,           groupMember) {
 
-    module.exports = react.createClass({
+    return react.createClass({
         displayName : 'Group',
 
         mixins : [panelsPublish, groupMember],
@@ -56,4 +53,4 @@ var groupMember = require('./mixin/groupMember');
             );
         }
     });
-
+});

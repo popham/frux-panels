@@ -1,11 +1,9 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-var aspect = require('dojo/aspect');
-var registry = require('dijit/registry');
-var GroupPane = require('../GroupPane');
+define(['react', 'dojo/aspect', 'dijit/registry', '../GroupPane'], function (
+         react,        aspect,         registry,      GroupPane) {
 
-    module.exports = function (id, panelsStore, dragBus) {
+    return function (id, panelsStore, dragBus) {
         var element = document.getElementById(id);
         var mount = function () {
             var container = element.children[0];
@@ -25,4 +23,4 @@ var GroupPane = require('../GroupPane');
 
         return mount();
     };
-
+});

@@ -1,11 +1,9 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-var Group = require('./Group');
-var Scrollbar = require('./Scrollbar');
-var affine = require('affine/lib/2d/primitive');
+define(['react', './Group', './Scrollbar', 'affine/lib/2d/primitive'], function (
+         react,     Group,     Scrollbar,   affine) {
 
-    module.exports = react.createClass({
+    return react.createClass({
         displayName : 'GroupPane',
 
         mixins : [react.addons.LinkedStateMixin],
@@ -55,4 +53,4 @@ var affine = require('affine/lib/2d/primitive');
             );
         }
     });
-
+});

@@ -1,4 +1,4 @@
-var bacon = require('baconjs');
+define(['baconjs'], function (bacon) {
     var Act = function () {
         this.streams = {
             drag : new bacon.Bus(),
@@ -20,11 +20,11 @@ var bacon = require('baconjs');
         });
     };
 
-    module.exports = function () {
+    return function () {
         this.act = new Act();
         this.publish = {
             drag : this.act.streams.drag.toProperty(),
             drop : this.act.streams.drop.toProperty()
         };
     };
-
+});

@@ -1,7 +1,5 @@
-var bacon = require('baconjs');
-var _ = require('lodash');
-var frux_list = require('frux-list');
-var Insertion = require('./Insertion');
+define(['baconjs', 'lodash', 'frux-list', './Insertion'], function (
+         bacon,          _,   frux_list,     Insertion) {
     var Install = function (list) {
         this.stream = new bacon.Bus();
         this.stream.onValue(function (o) {
@@ -68,5 +66,5 @@ var Insertion = require('./Insertion');
 
     Store.prototype = Object.create(frux_list.List.prototype);
 
-    module.exports = Store;
-
+    return Store;
+});

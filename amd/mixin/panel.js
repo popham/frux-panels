@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-var groupMember = require('./groupMember');
+define(['react', './groupMember'], function (
+         react,     groupMember) {
     /**
      * Default policies
      */
@@ -58,7 +58,7 @@ var groupMember = require('./groupMember');
      * Externally supplied state:
      * icons : [{url: 'http://asdf.com', onClick: function (e) {...}}, ...]
      */
-    module.exports = {
+    return {
         mixins : [groupMember],
 
         propTypes : {
@@ -93,4 +93,4 @@ var groupMember = require('./groupMember');
             );
         }
     };
-
+});

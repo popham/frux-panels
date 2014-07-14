@@ -1,6 +1,5 @@
-var react = require('react');
-var list = require('frux-list');
-    module.exports = {
+define(['react', 'frux-list'], function (react, list) {
+    return {
         propTypes : {
             panelsPublish : react.PropTypes.instanceOf(list.Publish).isRequired
         },
@@ -24,4 +23,4 @@ var list = require('frux-list');
             this.state.panelsPublishUnsubscribe();
         }
     };
-
+});

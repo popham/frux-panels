@@ -1,6 +1,5 @@
-var react = require('react');
-var DragBus = require('../DragBus');
-    module.exports = {
+define(['react', '../DragBus'], function (react, DragBus) {
+    return {
         propTypes : {
             dragBus : react.PropTypes.instanceOf(DragBus),
             draggable : react.PropTypes.boolean
@@ -22,4 +21,4 @@ var DragBus = require('../DragBus');
             return null;/*component placeholder absolute positioned ...*/
         }
     };
-
+});

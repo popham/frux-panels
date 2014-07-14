@@ -1,7 +1,6 @@
-var react = require('react');
-var list = require('frux-list');
-var DragBus = require('../DragBus');
-    module.exports = {
+define(['react', 'frux-list', '../DragBus'], function (
+         react,        list,      DragBus) {
+    return {
         propTypes : {
             panelsAct : react.PropTypes.object.isRequired,
             dragBus : react.PropTypes.instanceOf(DragBus).isRequired
@@ -12,4 +11,4 @@ var DragBus = require('../DragBus');
             dragBus : this.props.dragBus
         }; }
     };
-
+});

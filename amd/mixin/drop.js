@@ -1,6 +1,5 @@
-var react = require('react');
-var DragBus = require('../DragBus');
-    module.exports = {
+define(['react', '../DragBus'], function (react, DragBus) {
+    return {
         propTypes : {
             dragBus : react.PropTypes.instanceOf(DragBus)
         },
@@ -42,4 +41,4 @@ var DragBus = require('../DragBus');
             this.setState({ unsubscribe : null });
         }
     };
-
+});

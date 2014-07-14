@@ -1,8 +1,6 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-var _ = require('lodash');
-var groupMember = require('./mixin/groupMember');
+define(['react', 'lodash', './mixin/groupMember'], function (react, _, groupMember) {
     var Insertion = react.createClass({
         displayName : 'Insertion',
 
@@ -52,5 +50,5 @@ var groupMember = require('./mixin/groupMember');
         }
     });
 
-    module.exports = Insertion;
-
+    return Insertion;
+});
