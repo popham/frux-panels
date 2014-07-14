@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', 'affine/lib/2d/primitive', '../header/icon/index', '../Slot', './storeItemExclusions', './drag'], function (
-         react,   affine,                              icon,            Slot,     storeItemExclusions,     drag) {
+define(['react', '../header/icon/index', '../Slot', './storeItemExclusions', './drag'], function (
+         react,             icon,            Slot,     storeItemExclusions,     drag) {
 
     var Close = icon.Close;
     var Unmount = icon.Unmount;

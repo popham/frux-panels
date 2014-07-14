@@ -1,4 +1,4 @@
-define(['react', 'affine/lib/2d/primitive'], function (
+define(['react', 'affine/2d/primitive'], function (
          react,   affine) {
 
     var project = function (position, size) {

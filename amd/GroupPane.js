@@ -1,6 +1,6 @@
 /** @jsx react.DOM */
 
-define(['react', './Group', './Scrollbar', 'affine/lib/2d/primitive'], function (
+define(['react', './Group', './Scrollbar', 'affine/2d/primitive'], function (
          react,     Group,     Scrollbar,   affine) {
 
     return react.createClass({
