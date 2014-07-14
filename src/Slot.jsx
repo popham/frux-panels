@@ -33,7 +33,9 @@ define(['react', 'lodash', './mixin/storeItemExclusions'], function (
                     orphan : this.props.orphansAct.adoption.current
                 });
 
-                this.props.orphansAct.adoption.hide();
+                if (this.state.orphan !== null) {
+                    this.props.orphansAct.adoption.visit();
+                }
             }
         },
 
@@ -42,7 +44,7 @@ define(['react', 'lodash', './mixin/storeItemExclusions'], function (
                 orphan : null
             });
 
-            this.props.orphansAct.adoption.unhide();
+            this.props.orphansAct.adoption.unvisit();
         },
 
         mouseUp : function (e) {
@@ -57,9 +59,7 @@ define(['react', 'lodash', './mixin/storeItemExclusions'], function (
         },
 
         render : function () {
-            var orphan = this.state.orphan;
-
-            if (orphan === null) {
+            if (this.state.orphan === null) {
                 return (
                     <div
                         onMouseOver={this.mouseOver}

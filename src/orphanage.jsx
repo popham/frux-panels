@@ -46,7 +46,7 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
         this._list.publish.push();
     };
 
-    Adoption.prototype.hide = function () {
+    Adoption.prototype.visit = function () {
         if (this._current !== null) {
             this._list._items = this._list._items.clone();
 
@@ -61,7 +61,7 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
         }
     };
 
-    Adoption.prototype.unhide = function () {
+    Adoption.prototype.unvisit = function () {
         if (this._current !== null) {
             this._list._item = this._list._items.clone();
 
