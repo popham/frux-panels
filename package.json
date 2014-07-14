@@ -37,8 +37,8 @@
   "homepage": "https://github.com/popham/frux-panels",
   "devDependencies": {
     "bootstrap": "^3.1.1",
+    "jest-cli": "^0.1.17",
     "less": "^1.7.1",
-    "mocha": "^1.20.1",
     "nodefy": "^0.2.2",
     "react-tools": "^0.10.0"
   },
