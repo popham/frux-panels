@@ -26,20 +26,22 @@ define(['react', 'lodash', './mixin/storeItemExclusions'], function (
 
         mouseOver : function (e) {
             if (this.isOpen()) {
-                this.setState({ orphan : this.props.orphansAct.adoption.current });
+                var orphan = this.props.orphansAct.adoption.current;
 
-                if (this.isVisited()) {
+                if (orphan !== null) {
                     this.props.orphansAct.adoption.visit();
                 }
+
+                this.setState({ orphan : orphan });
             }
         },
 
         mouseOut : function (e) {
+            this.props.orphansAct.adoption.unvisit();
+
             this.setState({
                 orphan : null
             });
-
-            this.props.orphansAct.adoption.unvisit();
         },
 
         mouseUp : function (e) {

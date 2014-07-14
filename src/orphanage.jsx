@@ -28,6 +28,10 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
     var Adoption = function (list) {
         this._list = list;
         this._current = null;
+        this.unselect = function () {
+            this._current = null;
+            this._list.publish.push();
+        }.bind(this); // Bound function to admit listener removal.
     };
 
     Object.defineProperty(Adoption.prototype, 'current', {
@@ -41,11 +45,6 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
         this._list.publish.push();
     };
 
-    Adoption.prototype.unselect = function () {
-        this._current = null;
-        this._list.publish.push();
-    };
-
     Adoption.prototype.visit = function () {
         if (this._current !== null) {
             this._list._items = this._list._items.clone();
@@ -56,6 +55,7 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
             bundle.props = props;
 
             this._list._items.replace(this._current, [bundle]);
+            document.addEventListener('mouseup', this.unselect);
 
             this._list.publish.push();
         }
@@ -71,6 +71,7 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
             bundle.props = props;
 
             this._list._items.replace(this._current, [bundle]);
+            document.removeEventListener('mouseup', this.unselect);
 
             this._list.publish.push();
         }

@@ -44,7 +44,7 @@ define(['react', '../header/icon/index', '../Slot', './storeItemExclusions', './
 
         defaultUnmount : function (e) {
             if (this.props.isMounted) {
-                this.defaultFork();
+                this.defaultFork(e);
                 this.props.panelsAct.uninstall.push(this.props.key);
             }
 
@@ -162,14 +162,6 @@ define(['react', '../header/icon/index', '../Slot', './storeItemExclusions', './
         unselectOrphan : function (e) {
             if (!this.props.isMounted) {
                 this.props.orphansAct.adoption.unselect();
-            }
-        },
-
-        componentDidUpdate : function (prevProps, prevState) {
-            if (!this.props.isMounted && prevProps.isMounted) {
-                document.addEventListener('mouseup', this.unselectOrphan);
-            } else if (this.props.isMounted && !prevProps.isMounted) {
-                document.removeEventListener('mouseup', this.unselectOrphan);
             }
         },
 
