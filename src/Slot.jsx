@@ -59,7 +59,9 @@ define(['react', 'lodash', './mixin/storeItemExclusions'], function (
         },
 
         render : function () {
-            if (this.state.orphan === null) {
+            var orphan = this.state.orphan;
+
+            if (orphan === null) {
                 return (
                     <div
                         onMouseOver={this.mouseOver}
