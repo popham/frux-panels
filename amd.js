@@ -2,7 +2,6 @@ define(['./amd/Insertion', './amd/Store', './amd/install/group', './amd/install/
                Insertion,         Store,                 group,                 orphanage,         mixin){
 
     return {
-        DragBus : DragBus,
         Insertion : Insertion,
         Store : Store,
         install : {
