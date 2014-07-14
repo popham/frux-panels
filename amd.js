@@ -1,5 +1,5 @@
-define(['./lib/DragBus', './lib/Insertion', './lib/Store', './lib/install/group', './lib/install/orphanage', './lib/mixin/index'], function (
-               DragBus,         Insertion,         Store,                 group,                 orphanage,         mixin){
+define(['./amd/Insertion', './amd/Store', './amd/install/group', './amd/install/orphanage', './amd/mixin/index'], function (
+               Insertion,         Store,                 group,                 orphanage,         mixin){
 
     return {
         DragBus : DragBus,

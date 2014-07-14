@@ -1,4 +1,3 @@
-exports.DragBus = require('./lib/DragBus');
 exports.Insertion = require('./lib/Insertion');
 exports.Store = require('./lib/Store')
 exports.install = {
