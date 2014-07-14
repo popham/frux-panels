@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-    module.exports = react.createClass({
+define(['react'], function (react) {
+    return react.createClass({
         getDefaultProps : function () { return {
             width : 20,
             height : 20
@@ -17,4 +17,4 @@ var react = require('react');
             );
         }
     });
-
+});

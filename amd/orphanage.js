@@ -1,10 +1,7 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-var frux_list = require('frux-list');
-var panelize = require('./panelize');
-var panelsPublish = require('./mixin/panelsPublish');
-var storeItemExclusions = require('./mixin/storeItemExclusions');
+define(['react', 'frux-list', './panelize', './mixin/panelsPublish', './mixin/storeItemExclusions'], function (
+         react,   frux_list,     panelize,           panelsPublish,           storeItemExclusions) {
 
     var Install = function (list) {
         this._list = list;
@@ -123,8 +120,8 @@ var storeItemExclusions = require('./mixin/storeItemExclusions');
         }
     });
 
-    module.exports = {
+    return {
         Store : Store,
         Orphanage : Orphanage
     };
-
+});

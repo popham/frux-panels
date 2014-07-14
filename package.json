@@ -2,16 +2,17 @@
   "name": "frux-panels",
   "version": "0.0.3",
   "description": "Functional reactive panels UI under React's Flux architecture.",
-  "main": "index",
+  "main": "cjs",
   "scripts": {
-    "test": "jest",
-    "jsx": "mkdir -p lib && node ./node_modules/.bin/jsx -x jsx src lib",
-    "js": "mkdir -p lib && rsync -av --include='*/' --include='*.js' --exclude='*' src/ lib/",
-    "nodify": "./node_modules/.bin/urequire -o ./test/lib/frux-list nodejs node_modules/frux-list/ && ./node_modules/.bin/urequire -o ./test/lib nodejs lib/",
+    "test": "./node_modules/.bin/mocha",
+    "jsx": "mkdir -p amd && node ./node_modules/.bin/jsx -x jsx src amd",
+    "js": "mkdir -p amd && rsync -av --include='*/' --include='*.js' --exclude='*' src/ amd/",
+    "amd": "npm run jsx && npm run js",
+    "cjs": "shopt -s globstar && ./node_modules/.bin/nodefy -o lib 'amd/**/*.js'",
     "fonts": "cp -r node_modules/bootstrap/fonts/ fonts",
     "css": "mkdir -p css && ./scripts/css.sh",
-    "clean": "rm -rf css & rm -rf lib",
-    "build": "npm run jsx && npm run js && npm run amdefine && npm run fonts && npm run css"
+    "clean": "rm -rf css & rm -rf lib & rm -rf amd & rm -rf fonts",
+    "build": "npm run fonts & npm run css & npm run amd && npm run cjs"
   },
   "repository": {
     "type": "git",
@@ -38,13 +39,15 @@
     "bootstrap": "^3.1.1",
     "jest-cli": "^0.1.17",
     "less": "^1.7.1",
+    "mocha": "^1.20.1",
+    "nodefy": "^0.2.2",
     "react-tools": "^0.10.0"
   },
   "dependencies": {
     "affine": "git://github.com/popham/affine",
     "baconjs": "^0.7.18",
     "envify": "^1.2.1",
-    "frux-list": "0.0.4",
+    "frux-list": "0.0.7",
     "lodash": "^2.4.1",
     "react": "^0.10.0"
   }

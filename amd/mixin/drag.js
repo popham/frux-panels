@@ -20,11 +20,13 @@ define(['react', 'affine/lib/2d/primitive'], function (
             initialTop : react.PropTypes.number,
             initialWidth : react.PropTypes.number,
             initialHeight : react.PropTypes.number,
-            isMounted : react.PropTypes.bool
+            isMounted : react.PropTypes.bool,
+            isVisiting : react.PropTypes.bool
         },
 
         getDefaultProps : function () { return {
-            isMounted : true
+            isMounted : true,
+            isVisiting : false
         }; },
 
         getInitialState : function () {
@@ -50,7 +52,7 @@ define(['react', 'affine/lib/2d/primitive'], function (
             return this.state.dragOrigin !== null;
         },
 
-        draggableMouseDown : function (e) {
+        dragMouseDown : function (e) {
             if (this.props.isMounted) return;
             if (e.button !== 0) return;
 
@@ -64,7 +66,7 @@ define(['react', 'affine/lib/2d/primitive'], function (
             e.preventDefault();
         },
 
-        draggableMouseMove : function (e) {
+        dragMouseMove : function (e) {
             if (!this.isDragging()) return;
 
             var p = new affine.Point(e.clientX, e.clientY);
@@ -79,7 +81,7 @@ define(['react', 'affine/lib/2d/primitive'], function (
             e.preventDefault();
         },
 
-        draggableMouseUp : function (e) {
+        dragMouseUp : function (e) {
             this.setState({
                 dragOrigin : null,
                 dragStartPosition : null
@@ -91,11 +93,11 @@ define(['react', 'affine/lib/2d/primitive'], function (
 
         componentDidUpdate : function (prevProps, prevState) {
             if (this.isDragging() && prevState.dragOrigin === null) {
-                document.addEventListener('mousemove', this.draggableMouseMove);
-                document.addEventListener('mouseup', this.draggableMouseUp);
+                document.addEventListener('mousemove', this.dragMouseMove);
+                document.addEventListener('mouseup', this.dragMouseUp);
             } else if (!this.isDragging() && prevState.dragOrigin !== null) {
-                document.removeEventListener('mousemove', this.draggableMouseMove);
-                document.removeEventListener('mouseup', this.draggableMouseUp);
+                document.removeEventListener('mousemove', this.dragMouseMove);
+                document.removeEventListener('mouseup', this.dragMouseUp);
             }
         },
 

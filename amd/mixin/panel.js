@@ -1,11 +1,7 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-var affine = require('affine/lib/2d/primitive');
-var icon = require('../header/icon/index');
-var Slot = require('../Slot');
-var storeItemExclusions = require('./storeItemExclusions');
-var drag = require('./drag');
+define(['react', 'affine/lib/2d/primitive', '../header/icon/index', '../Slot', './storeItemExclusions', './drag'], function (
+         react,   affine,                              icon,            Slot,     storeItemExclusions,     drag) {
 
     var Close = icon.Close;
     var Unmount = icon.Unmount;
@@ -15,7 +11,7 @@ var drag = require('./drag');
      * Externally supplied state:
      * icons : [{url: 'http://asdf.com', mouseDown: function (e) {...}}, ...]
      */
-    module.exports = {
+    return {
         mixins : [storeItemExclusions, drag],
 
         propTypes : {
@@ -225,4 +221,4 @@ var drag = require('./drag');
             );
         }
     };
-
+});

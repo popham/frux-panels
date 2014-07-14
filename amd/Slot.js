@@ -1,10 +1,9 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-var _ = require('lodash');
-var storeItemExclusions = require('./mixin/storeItemExclusions');
+define(['react', 'lodash', './mixin/storeItemExclusions'], function (
+         react,        _,           storeItemExclusions) {
 
-    module.exports = react.createClass({
+    return react.createClass({
         displayName : 'Slot',
 
         mixins : [storeItemExclusions],
@@ -85,4 +84,4 @@ var storeItemExclusions = require('./mixin/storeItemExclusions');
             }
         }
     });
-
+});

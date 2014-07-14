@@ -1,7 +1,5 @@
-var react = require('react');
-var _ = require('lodash');
-var list = require('frux-list');
-    module.exports = {
+define(['react', 'lodash', 'frux-list'], function (react, _, list) {
+    return {
         propTypes : {
             panelsPublish : react.PropTypes.instanceOf(list.Publish).isRequired
         },
@@ -25,4 +23,4 @@ var list = require('frux-list');
             this.state.panelsPublishUnsubscribe();
         }
     };
-
+});

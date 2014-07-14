@@ -1,11 +1,11 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-var orphanage = require('../orphanage');
+define(['react', '../orphanage'], function (
+         react,      orphanage) {
 
     var Orphanage = orphanage.Orphanage;
 
-    module.exports = function (id) {
+    return function (id) {
         var store = new orphanage.Store();
         var element = document.getElementById(id);
 
@@ -19,4 +19,4 @@ var orphanage = require('../orphanage');
 
         return store.act;
     };
-
+});

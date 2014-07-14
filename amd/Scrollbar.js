@@ -1,13 +1,13 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-var affine = require('affine/lib/2d/primitive');
+define(['react', 'affine/lib/2d/primitive'], function (
+         react,   affine) {
 
     var project = function (left, member, right) {
         return Math.max(0, Math.min(member, right));
     };
 
-    module.exports = react.createClass({
+    return react.createClass({
         displayName : 'Scrollbar',
 
         propTypes : {
@@ -184,4 +184,4 @@ var affine = require('affine/lib/2d/primitive');
             );
         }
     });
-
+});

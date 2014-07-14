@@ -1,6 +1,6 @@
-var react = require('react');
+define(['react'], function (react) {
 
-    module.exports = {
+    return {
         propTypes : {
             panelsAct : react.PropTypes.object.isRequired,
             orphansAct : react.PropTypes.object.isRequired
@@ -11,4 +11,4 @@ var react = require('react');
             orphansAct : this.props.orphansAct
         }; }
     };
-
+});

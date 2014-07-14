@@ -1,12 +1,9 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-var Insertion = require('./Insertion');
-var panelize = require('./panelize');
-var panelsPublish = require('./mixin/panelsPublish');
-var storeItemExclusions = require('./mixin/storeItemExclusions');
+define(['react', './Insertion', './panelize', './mixin/panelsPublish', './mixin/storeItemExclusions'], function (
+         react,     Insertion,     panelize,           panelsPublish,           storeItemExclusions) {
 
-    module.exports = react.createClass({
+    return react.createClass({
         displayName : 'Group',
 
         mixins : [panelsPublish, storeItemExclusions],
@@ -51,4 +48,4 @@ var storeItemExclusions = require('./mixin/storeItemExclusions');
             );
         }
     });
-
+});
