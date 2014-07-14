@@ -20,22 +20,17 @@ define(['react', 'lodash', './mixin/storeItemExclusions'], function (
             return this.props.isPlaceholder;
         },
 
-// non isMounted => orphan status
-// Mouse down => selected
-// Orphan mouse into => is visiting (triggered by under element)
-// Orphan mouse out of => non visiting (triggered by under element)
-// Open slot + mouse over => transition to visiting
-// Open slot + mouse out => transition to non visiting
+        isVisited : function () {
+            return this.state.orphan !== null;
+        },
 
         mouseOver : function (e) {
             if (this.isOpen()) {
-                var orphan = this.props.orphansAct.adoption.current;
+                this.setState({ orphan : this.props.orphansAct.adoption.current });
 
-                if (orphan !== null) {
+                if (this.isVisited()) {
                     this.props.orphansAct.adoption.visit();
                 }
-
-                this.setState({ orphan : orphan });
             }
         },
 
@@ -48,7 +43,7 @@ define(['react', 'lodash', './mixin/storeItemExclusions'], function (
         },
 
         mouseUp : function (e) {
-            if (this.state.orphan !== null) {
+            if (this.isVisited()) {
                 this.props.orphansAct.adoption.claim();
                 this.props.panelsAct.install.push(this.props.key, this.state.orphan);
                 this.props.orphansAct.uninstall(this.props.key);
@@ -61,26 +56,20 @@ define(['react', 'lodash', './mixin/storeItemExclusions'], function (
         render : function () {
             var orphan = this.state.orphan;
 
-            if (orphan === null) {
+            if (this.isVisited()) {
+                var props = {};
+                _.extend(props, this.storeItemExclusions());
+                _.extend(props, this.state.orphan.props);
+
                 return (
-                    <div
-                        onMouseOver={this.mouseOver}
-                        onMouseOut={this.mouseOut}
-                        onMouseUp={this.mouseUp}>
-                      {this.props.children}
+                    <div onMouseOut={this.mouseOut} onMouseUp={this.mouseUp}>
+                      {this.state.orphan.component(props)}
                     </div>
                 );
             } else {
-                var props = {};
-                _.extend(props, this.storeItemExclusions());
-                _.extend(props, orphan.props);
-
                 return (
-                    <div
-                        onMouseOver={this.mouseOver}
-                        onMouseOut={this.mouseOut}
-                        onMouseUp={this.mouseUp}>
-                      {orphan.component(props)}
+                    <div onMouseOver={this.mouseOver}>
+                      {this.props.children}
                     </div>
                 );
             }
