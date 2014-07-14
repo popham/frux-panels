@@ -2,15 +2,16 @@
   "name": "frux-panels",
   "version": "0.0.3",
   "description": "Functional reactive panels UI under React's Flux architecture.",
-  "main": "main",
+  "main": "index",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "jsx": "mkdir -p lib && node ./node_modules/.bin/jsx -x jsx src lib",
     "js": "mkdir -p lib && rsync -av --include='*/' --include='*.js' --exclude='*' src/ lib/",
+    "nodify": "./node_modules/.bin/urequire -o ./test/lib/frux-list nodejs node_modules/frux-list/ && ./node_modules/.bin/urequire -o ./test/lib nodejs lib/",
     "fonts": "cp -r node_modules/bootstrap/fonts/ fonts",
     "css": "mkdir -p css && ./scripts/css.sh",
     "clean": "rm -rf css & rm -rf lib",
-    "build": "npm run jsx & npm run js & npm run fonts & npm run css"
+    "build": "npm run jsx && npm run js && npm run amdefine && npm run fonts && npm run css"
   },
   "repository": {
     "type": "git",
@@ -35,7 +36,16 @@
   "homepage": "https://github.com/popham/frux-panels",
   "devDependencies": {
     "bootstrap": "^3.1.1",
+    "jest-cli": "^0.1.17",
     "less": "^1.7.1",
     "react-tools": "^0.10.0"
+  },
+  "dependencies": {
+    "affine": "git://github.com/popham/affine",
+    "baconjs": "^0.7.18",
+    "envify": "^1.2.1",
+    "frux-list": "0.0.4",
+    "lodash": "^2.4.1",
+    "react": "^0.10.0"
   }
 }
