@@ -4,7 +4,7 @@
   "description": "Functional reactive panels UI under React's Flux architecture.",
   "main": "cjs",
   "scripts": {
-    "test": "./node_modules/.bin/mocha",
+    "test": "./node_modules/.bin/jest",
     "jsx": "mkdir -p amd && node ./node_modules/.bin/jsx -x jsx src amd",
     "js": "mkdir -p amd && rsync -av --include='*/' --include='*.js' --exclude='*' src/ amd/",
     "amd": "npm run jsx && npm run js",
@@ -17,6 +17,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/popham/frux-panels.git"
+  },
+  "jest": {
+    "unmockedModulePathPatterns": ["<rootDir>/node_modules"],
+    "testDirectoryName": "test"
   },
   "keywords": [
     "frp",
