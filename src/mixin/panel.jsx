@@ -99,8 +99,10 @@ define(['react', '../header/icon/index', '../Slot', './storeItemExclusions', './
             var cursor = { cursor : 'default' };
 
             var mouseDown = function (e) {
-                this.dragMouseDown(e);
-                this.selectOrphan(e);
+                if (!this.props.isMounted) {
+                    this.dragMouseDown(e);
+                    this.selectOrphan(e);
+                }
             };
 
             array.push(
@@ -196,13 +198,16 @@ define(['react', '../header/icon/index', '../Slot', './storeItemExclusions', './
                 if (this.isDragging()) {
                     style.pointerEvents = 'none';
                 }
+
+                if (this.props.isVisiting) {
+                    style.display = 'none';
+                }
             }
 
             if (this.props.isMounted) {
                 children = (
                     <Slot
                         isPlaceholder={false}
-                        isVisited={this.props.isVisiting}
                         panelsAct={this.props.panelsAct}
                         orphansAct={this.props.orphansAct}>
                       {children}

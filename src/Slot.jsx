@@ -29,6 +29,8 @@ define(['react', 'lodash', './mixin/storeItemExclusions'], function (
                 var orphan = this.props.orphansAct.adoption.current;
 
                 if (orphan !== null) {
+console.log('Slot mouseOver:');
+console.log(e);
                     this.props.orphansAct.adoption.visit();
                 }
 
@@ -37,6 +39,8 @@ define(['react', 'lodash', './mixin/storeItemExclusions'], function (
         },
 
         mouseOut : function (e) {
+console.log('Slot mouseOut:');
+console.log(e);
             this.props.orphansAct.adoption.unvisit();
 
             this.setState({
@@ -45,6 +49,8 @@ define(['react', 'lodash', './mixin/storeItemExclusions'], function (
         },
 
         mouseUp : function (e) {
+console.log('Slot mouseUp:');
+console.log(e);
             if (this.isVisited()) {
                 this.props.orphansAct.adoption.claim();
                 this.props.panelsAct.install.push(this.props.key, this.state.orphan);

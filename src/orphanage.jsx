@@ -10,6 +10,8 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
     Install.prototype.push = function (bundle) {
         this._list._items = this._list._items.clone();
         this._list._items.append([bundle]);
+console.log('Orphanage Install:');
+console.log(bundle);
 
         this._list.publish.push();
     };
@@ -21,6 +23,8 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
     Uninstall.prototype.push = function (key) {
         this._list._items = this._list._items.clone();
         this._list._items.remove(key, 1);
+console.log('Orphanage Uninstall:');
+console.log(key);
 
         this._list.publish.push();
     };
@@ -29,6 +33,8 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
         this._list = list;
         this._current = null;
         this.unselect = function () {
+console.log('Orphanage unselect:')
+console.log(this._current);
             this._current = null;
             this._list.publish.push();
         }.bind(this); // Bound function to admit listener removal.
@@ -43,6 +49,8 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
     Adoption.prototype.select = function (key) {
         this._current = key;
         this._list.publish.push();
+console.log('Orphanage select:');
+console.log(key);
     };
 
     Adoption.prototype.visit = function () {
@@ -53,9 +61,9 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
             var props = _.extend({}, bundle.props);
             props.isVisiting = true;
             bundle.props = props;
-
             this._list._items.replace(this._current, [bundle]);
-            document.addEventListener('mouseup', this.unselect);
+console.log('Orphanage visit:');
+console.log(this._current);
 
             this._list.publish.push();
         }
@@ -67,11 +75,11 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
 
             var bundle = _.extend({}, this._list.value(this._current));
             var props = _.extend({}, bundle.props);
-            props.isVisiting = false;
+            delete props['isVisiting'];
             bundle.props = props;
-
             this._list._items.replace(this._current, [bundle]);
-            document.removeEventListener('mouseup', this.unselect);
+console.log('Orphanage unvisit:');
+console.log(this._current);
 
             this._list.publish.push();
         }
@@ -81,6 +89,8 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
         if (this._current !== null) {
             var current = this._current;
             this._current = null;
+console.log('Orphanage claim:');
+console.log(current);
 
             this.uninstall.push(current);
         }
@@ -105,11 +115,24 @@ define(['react', 'lodash', 'frux-list', './panelize', './mixin/index'], function
 
         mixins : [mixin.panelsPublish, mixin.storeItemExclusions],
 
+        componentDidMount : function () {
+            document.addEventListener(
+                'mouseup',
+                this.props.orphansAct.adoption.unselect
+            );
+        },
+
+        componentWillUnmount : function () {
+            document.removeEventListener(
+                'mouseup',
+                this.props.orphansAct.adoption.unselect
+            );
+        },
+
         render : function () {
-            // Cover the whole workspace.
             var style = {
                 margin : 0,
-                padding : 0,
+                padding : 0
             };
 
             var panel = panelize.bind(null, this.storeItemExclusions());

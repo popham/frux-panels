@@ -19,6 +19,8 @@ define(['baconjs', 'lodash', 'frux-list', './Insertion'], function (
             key : key,
             bundle : bundle
         });
+console.log('Store Install:');
+console.log(bundle);
     };
 
     var Uninstall = function (list) {
@@ -49,6 +51,8 @@ define(['baconjs', 'lodash', 'frux-list', './Insertion'], function (
 
     Uninstall.prototype.push = function (key) {
         this.stream.push({ key : key });
+console.log('Store Uninstall:');
+console.log(key);
     };
 
     var Store = function (initial) {
