@@ -10,9 +10,9 @@ define(['react', './icon/index'], function (react, icon) {
         displayName : 'Header',
 
         propTypes : {
-            onUnmount : react.PropTypes.function.isRequired,
-            onFork : react.PropTypes.function.isRequired,
-            onClose : react.PropTypes.function.isRequired
+            onUnmount : react.PropTypes.func.isRequired,
+            onFork : react.PropTypes.func.isRequired,
+            onClose : react.PropTypes.func.isRequired
         },
 
         render : function () {
