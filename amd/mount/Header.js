@@ -27,15 +27,15 @@ define(['react', './icon/index'], function (react, icon) {
                     Unmount(
                         {style:cursor,
                         className:"icon",
-                        onMouseDown:unmount} ),
+                        onMouseDown:this.props.onUnmount} ),
                     Fork(
                         {style:cursor,
                         className:"icon",
-                        onMouseDown:fork} ),
+                        onMouseDown:this.props.onFork} ),
                     Close(
                         {style:cursor,
                         className:"icon",
-                        onMouseDown:close} )
+                        onMouseDown:this.props.onClose} )
                   ),
                   react.DOM.p( {style:moveCursor}, this.props.children)
                 )
