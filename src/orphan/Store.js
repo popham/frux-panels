@@ -69,33 +69,34 @@ define(['react', 'signals', '../KeyedList'], function (
         }
     };
 
+    var Act = function (list) {
+        this._list = list;
+        this.adoption = new Adoption(this._list);
+    };
+
+    Act.prototype.install = function (hostInitialState, memento) {
+        this._list.append([{
+            hostInitialState : hostInitialState,
+            memento : memento
+        }]);
+
+        this.push();
+    };
+
+    Act.prototype.uninstall = function (key) {
+        this._list.remove(key, 1);
+
+        this.push();
+    };
+
     var Store = function () {
         this._list = new KeyedList();
-        this._adoption = new Adoption(this._list);
+        this.act = new Act(this._list);
         this.publish = new signals.Signal();
     };
 
     Store.prototype.push = function() {
         this.publish.dispatch(this._list.items);
-    }
-
-    Store.prototype.act = {
-        install : function (hostInitialState, memento) {
-            this._list.append([{
-                hostInitialState : hostInitialState,
-                memento : memento
-            }]);
-
-            this.push();
-        }.bind(this),
-
-        uninstall : function (key) {
-            this._list.remove(key, 1);
-
-            this.push();
-        }.bind(this),
-
-        adoption : this._adoption
     }
 
     return Store;
