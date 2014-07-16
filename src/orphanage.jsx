@@ -129,24 +129,24 @@ define(['react', 'frux-list', './mixin/index', './mount/Orphan'], function (
             );
         },
 
-        panelize : function (bundle, key) {
-            return bundle.memento.component(
-                react.addons.update(bundle.memento.componentProps, {
-                    $merge : this.storeItemExclusions(),
-                    $merge : {Host : Orphan}
-                })
-            );
-        },
-
         render : function () {
             var style = {
                 margin : 0,
                 padding : 0
             };
 
+            function panelize(bundle, key) {
+                return bundle.memento.component(
+                    react.addons.update(bundle.memento.componentProps, {
+                        $merge : this.storeItemExclusions(),
+                        $merge : {Host : Orphan}
+                    })
+                );
+            }
+
             return (
                 <ul className="frux-panels" style={style}>
-                  {this.state.panels.map(this.panelize.bind(this))}
+                  {this.state.panels.map(panelize)}
                 </ul>
             );
         }

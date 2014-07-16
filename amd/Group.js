@@ -30,15 +30,6 @@ define(['react', './mixin/index'], function (react, mixin) {
             }
         },
 
-        panelize : function (bundle, key) {
-            return bundle.memento.component(
-                react.addons.update(bundle.memento.componentProps, {
-                    $merge : this.storeItemExclusions(),
-                    $merge : {Host : bundle.Host}
-                })
-            );
-        },
-
         render : function () {
             var style = {
                 margin : 0,
@@ -48,9 +39,18 @@ define(['react', './mixin/index'], function (react, mixin) {
                 top : -this.props.positionLink.value
             };
 
+            function panelize(bundle, key) {
+                return bundle.memento.component(
+                    react.addons.update(bundle.memento.componentProps, {
+                        $merge : this.storeItemExclusions(),
+                        $merge : {Host : bundle.Host}
+                    })
+                );
+            }
+
             return (
                 react.DOM.ul( {className:"frux-panels", style:style} , 
-                  this.state.panels.map(this.panelize.bind(this))
+                  this.state.panels.map(panelize)
                 )
             );
         }
