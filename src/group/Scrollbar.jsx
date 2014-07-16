@@ -91,7 +91,7 @@ define(['react', 'affine/2d/primitive'], function (
             return this.state.dragOrigin !== null;
         },
 
-        mouseDown : function (e) {
+        dragStart : function (e) {
             if (e.button !== 0) return;
 
             this.setState({
@@ -103,7 +103,7 @@ define(['react', 'affine/2d/primitive'], function (
             e.preventDefault();
         },
 
-        mouseMove : function (e) {
+        drag : function (e) {
             if (!this.isDragging()) return;
 
             var p = new affine.Point(e.pageX, e.pageY);
@@ -119,7 +119,7 @@ define(['react', 'affine/2d/primitive'], function (
             e.preventDefault();
         },
 
-        mouseUp : function (e) {
+        dragEnd : function (e) {
             this.setState({
                 dragOrigin : null,
                 dragStartPosition : null
@@ -127,16 +127,6 @@ define(['react', 'affine/2d/primitive'], function (
 
             e.stopPropagation();
             e.preventDefault();
-        },
-
-        componentDidUpdate : function (prevProps, prevState) {
-            if (this.isDragging() && prevState.dragOrigin === null) {
-                document.addEventListener('mousemove', this.mouseMove);
-                document.addEventListener('mouseup', this.mouseUp);
-            } else if (!this.isDragging() && prevState.dragOrigin !== null) {
-                document.removeEventListener('mousemove', this.mouseMove);
-                document.removeEventListener('mouseup', this.mouseUp);
-            }
         },
 
         shouldComponentUpdate : function (nextProps, nextState) {

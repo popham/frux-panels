@@ -1,6 +1,6 @@
 /** @jsx react.DOM */
 
-define(['react', './mixin/index'], function (react, mixin) {
+define(['react', '../mixin/index'], function (react, mixin) {
 
     return react.createClass({
         displayName : 'Group',
@@ -39,18 +39,19 @@ define(['react', './mixin/index'], function (react, mixin) {
                 top : -this.props.positionLink.value
             };
 
-            function panelize(bundle, key) {
-                return bundle.memento.component(
-                    react.addons.update(bundle.memento.componentProps, {
+            function panelize(item) {
+                var memento = item.value.memento;
+                return memento.component(
+                    react.addons.update(memento.componentProps, {
                         $merge : this.storeItemExclusions(),
-                        $merge : {Host : bundle.Host}
+                        $merge : {Host:item.value.Host, key:item.key}
                     })
                 );
             }
 
             return (
                 <ul className="frux-panels" style={style} >
-                  {this.state.panels.map(panelize)}
+                  {this.state.panels.map(panelize, this)}
                 </ul>
             );
         }

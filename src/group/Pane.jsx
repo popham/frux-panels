@@ -1,10 +1,10 @@
 /** @jsx react.DOM */
 
-define(['react', './Group', './Scrollbar', 'affine/2d/primitive'], function (
-         react,     Group,     Scrollbar,   affine) {
+define(['react', 'affine/2d/primitive', './Group', './Scrollbar'], function (
+         react,   affine,                  Group,     Scrollbar) {
 
     return react.createClass({
-        displayName : 'GroupPane',
+        displayName : 'Pane',
 
         mixins : [react.addons.LinkedStateMixin],
 
