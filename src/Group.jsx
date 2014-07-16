@@ -1,7 +1,6 @@
 /** @jsx react.DOM */
 
-define(['react', './Insertion', './panelize', './mixin/index'], function (
-         react,     Insertion,     panelize,     mixin) {
+define(['react', './mixin/index'], function (react, mixin) {
 
     return react.createClass({
         displayName : 'Group',
@@ -31,6 +30,15 @@ define(['react', './Insertion', './panelize', './mixin/index'], function (
             }
         },
 
+        panelize : function (bundle, key) {
+            return bundle.memento.component(
+                react.addons.update(bundle.memento.componentProps, {
+                    $merge : this.storeItemExclusions(),
+                    $merge : {Host : bundle.Host}
+                })
+            );
+        },
+
         render : function () {
             var style = {
                 margin : 0,
@@ -40,10 +48,9 @@ define(['react', './Insertion', './panelize', './mixin/index'], function (
                 top : -this.props.positionLink.value
             };
 
-            var panel = panelize.bind(null, this.storeItemExclusions());
             return (
                 <ul className="frux-panels" style={style} >
-                  {this.state.panels.map(panel)}
+                  {this.state.panels.map(this.panelize.bind(this))}
                 </ul>
             );
         }
