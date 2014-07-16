@@ -1,5 +1,5 @@
-define(['baconjs', 'frux-list'], function (
-         bacon,     frux_list) {
+define(['baconjs', 'frux-list', './mount/Static', './mount/Empty'], function (
+         bacon,     frux_list,           Static,           Empty) {
 
     var Install = function (list) {
         this.stream = new bacon.Bus();
@@ -66,6 +66,16 @@ define(['baconjs', 'frux-list'], function (
     };
 
     Store.prototype = Object.create(frux_list.List.prototype);
+
+    Store.prototype.appendStatic = function (memento) {
+        this._items = this._items.clone();
+        this._items.append([{Host:Static, memento:memento}]);
+    };
+
+    Store.prototype.appendEmpty = function (memento) {
+        this._items = this._items.clone();
+        this._items.append([{Host:Empty, memento:memento}]);
+    };
 
     return Store;
 });
