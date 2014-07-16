@@ -19,7 +19,9 @@
     "url": "https://github.com/popham/frux-panels.git"
   },
   "jest": {
-    "unmockedModulePathPatterns": ["<rootDir>/node_modules"],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules"
+    ],
     "testDirectoryName": "test"
   },
   "keywords": [
@@ -48,10 +50,8 @@
   },
   "dependencies": {
     "affine": "git://github.com/popham/affine",
-    "baconjs": "^0.7.18",
     "envify": "^1.2.1",
-    "frux-list": "0.0.7",
-    "lodash": "^2.4.1",
-    "react": "^0.10.0"
+    "react": "^0.10.0",
+    "signals": "^1.0.0"
   }
 }
