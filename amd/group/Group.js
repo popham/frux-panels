@@ -31,6 +31,17 @@ define(['react', '../mixin/index'], function (react, mixin) {
         },
 
         render : function () {
+            function panelize(item) {
+                var memento = item.value.memento;
+                var props = react.addons.update(memento.componentProps, {
+                    $merge : this.storeItemExclusions()
+                });
+                props.Host = item.value.Host;
+                props.key = item.key;
+
+                return memento.component(props);
+            }
+
             var style = {
                 margin : 0,
                 overflow : "hidden",
@@ -38,16 +49,6 @@ define(['react', '../mixin/index'], function (react, mixin) {
                 width : "100%",
                 top : -this.props.positionLink.value
             };
-
-            function panelize(item) {
-                var memento = item.value.memento;
-                return memento.component(
-                    react.addons.update(memento.componentProps, {
-                        $merge : this.storeItemExclusions(),
-                        $merge : {Host:item.value.Host, key:item.key}
-                    })
-                );
-            }
 
             return (
                 react.DOM.ul( {className:"frux-panels", style:style} , 
