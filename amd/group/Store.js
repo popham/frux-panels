@@ -20,6 +20,7 @@ define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList']
         if (key === this._list.firstKey || key === this._list.lastKey) {
             // First and last list members cannot induce adjacent Empties.
             this._list.remove(key, 1);
+            this.push();
             return;
         }
 
