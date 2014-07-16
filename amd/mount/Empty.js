@@ -50,9 +50,9 @@ define(['react', '../mixin/host'], function (
             return (
                 react.DOM.li( {key:this.props.key,
                     className:classes.join(' '),
-                    onDragEnter:this.dragEnter.bind(this),
-                    onDragLeave:this.dragLeave.bind(this),
-                    onDrop:this.drop.bind(this)}, 
+                    onDragEnter:this.dragEnter,
+                    onDragLeave:this.dragLeave,
+                    onDrop:this.drop}, 
                   children
                 )
             );
