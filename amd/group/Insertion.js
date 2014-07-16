@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-var react = require('react');
-var storeItemExclusions = require('./mixin/storeItemExclusions');
+define(['react', '../mixin/storeItemExclusions'], function (
+         react,           storeItemExclusions) {
 
     var Insertion = react.createClass({
         displayName : 'Insertion',
@@ -46,5 +46,5 @@ var storeItemExclusions = require('./mixin/storeItemExclusions');
         }
     });
 
-    module.exports = Insertion;
-
+    return Insertion;
+});

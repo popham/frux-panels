@@ -3,7 +3,7 @@
 define(['react', '../mixin/host', './fork', './close'], function (
          react,            host,     fork,     close) {
 
-    var Static = react.createClass({
+    return react.createClass({
         displayName : 'Static',
 
         mixins : [host],
@@ -31,6 +31,4 @@ define(['react', '../mixin/host', './fork', './close'], function (
             );
         }
     });
-
-    return Static;
 });
