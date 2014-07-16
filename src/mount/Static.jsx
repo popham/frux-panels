@@ -21,9 +21,9 @@ define(['react', '../mixin/host', './fork', './close', './Header'], function (
                 <li key={this.props.key}
                     className="mount static-mount">
                   <Header
-                      onUnmount={this.unmount.bind(this)}
-                      onFork={fork.bind(this)}
-                      onClose={close.bind(this)}>
+                      onUnmount={this.unmount}
+                      onFork={fork}
+                      onClose={close}>
                     {this.props.heading}
                   </Header>
                   {this.props.children}

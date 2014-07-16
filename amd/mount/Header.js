@@ -17,6 +17,7 @@ define(['react', './icon/index'], function (react, icon) {
 
         render : function () {
             var moveCursor = { cursor : "move" };
+            var cursor = { cursor : "default" };
 
             return (
                 react.DOM.header(
