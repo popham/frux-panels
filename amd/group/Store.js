@@ -1,9 +1,15 @@
 define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList'], function (
          react,   signals,            Static,            Empty,      KeyedList) {
 
-    var Act = function (list) {
-        this._list = list;
+    var Act = function (store) {
+        this._store = store;
     };
+
+    Object.defineProperty(Act.prototype, '_list', {
+        get : function () { return this._store._list; }
+    });
+
+    Act.prototype._push = function () { this._store.push(); };
 
     Act.prototype.install = function (key, Host, memento) {
         var oldBundle = this._list.value(key);
@@ -13,14 +19,14 @@ define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList']
             oldBundle
         ]);
 
-        this.push();
+        this._push();
     };
 
     Act.prototype.uninstall = function (key) {
         if (key === this._list.firstKey || key === this._list.lastKey) {
             // First and last list members cannot induce adjacent Empties.
             this._list.remove(key, 1);
-            this.push();
+            this._push();
             return;
         }
 
@@ -37,12 +43,12 @@ define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList']
             this._list.remove(key, 1);
         }
 
-        this.push();
+        this._push();
     };
 
     var Store = function (initial) {
         this._list = new KeyedList();
-        this.act = new Act(this._list);
+        this.act = new Act(this);
         this.publish = new signals.Signal();
     };
 

@@ -14,7 +14,7 @@ define(['react', 'signals', '../KeyedList'], function (
         }
     });
 
-    Adoption.prototype.push = function () { this._store.push(); }
+    Adoption.prototype._push = function () { this._store.push(); }
 
     Object.defineProperty(Adoption.prototype, 'currentMemento', {
         get : function () {
@@ -43,7 +43,7 @@ define(['react', 'signals', '../KeyedList'], function (
             });
             this._list.replace(this._current, [bundle]);
 
-            this.push();
+            this._push();
         }
     };
 
@@ -56,7 +56,7 @@ define(['react', 'signals', '../KeyedList'], function (
             });
             this._list.replace(this._current, [bundle]);
 
-            this.push();
+            this._push();
         }
     };
 
@@ -69,10 +69,16 @@ define(['react', 'signals', '../KeyedList'], function (
         }
     };
 
-    var Act = function (list) {
-        this._list = list;
-        this.adoption = new Adoption(this._list);
+    var Act = function (store) {
+        this._store = store;
+        this.adoption = new Adoption(this);
     };
+
+    Object.defineProperty(Act.prototype, '_list', {
+        get : function () { return this._store._list; }
+    });
+
+    Act.prototype._push = function () { this._store.push(); };
 
     Act.prototype.install = function (hostInitialState, memento) {
         this._list.append([{
@@ -80,18 +86,18 @@ define(['react', 'signals', '../KeyedList'], function (
             memento : memento
         }]);
 
-        this.push();
+        this._push();
     };
 
     Act.prototype.uninstall = function (key) {
         this._list.remove(key, 1);
 
-        this.push();
+        this._push();
     };
 
     var Store = function () {
         this._list = new KeyedList();
-        this.act = new Act(this._list);
+        this.act = new Act(this);
         this.publish = new signals.Signal();
     };
 
