@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../mixin/storeItemExclusions'], function (
-         react,           storeItemExclusions) {
+define(['react', '../mixin/storeItemExclusions', '../mount/Empty'], function (
+         react,           storeItemExclusions,             Empty) {
 
     var Insertion = react.createClass({
         displayName : 'Insertion',
