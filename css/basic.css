@@ -398,14 +398,16 @@ ul.frux-panels li ul > li {
   padding-left: 5px;
   padding-right: 5px;
 }
-ul.frux-panels .mount {
-  /* Copied from Bootstrap without tables or list-group coverage. */
+ul.frux-panels .static-mount {
   background-color: #ffffff;
-  color: #333333;
   border: 1px solid transparent;
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+ul.frux-panels .mount {
+  /* Copied from Bootstrap without tables or list-group coverage. */
+  color: #333333;
 }
 ul.frux-panels .mount .title-bar {
   padding: 10px 15px;
@@ -418,6 +420,13 @@ ul.frux-panels .mount .title-bar > .dropdown .dropdown-toggle {
 }
 ul.frux-panels .mount .title-bar div {
   float: right !important;
+}
+ul.frux-panels .mount .title-bar svg.icon {
+  fill: #333333;
+  background: #ffffff;
+}
+ul.frux-panels .mount .title-bar svg.icon .border {
+  fill: #cccccc;
 }
 ul.frux-panels .mount .panel-content {
   padding: 15px;
