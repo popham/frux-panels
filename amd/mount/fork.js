@@ -11,7 +11,7 @@ define(['react', 'affine/2d/primitive', '../project'], function (
             isVisiting : false
         };
 
-        this.props.orphansAct.install.push(orphanState, this.props.memento);
+        this.props.orphansAct.install(orphanState, this.props.memento);
 
         e.stopPropagation();
         e.preventDefault();

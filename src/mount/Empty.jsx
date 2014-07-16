@@ -29,7 +29,7 @@ define(['react', '../mixin/host'], function (
 
             if (memento !== null) {
                 this.props.orphansAct.adoption.claim();
-                this.props.panelsAct.install.push(
+                this.props.panelsAct.install(
                     this.props.key,
                     StaticMount,
                     memento

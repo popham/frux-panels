@@ -10,7 +10,7 @@ define(['react', '../mixin/host', './fork', './close', './Header'], function (
 
         unmount : function (e) {
             this.fork(e);
-            this.props.panelsAct.uninstall.push(this.props.key);
+            this.props.panelsAct.uninstall(this.props.key);
 
             e.stopPropagation();
             e.preventDefault();

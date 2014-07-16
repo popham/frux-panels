@@ -15,7 +15,7 @@ define(['react', '../mixin/storeItemExclusions', '../mount/Empty'], function (
         render : function () {
             function installer(memento) {
                 return function (event) {
-                    this.props.panelsAct.install.push(
+                    this.props.panelsAct.install(
                         this.props.key,
                         StaticMount,
                         memento
