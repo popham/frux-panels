@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../mixin/host'], function (
-         react,            host) {
+define(['react', '../mixin/host', './Static'], function (
+         react,            host,     Static) {
 
     return react.createClass({
         displayName : 'Empty',
@@ -31,7 +31,7 @@ define(['react', '../mixin/host'], function (
                 this.props.orphansAct.adoption.claim();
                 this.props.panelsAct.install(
                     this.props.key,
-                    StaticMount,
+                    Static,
                     memento
                 );
             }

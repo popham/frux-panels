@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../mixin/storeItemExclusions', '../mount/Empty'], function (
-         react,           storeItemExclusions,             Empty) {
+define(['react', '../mixin/storeItemExclusions', '../mount/Empty', '../mount/Static'], function (
+         react,            storeItemExclusions,            Empty,            Static) {
 
     var Insertion = react.createClass({
         displayName : 'Insertion',
@@ -22,7 +22,7 @@ define(['react', '../mixin/storeItemExclusions', '../mount/Empty'], function (
                 return function (event) {
                     this.props.panelsAct.install(
                         this.props.key,
-                        StaticMount,
+                        Static,
                         memento
                     );
                 }.bind(this);
