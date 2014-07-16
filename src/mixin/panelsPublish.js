@@ -1,7 +1,7 @@
-define(['react', 'frux-list'], function (react, list) {
+define(['react', 'signals'], function (react, signals) {
     return {
         propTypes : {
-            panelsPublish : react.PropTypes.instanceOf(list.Publish).isRequired
+            panelsPublish : react.PropTypes.instanceOf(signals.Signal).isRequired
         },
 
         getInitialState : function () { return {
@@ -10,13 +10,17 @@ define(['react', 'frux-list'], function (react, list) {
         }; },
 
         componentWillMount : function () {
-            var unsubscribe = this.props.panelsPublish.items.onValue(
-                function (items) {
-                    this.setState({ panels : items });
-                }.bind(this)
-            );
+            var onPublish = function (items) {
+                this.setState({ panels : items });
+            }.bind(this);
 
-            this.setState({ panelsPublishUnsubscribe : unsubscribe});
+            this.props.panelsPublish.add(onPublish);
+
+            this.setState({
+                panelsPublishUnsubscribe : function() {
+                    this.props.panelsPublish.remove(onPublish);
+                }.bind(this)
+            });
         },
 
         componentWillUnmount : function () {
