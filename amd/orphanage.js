@@ -144,7 +144,6 @@ define(['react', 'frux-list', './mixin/index', './mount/Orphan'], function (
                 padding : 0
             };
 
-            var panel = panelize.bind(null, this.storeItemExclusions());
             return (
                 react.DOM.ul( {className:"frux-panels", style:style}, 
                   this.state.panels.map(this.panelize.bind(this))
