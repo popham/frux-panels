@@ -3,7 +3,7 @@
 define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork', './close'], function (
          react,   affine,                         host,      project,     fork,     close) {
 
-    var Orphan = react.createClass({
+    return react.createClass({
         displayName : 'Orphan',
 
         mixins : [host],
@@ -86,6 +86,4 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
             );
         }
     });
-
-    return Orphan;
 });

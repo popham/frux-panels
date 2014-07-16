@@ -3,7 +3,7 @@
 define(['react', '../mixin/host'], function (
          react,            host) {
 
-    var Empty = react.createClass({
+    return react.createClass({
         displayName : 'Empty',
 
         mixins : [host],
@@ -58,6 +58,4 @@ define(['react', '../mixin/host'], function (
             );
         }
     });
-
-    return Empty;
 });
