@@ -1,14 +1,14 @@
 /** @jsx react.DOM */
 
-define(['react', 'dojo/aspect', 'dijit/registry', '../GroupPane'], function (
-         react,        aspect,         registry,      GroupPane) {
+define(['react', 'dojo/aspect', 'dijit/registry', '../group/Pane'], function (
+         react,        aspect,         registry,            Pane) {
 
     return function (id, panelsStore, orphansAct) {
         var element = document.getElementById(id);
         var mount = function () {
             var container = element.children[0];
             react.renderComponent(
-                <GroupPane
+                <Pane
                     panelsStore={panelsStore}
                     orphansAct={orphansAct}
                     width={container.offsetWidth}
