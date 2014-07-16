@@ -1,8 +1,7 @@
-define(['./drag', './panel', './panelsPublish', './storeItemExclusions'], function (
-           drag,     panel,     panelsPublish,     storeItemExclusions) {
+define(['./panel', './panelsPublish', './storeItemExclusions'], function (
+           panel,     panelsPublish,     storeItemExclusions) {
 
     return {
-        drag : drag,
         panel : panel,
         panelsPublish : panelsPublish,
         storeItemExclusions : storeItemExclusions

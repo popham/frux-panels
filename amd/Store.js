@@ -1,5 +1,5 @@
-define(['baconjs', 'lodash', 'frux-list', './Insertion'], function (
-         bacon,          _,   frux_list,     Insertion) {
+define(['baconjs', 'frux-list'], function (
+         bacon,     frux_list) {
 
     var Install = function (list) {
         this.stream = new bacon.Bus();
@@ -14,13 +14,14 @@ define(['baconjs', 'lodash', 'frux-list', './Insertion'], function (
         });
     };
 
-    Install.prototype.push = function (key, bundle) {
+    Install.prototype.push = function (key, Host, memento) {
         this.stream.push({
             key : key,
-            bundle : bundle
+            bundle : {
+                Host : Host,
+                memento : memento
+            }
         });
-console.log('Store Install:');
-console.log(bundle);
     };
 
     var Uninstall = function (list) {
@@ -51,8 +52,6 @@ console.log(bundle);
 
     Uninstall.prototype.push = function (key) {
         this.stream.push({ key : key });
-console.log('Store Uninstall:');
-console.log(key);
     };
 
     var Store = function (initial) {
