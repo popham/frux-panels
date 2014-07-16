@@ -1,12 +1,10 @@
 /** @jsx react.DOM */
 
-define(['react', '../orphanage'], function (
-         react,      orphanage) {
-
-    var Orphanage = orphanage.Orphanage;
+define(['react', '../orphan/Orphanage', '../orphan/Store'], function (
+         react,             Orphanage,             Store) {
 
     return function (id) {
-        var store = new orphanage.Store();
+        var store = new Store();
         var element = document.getElementById(id);
 
         react.renderComponent(

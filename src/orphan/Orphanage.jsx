@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', './mixin/index', './mount/Orphan'], function (
-         react,     mixin,                 Orphan) {
+define(['react', '../mixin/index', '../mount/Orphan'], function (
+         react,      mixin,                  Orphan) {
 
     return react.createClass({
         displayName : 'Orphanage',
