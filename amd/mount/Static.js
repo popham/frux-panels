@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../mixin/host', './fork', './close'], function (
-         react,            host,     fork,     close) {
+define(['react', '../mixin/host', './fork', './close', './Header'], function (
+         react,            host,     fork,     close,     Header) {
 
     return react.createClass({
         displayName : 'Static',

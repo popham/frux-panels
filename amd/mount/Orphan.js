@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork', './close'], function (
-         react,   affine,                         host,      project,     fork,     close) {
+define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork', './close', './Header'], function (
+         react,   affine,                         host,      project,     fork,     close,     Header) {
 
     return react.createClass({
         displayName : 'Orphan',
