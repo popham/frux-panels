@@ -1,12 +1,12 @@
-define(['signals', '../mount/Static', '../mount/Empty', '../KeyedList'], function (
-         signals,            Static,            Empty,      KeyedList) {
+define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList'], function (
+         react,   signals,            Static,            Empty,      KeyedList) {
 
     var Store = function (initial) {
         this._list = new KeyedList();
         this.publish = new signals.Signal();
     };
 
-    Store.prototype._push = function () {
+    Store.prototype.push = function () {
         this.publish.dispatch(this._list.items);
     };
 
@@ -19,7 +19,7 @@ define(['signals', '../mount/Static', '../mount/Empty', '../KeyedList'], functio
                 oldBundle
             ]);
 
-            this._push();
+            this.push();
         }.bind(this),
 
         uninstall : function (key) {
@@ -42,18 +42,22 @@ define(['signals', '../mount/Static', '../mount/Empty', '../KeyedList'], functio
                 this._list.remove(key, 1);
             }
 
-            this._push();
+            this.push();
         }.bind(this)
     }
 
-    Store.prototype.appendStatic = function (memento) {
-        this._list.append([{Host:Static, memento:memento}]);
-        this._push();
+    Store.prototype.appendStatic = function (memento, storeItemExclusions) {
+        this._list.append([react.addons.update(storeItemExclusions, {
+            $merge : {Host:Static, memento:memento}
+        })]);
+        this.push();
     };
 
-    Store.prototype.appendEmpty = function (memento) {
-        this._list.append([{Host:Empty, memento:memento}]);
-        this._push();
+    Store.prototype.appendEmpty = function (memento, storeItemExclusions) {
+        this._list.append([react.addons.update(storeItemExclusions, {
+            $merge : {Host:Empty, memento:memento}
+        })]);
+        this.push();
     };
 
     return Store;

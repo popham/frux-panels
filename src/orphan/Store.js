@@ -14,7 +14,7 @@ define(['react', 'signals', '../KeyedList'], function (
         }
     });
 
-    Adoption.prototype._push = function () { this._store._push(); }
+    Adoption.prototype.push = function () { this._store.push(); }
 
     Object.defineProperty(Adoption.prototype, 'currentMemento', {
         get : function () {
@@ -43,7 +43,7 @@ define(['react', 'signals', '../KeyedList'], function (
             });
             this._list.replace(this._current, [bundle]);
 
-            this._push();
+            this.push();
         }
     };
 
@@ -56,7 +56,7 @@ define(['react', 'signals', '../KeyedList'], function (
             });
             this._list.replace(this._current, [bundle]);
 
-            this._push();
+            this.push();
         }
     };
 
@@ -75,7 +75,7 @@ define(['react', 'signals', '../KeyedList'], function (
         this.publish = new signals.Signal();
     };
 
-    Store.prototype._push = function() {
+    Store.prototype.push = function() {
         this.publish.dispatch(this._list.items);
     }
 
@@ -86,13 +86,13 @@ define(['react', 'signals', '../KeyedList'], function (
                 memento : memento
             }]);
 
-            this._push();
+            this.push();
         }.bind(this),
 
         uninstall : function (key) {
             this._list.remove(key, 1);
 
-            this._push();
+            this.push();
         }.bind(this),
 
         adoption : this._adoption
