@@ -1,43 +1,20 @@
 /** @jsx react.DOM */
 
-define(['react', 'frux-list', './mixin/index', './mount/Orphan'], function (
-         react,   frux_list,     mixin,                 Orphan) {
+define(['react', 'signals', './KeyedList'], function (
+         react,   signals,     KeyedList) {
 
-    var Install = function (list) {
-        this._list = list;
-    };
-
-    Install.prototype.push = function (hostInitialState, memento) {
-        var bundle = {
-            hostInitialState : hostInitialState,
-            memento : memento
-        };
-
-        this._list._items = this._list._items.clone();
-        this._list._items.append([bundle]);
-
-        this._list.publish.push();
-    };
-
-    var Uninstall = function (list) {
-        this._list = list;
-    };
-
-    Uninstall.prototype.push = function (key) {
-        this._list._items = this._list._items.clone();
-        this._list._items.remove(key, 1);
-
-        this._list.publish.push();
-    };
-
-    var Adoption = function (list) {
-        this._list = list;
+    var Adoption = function (store) {
+        this._store = store;
         this._current = null;
-        this.unselect = function () {
-            this._current = null;
-            this._list.publish.push();
-        }.bind(this); // Bound function to admit listener removal.
     };
+
+    Object.defineProperty(Adoption.prototype, '_list', {
+        get : function () {
+            return this._store._list;
+        }
+    });
+
+    Adoption.prototype._push = function () { this._store._push(); }
 
     Object.defineProperty(Adoption.prototype, 'currentMemento', {
         get : function () {
@@ -45,45 +22,41 @@ define(['react', 'frux-list', './mixin/index', './mount/Orphan'], function (
 
             var bundle = this._list.value(this._current);
 
-            return {
-                component : bundle.component,
-                componentProps : bundle.componentProps
-            };
+            return bundle.memento;
         }
     });
 
     Adoption.prototype.select = function (key) {
         this._current = key;
-        this._list.publish.push();
+    };
+
+    Adoption.prototype.unselect = function () {
+        this._current = null;
     };
 
     Adoption.prototype.visit = function () {
         if (this._current !== null) {
-            this._list._items = this._list._items.clone();
-
             var bundle = react.addons.update(this._list.value(this._current), {
                 memento : {componentProps : {
                     $merge : {isVisiting : true}
                 } }
             });
-            this._list._items.replace(this._current, [bundle]);
+            this._list.replace(this._current, [bundle]);
 
-            this._list.publish.push();
+            this._push();
         }
     };
 
     Adoption.prototype.unvisit = function () {
         if (this._current !== null) {
-            this._list._item = this._list._items.clone();
-
             var bundle = react.addons.update(this._list.value(this._current), {
                 memento : {componentProps : {
                     $merge : {isVisiting : false}
                 } }
             });
-            this._list._items.replace(this._current, [bundle]);
+            this._list.replace(this._current, [bundle]);
 
-            this._list.publish.push();
+            this._push();
         }
     };
 
@@ -92,68 +65,38 @@ define(['react', 'frux-list', './mixin/index', './mount/Orphan'], function (
             var current = this._current;
             this._current = null;
 
-            this.uninstall.push(current);
+            this._store.act.uninstall(current);
         }
     };
 
     var Store = function () {
-        frux_list.List.call(this, []);
-
-        this.act = {
-            install : new Install(this),
-            uninstall : new Uninstall(this),
-            adoption : new Adoption(this),
-        };
-
-        this.publish = new frux_list.Publish(this);
+        this._list = new KeyedList();
+        this._adoption = new Adoption(this._list);
+        this.publish = new signals.Signal();
     };
 
-    Store.prototype = Object.create(frux_list.List.prototype);
+    Store.prototype._push = function() {
+        this.publish.dispatch(this._list.items);
+    }
 
-    var Orphanage = react.createClass({
-        displayName : 'Orphanage',
+    Store.prototype.act = {
+        install : function (hostInitialState, memento) {
+            this._list.append([{
+                hostInitialState : hostInitialState,
+                memento : memento
+            }]);
 
-        mixins : [mixin.panelsPublish, mixin.storeItemExclusions],
+            this._push();
+        }.bind(this),
 
-        componentDidMount : function () {
-            document.addEventListener(
-                'mouseup',
-                this.props.orphansAct.adoption.unselect
-            );
-        },
+        uninstall : function (key) {
+            this._list.remove(key, 1);
 
-        componentWillUnmount : function () {
-            document.removeEventListener(
-                'mouseup',
-                this.props.orphansAct.adoption.unselect
-            );
-        },
+            this._push();
+        }.bind(this),
 
-        render : function () {
-            var style = {
-                margin : 0,
-                padding : 0
-            };
+        adoption : this._adoption
+    }
 
-            function panelize(bundle, key) {
-                return bundle.memento.component(
-                    react.addons.update(bundle.memento.componentProps, {
-                        $merge : this.storeItemExclusions(),
-                        $merge : {Host : Orphan}
-                    })
-                );
-            }
-
-            return (
-                <ul className="frux-panels" style={style}>
-                  {this.state.panels.map(panelize)}
-                </ul>
-            );
-        }
-    });
-
-    return {
-        Store : Store,
-        Orphanage : Orphanage
-    };
+    return Store;
 });
