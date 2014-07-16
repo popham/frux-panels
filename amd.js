@@ -1,13 +1,13 @@
-define(['./amd/Insertion', './amd/Store', './amd/install/group', './amd/install/orphanage', './amd/mixin/index'], function (
-               Insertion,         Store,                 group,                 orphanage,         mixin){
+define(['./amd/group/Insertion', './amd/group/Store', './amd/install/group', './amd/install/orphanage', './amd/mixin/index'], function (
+                     Insertion,               Store,                 group,                 orphanage,         mixin){
 
     return {
-        Insertion : Insertion,
-        Store : Store,
-        install : {
-            group : group,
-            orphanage : orphanage
+        group : {
+            Store : Store,
+            Insertion : Insertion,
+            install : group
         },
+        orphanage : { install : orphanage },
         mixin : mixin
     };
 });

@@ -1,7 +1,7 @@
-exports.Insertion = require('./lib/Insertion');
-exports.Store = require('./lib/Store')
-exports.install = {
-    group : require('./lib/install/group'),
-    orphanage : require('./lib/install/orphanage')
+exports.group = {
+    Store : require('./lib/group/Store'),
+    Insertion : require('./lib/group/Insertion'),
+    install : require('./lib/install/group'),
 };
+exports.orphanage = { install : require('./lib/install/orphanage') };
 exports.mixin = require('./lib/mixin/index');
