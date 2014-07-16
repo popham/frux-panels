@@ -12,6 +12,11 @@ define(['react', '../mixin/storeItemExclusions', '../mount/Empty'], function (
             components : react.PropTypes.arrayOf(react.PropTypes.object).isRequired
         },
 
+        memento : function () { return {
+            component : Insertion,
+            componentProps : this.props
+        }; },
+
         render : function () {
             function installer(memento) {
                 return function (event) {
@@ -38,6 +43,7 @@ define(['react', '../mixin/storeItemExclusions', '../mount/Empty'], function (
             return (
                 <Empty
                     key={this.props.key}
+                    memento={this.memento()}
                     panelsAct={this.props.panelsAct}
                     orphansAct={this.props.orphansAct} >
                   <ul>{this.props.components.map(iconify.bind(this))}</ul>

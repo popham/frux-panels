@@ -6,7 +6,6 @@ define(['react', './storeItemExclusions'], function (
 
         propTypes : {
             memento : react.PropTypes.object.isRequired,
-            heading : react.PropTypes.string.isRequired,
             initialState : react.PropTypes.object
         },
 

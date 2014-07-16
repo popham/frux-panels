@@ -8,6 +8,10 @@ define(['react', '../mixin/host', './fork', './close', './Header'], function (
 
         mixins : [host],
 
+        propTypes : {
+            heading : react.PropTypes.string.isRequired
+        },
+
         unmount : function (e) {
             this.fork(e);
             this.props.panelsAct.uninstall(this.props.key);

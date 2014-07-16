@@ -9,6 +9,7 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
         mixins : [host],
 
         propTypes : {
+            heading : react.PropTypes.string.isRequired,
             isVisiting : react.PropTypes.bool.isRequired
         },
 
