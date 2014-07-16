@@ -47,16 +47,12 @@ define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList']
     }
 
     Store.prototype.appendStatic = function (memento, storeItemExclusions) {
-        this._list.append([react.addons.update(storeItemExclusions, {
-            $merge : {Host:Static, memento:memento}
-        })]);
+        this._list.append([{Host:Static, memento:memento}]);
         this.push();
     };
 
-    Store.prototype.appendEmpty = function (memento, storeItemExclusions) {
-        this._list.append([react.addons.update(storeItemExclusions, {
-            $merge : {Host:Empty, memento:memento}
-        })]);
+    Store.prototype.appendEmpty = function (memento) {
+        this._list.append([{Host:Empty, memento:memento}]);
         this.push();
     };
 
