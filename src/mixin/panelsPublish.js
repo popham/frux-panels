@@ -5,7 +5,7 @@ define(['react', 'signals'], function (react, signals) {
         },
 
         getInitialState : function () { return {
-            panels : null,
+            panels : [],
             panelsPublishUnsubscribe : null
         }; },
 
