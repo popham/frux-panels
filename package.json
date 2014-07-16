@@ -12,7 +12,7 @@
     "fonts": "cp -r node_modules/bootstrap/fonts/ fonts",
     "css": "mkdir -p css && ./scripts/css.sh",
     "clean": "rm -rf css & rm -rf lib & rm -rf amd & rm -rf fonts",
-    "build": "npm run clean && npm run fonts & npm run css & npm run amd && npm run cjs"
+    "build": "npm run clean && npm run fonts & npm run css & npm run jsx && npm run amd && npm run cjs"
   },
   "repository": {
     "type": "git",
