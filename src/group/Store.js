@@ -1,5 +1,5 @@
-define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList'], function (
-         react,   signals,            Static,            Empty,      KeyedList) {
+define(['require', 'react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList'], function (
+         require,   react,   signals,            Static,            Empty,      KeyedList) {
 
     var Act = function (store) {
         this._store = store;
@@ -64,10 +64,7 @@ define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList']
         componentProps : {}
     }; };
 
-    Store.emptyHostMemento = function () { return {
-        component : Empty,
-        componentProps : {}
-    }; };
+    Store.emptyHostMemento = function () { return Empty.hostMemento(); };
 
     Store.prototype.push = function () {
         this.publish.dispatch(this._list.items);

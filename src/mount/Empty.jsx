@@ -1,12 +1,19 @@
 /** @jsx react.DOM */
 
-define(['react', '../group/Store', '../mixin/host', './Static'], function (
-         react,            Store,            host,     Static) {
+define(['react', '../mixin/host', './Static'], function (
+         react,            host,     Static) {
 
-    return react.createClass({
+    var Empty = react.createClass({
         displayName : 'Empty',
 
         mixins : [host],
+
+        statics : {
+            hostMemento : function () { return {
+                component : Empty,
+                componentProps : {}
+            }; }
+        },
 
         getInitialState : function () { return {
             orphanMemento : null
@@ -46,7 +53,7 @@ define(['react', '../group/Store', '../mixin/host', './Static'], function (
                 var props = react.addons.update(memento.componentProps, {
                     $merge : this.storeItemExclusions()
                 });
-                props.hostMemento = Store.emptyHostMemento();
+                props.hostMemento = Empty.hostMemento();
                 props.key = this.props.key;
 
                 children = memento.component(props);
@@ -64,4 +71,6 @@ define(['react', '../group/Store', '../mixin/host', './Static'], function (
             );
         }
     });
+
+    return Empty
 });
