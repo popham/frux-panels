@@ -38,6 +38,9 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
             });
 
             this.props.orphansAct.adoption.select(this.props.key);
+
+            e.preventDefault();
+            e.stopPropagation();
         },
 
         drag : function (e) {
@@ -49,10 +52,15 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
                     this.state.size
                 )
             });
+
+            e.preventDefault();
         },
 
         dragEnd : function (e) {
             this.setState({ handleToOrigin : null });
+
+            e.preventDefault();
+            e.stopPropagation();
         },
 
         render : function () {
