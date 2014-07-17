@@ -37,7 +37,7 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
                 )
             });
 
-            this.props.orphanActs.adoption.select(this.props.key);
+            this.props.orphansAct.adoption.select(this.props.key);
         },
 
         drag : function (e) {
