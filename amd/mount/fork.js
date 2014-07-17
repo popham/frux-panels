@@ -3,7 +3,7 @@ define(['react', 'affine/2d/primitive', '../project'], function (
 
     return function (e) {
         var rect = this.getDOMNode().getBoundingClientRect();
-        var size = new affine.Vector(rect.offsetWidth, rect.offsetHeight);
+        var size = new affine.Vector(rect.width, rect.height);
 
         var orphanState = {
             position : project(new affine.Point(rect.left, rect.top), size),
