@@ -398,7 +398,7 @@ ul.frux-panels li ul > li {
   padding-left: 5px;
   padding-right: 5px;
 }
-ul.frux-panels .static-mount {
+ul.frux-panels .orphan-mount .static-mount {
   background-color: #ffffff;
   border: 1px solid transparent;
   border-radius: 4px;
