@@ -139,6 +139,13 @@ define(['react', 'affine/2d/primitive'], function (
             }
         },
 
+        componentWillUnmount : function () {
+            if (this.isDragging()){
+                document.removeEventListener('mousemove', this.mouseMove);
+                document.removeEventListener('mouseup', this.mouseUp);
+            }
+        },
+
         shouldComponentUpdate : function (nextProps, nextState) {
             var props = this.props;
 
