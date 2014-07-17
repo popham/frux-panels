@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../mixin/index', '../mount/Orphan'], function (
-         react,      mixin,                  Orphan) {
+define(['react', '../mixin/index', '../panelize'], function (
+         react,      mixin,            panelize) {
 
     return react.createClass({
         displayName : 'Orphanage',
@@ -9,17 +9,6 @@ define(['react', '../mixin/index', '../mount/Orphan'], function (
         mixins : [mixin.panelsPublish, mixin.storeItemExclusions],
 
         render : function () {
-            function panelize(item) {
-                var memento = item.value.memento;
-                var props = react.addons.update(memento.componentProps, {
-                    $merge : this.storeItemExclusions()
-                });
-                props.Host = Orphan;
-                props.key = item.key;
-
-                return memento.component(props);
-            }
-
             var style = {
                 margin : 0,
                 padding : 0

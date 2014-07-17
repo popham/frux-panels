@@ -1,6 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../mixin/index'], function (react, mixin) {
+define(['react', '../mixin/index', '../panelize'], function (
+         react,      mixin,            panelize) {
 
     return react.createClass({
         displayName : 'Group',
@@ -31,17 +32,6 @@ define(['react', '../mixin/index'], function (react, mixin) {
         },
 
         render : function () {
-            function panelize(item) {
-                var memento = item.value.memento;
-                var props = react.addons.update(memento.componentProps, {
-                    $merge : this.storeItemExclusions()
-                });
-                props.Host = item.value.Host;
-                props.key = item.key;
-
-                return memento.component(props);
-            }
-
             var style = {
                 margin : 0,
                 overflow : "hidden",
