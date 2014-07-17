@@ -28,7 +28,13 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
             e.preventDefault();
         },
 
-        dragStart : function (e) {
+        isDragging : function () {
+            return this.state.handleToOrigin !== null;
+        },
+
+        mouseDown : function (e) {
+            if (e.button !== 0) return;
+
             var rect = this.getDOMNode().getBoundingClientRect();
             this.setState({
                 handleToOrigin : new affine.Vector(
@@ -39,12 +45,14 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
 
             this.props.orphansAct.adoption.select(this.props.key);
 
-//            e.preventDefault();
-//            e.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation();
         },
 
-        drag : function (e) {
-            var position = new affine.Point(e.clientX, e.clientY);
+        mouseMove : function (e) {
+            if (!this.isDragging()) return;
+
+            var position = new affine.Point(e.pageX, e.pageY);
             this.setState({
                 position : project(
                     position.plus(this.state.handleToOrigin),
@@ -52,18 +60,32 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
                 )
             });
 
-//            e.preventDefault();
-console.log('Drag');
-console.log(position);
-console.log(this.state.handleToOrigin);
-console.log(this.state.size);
+            e.stopPropagation();
+            e.preventDefault();
         },
 
-        dragEnd : function (e) {
+        mouseUp : function (e) {
             this.setState({ handleToOrigin : null });
 
-//            e.preventDefault();
-//            e.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation();
+        },
+
+        componentDidUpdate : function (prevProps, prevState) {
+            if (this.isDragging() && prevState.handleToOrigin === null) {
+                document.addEventListener('mousemove', this.mouseMove);
+                document.addEventListener('mouseup', this.mouseUp);
+            } else if (!this.isDragging() && prevState.handleToOrigin !== null) {
+                document.removeEventListener('mousemove', this.mouseMove);
+                document.removeEventListener('mouseup', this.mouseUp);
+            }
+        },
+
+        componentWillUnmount : function () {
+            if (this.isDragging()){
+                document.removeEventListener('mousemove', this.mouseMove);
+                document.removeEventListener('mouseup', this.mouseUp);
+            }
         },
 
         render : function () {
@@ -78,14 +100,13 @@ console.log(this.state.size);
                 height : this.state.size.y
             };
 
+            if (this.isDragging()) style.pointerEvents = 'none';
             if (this.props.isVisiting) style.display = 'none';
 
             return (
                 react.DOM.li( {key:this.props.key,
                     draggable:"true",
-                    onDragStart:this.dragStart,
-                    onDrag:this.drag,
-                    onDragEnd:this.dragEnd,
+                    onMouseDown:this.mouseDown,
                     className:"mount orphan-mount",
                     style:style}, 
                   Header(
