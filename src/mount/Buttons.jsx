@@ -7,7 +7,7 @@ define(['react', './icon/index'], function (react, icon) {
     var Close = icon.Close;
 
     return react.createClass({
-        displayName : 'Header',
+        displayName : 'Buttons',
 
         propTypes : {
             onUnmount : react.PropTypes.func,
