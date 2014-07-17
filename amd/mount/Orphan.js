@@ -37,7 +37,7 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
                 )
             });
 
-            this.props.orphanAct.adoption.select(this.props.key);
+            this.props.orphanActs.adoption.select(this.props.key);
         },
 
         drag : function (e) {
@@ -71,9 +71,10 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
 
             return (
                 react.DOM.li( {key:this.props.key,
-                    onDragStart:this.dragStart.bind(this),
-                    onDrag:this.drag.bind(this),
-                    onDragEnd:this.dragEnd.bind(this),
+                    draggable:"true",
+                    onDragStart:this.dragStart,
+                    onDrag:this.drag,
+                    onDragEnd:this.dragEnd,
                     className:"mount orphan-mount",
                     style:style}, 
                   Header(
