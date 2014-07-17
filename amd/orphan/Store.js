@@ -71,7 +71,7 @@ define(['react', 'signals', '../mount/Orphan', '../KeyedList'], function (
 
     var Act = function (store) {
         this._store = store;
-        this.adoption = new Adoption(this);
+        this.adoption = new Adoption(this._store);
     };
 
     Object.defineProperty(Act.prototype, '_list', {

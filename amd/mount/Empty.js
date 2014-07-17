@@ -12,19 +12,19 @@ define(['react', '../mixin/host', './Static'], function (
             orphanMemento : null
         }; },
 
-        dragEnter : function (e) {
-            this.props.orphanAct.adoption.visit();
+        mouseEnter : function (e) {
+            this.props.orphansAct.adoption.visit();
             this.setState({
                 orphanMemento : this.props.orphansAct.adoption.currentMemento
             });
         },
 
-        dragLeave : function (e) {
-            this.props.orphanAct.adoption.unvisit();
+        mouseOut : function (e) {
+            this.props.orphansAct.adoption.unvisit();
             this.setState({ orphanMemento : null });
         },
 
-        drop : function (e) {
+        mouseUp : function (e) {
             var memento = this.state.orphanMemento;
 
             if (memento !== null) {
@@ -46,9 +46,9 @@ define(['react', '../mixin/host', './Static'], function (
             return (
                 react.DOM.li( {key:this.props.key,
                     className:classes.join(' '),
-                    onDragEnter:this.dragEnter,
-                    onDragLeave:this.dragLeave,
-                    onDrop:this.drop}, 
+                    onMouseEnter:this.mouseEnter,
+                    onMouseOut:this.mouseOut,
+                    onMouseUp:this.mouseUp}, 
                   children
                 )
             );
