@@ -13,7 +13,7 @@ define(['react', '../mixin/host', './fork', './close', './Header'], function (
         },
 
         unmount : function (e) {
-            this.fork(e);
+            fork.bind(this)(e);
             this.props.panelsAct.uninstall(this.props.key);
 
             e.stopPropagation();
