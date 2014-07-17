@@ -7,7 +7,7 @@ define(['react', './storeItemExclusions'], function (
         mixins : [storeItemExclusions],
 
         propTypes : {
-            Host : react.PropTypes.component.isRequired,
+            hostMemento : react.PropTypes.object.isRequired,
             initialState : react.PropTypes.object
         },
 
@@ -16,18 +16,19 @@ define(['react', './storeItemExclusions'], function (
         }; },
 
         host : function (heading, children) {
-            var Host = this.props.Host;
+            var hostMemento = this.props.hostMemento;
+            var host = hostMemento.component;
+            var hostProps = react.addons.update(hostMemento.componentProps, {
+                $merge : {
+                    key : this.props.key,
+                    guestMemento : this.memento(),
+                    heading : heading,
+                    panelsAct : this.props.panelsAct,
+                    orphansAct : this.props.orphansAct
+                }
+            });
 
-            return (
-                <Host
-                    key={this.props.key}
-                    memento={this.memento()}
-                    heading={heading}
-                    panelsAct={this.props.panelsAct}
-                    orphansAct={this.props.orphansAct}>
-                  {children}
-                </Host>
-            );
+            return host(hostProps, children);
         },
 
         componentWillMount : function () {

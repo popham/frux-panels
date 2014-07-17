@@ -5,7 +5,7 @@ define(['react', './storeItemExclusions'], function (
         mixins : [storeItemExclusions],
 
         propTypes : {
-            memento : react.PropTypes.object.isRequired,
+            guestMemento : react.PropTypes.object.isRequired,
             initialState : react.PropTypes.object
         },
 
