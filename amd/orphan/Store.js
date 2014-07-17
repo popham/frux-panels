@@ -37,9 +37,7 @@ define(['react', 'signals', '../mount/Orphan', '../KeyedList'], function (
     Adoption.prototype.visit = function () {
         if (this._current !== null) {
             var bundle = react.addons.update(this._list.value(this._current), {
-                memento : {componentProps : {
-                    $merge : {isVisiting : true}
-                } }
+                $merge : {hostMemento : Store.visitingHostMemento()}
             });
             this._list.replace(this._current, [bundle]);
 
@@ -50,9 +48,7 @@ define(['react', 'signals', '../mount/Orphan', '../KeyedList'], function (
     Adoption.prototype.unvisit = function () {
         if (this._current !== null) {
             var bundle = react.addons.update(this._list.value(this._current), {
-                memento : {componentProps : {
-                    $merge : {isVisiting : false}
-                } }
+                $merge : {hostMemento : Store.nonvisitingHostMemento()}
             });
             this._list.replace(this._current, [bundle]);
 
@@ -81,16 +77,8 @@ define(['react', 'signals', '../mount/Orphan', '../KeyedList'], function (
     Act.prototype._push = function () { this._store.push(); };
 
     Act.prototype.install = function (position, size, memento) {
-        var hostMemento = {
-            component : Orphan,
-            componentProps : {
-                initialState : { position:position, size:size },
-                isVisiting : false
-            }
-        };
-
         this._list.append([{
-            hostMemento : hostMemento,
+            hostMemento : Store.nonvisitingHostMemento(position, size),
             memento : memento
         }]);
 
@@ -107,6 +95,21 @@ define(['react', 'signals', '../mount/Orphan', '../KeyedList'], function (
         this._list = new KeyedList();
         this.act = new Act(this);
         this.publish = new signals.Signal();
+    };
+
+    Store.visitingHostMemento = function (position, size) { return {
+        component : Orphan,
+        componentProps : {
+            initialState : { position:position, size:size },
+            isVisiting : true
+        }
+    }; };
+
+    Store.nonvisitingHostMemento = function (position, size) {
+        var m = Store.visitingHostMemento(position, size);
+        m.componentProps.isVisiting = false;
+
+        return m;
     };
 
     Store.prototype.push = function() {

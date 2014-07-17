@@ -14,14 +14,9 @@ define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList']
     Act.prototype.install = function (key, memento) {
         var oldBundle = this._list.value(key);
 
-        var hostMemento = {
-            component : Static,
-            componentProps : {}
-        };
-
         this._list.splice(key, 1, [
             oldBundle,
-            {hostMemento:hostMemento, memento:memento},
+            {hostMemento:Store.staticHostMemento(), memento:memento},
             oldBundle
         ]);
 
@@ -64,25 +59,33 @@ define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList']
         this.publish = new signals.Signal();
     };
 
+    Store.staticHostMemento = function () { return {
+        component : Static,
+        componentProps : {}
+    }; };
+
+    Store.emptyHostMemento = function () { return {
+        component : Empty,
+        componentProps : {}
+    }; };
+
     Store.prototype.push = function () {
         this.publish.dispatch(this._list.items);
     };
 
     Store.prototype.appendStatic = function (memento) {
-        var host = {
-            component : Static,
-            componentProps : {}
-        };
-        this._list.append([{hostMemento:host, memento:memento}]);
+        this._list.append([{
+            hostMemento : Store.staticHostMemento(),
+            memento : memento
+        }]);
         this.push();
     };
 
     Store.prototype.appendEmpty = function (memento) {
-        var host = {
-            component : Empty,
-            componentProps : {}
-        };
-        this._list.append([{hostMemento:host, memento:memento}]);
+        this._list.append([{
+            hostMemento : Store.emptyHostMemento(),
+            memento : memento
+        }]);
         this.push();
     };
 
