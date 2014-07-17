@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../mixin/host', './Static'], function (
-         react,            host,     Static) {
+define(['react', '../mixin/host', './Button'], function (
+         react,            host,     Button) {
 
     var Empty = react.createClass({
         displayName : 'Empty',
@@ -41,9 +41,6 @@ define(['react', '../mixin/host', './Static'], function (
         },
 
         render : function () {
-            var classes = ["mount", "empty-mount"];
-            var children = this.props.children;
-
             var memento = this.state.orphanMemento;
             if (memento !== null) {
                 // Some of these props are unneeded since the panel is visiting.
@@ -57,19 +54,27 @@ define(['react', '../mixin/host', './Static'], function (
                 props.pointerEvents = 'none';
                 props.key = this.props.key;
 
-                children = memento.component(props);
-                classes.push("visited");
+                return (
+                    <li key={this.props.key}
+                        className="mount visited-mount">
+                      <header className="title-bar">
+                        <Buttons />
+                        <p>{this.props.heading}</p>
+                      </header>
+                      {react.Children.only(memento.component(props))}
+                    </li>
+                );
+            } else {
+                return (
+                    <li key={this.props.key}
+                        className="mount empty-mount"
+                        onMouseEnter={this.mouseEnter}
+                        onMouseOut={this.mouseOut}
+                        onMouseUp={this.mouseUp}>
+                      {this.props.children}
+                    </li>
+                );
             }
-
-            return (
-                <li key={this.props.key}
-                    className={classes.join(' ')}
-                    onMouseEnter={this.mouseEnter}
-                    onMouseOut={this.mouseOut}
-                    onMouseUp={this.mouseUp}>
-                  {children}
-                </li>
-            );
         }
     });
 
