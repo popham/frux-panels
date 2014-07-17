@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../mixin/host', './Static'], function (
-         react,            host,     Static) {
+define(['react', '../group/Store', '../mixin/host', './Static'], function (
+         react,            Store,            host,     Static) {
 
     return react.createClass({
         displayName : 'Empty',
@@ -39,7 +39,17 @@ define(['react', '../mixin/host', './Static'], function (
 
             var memento = this.state.orphanMemento;
             if (memento !== null) {
-                children = memento.component(memento.componentProps);
+                // A lot of these props are unneeded since the panel is
+                // visiting.  While hovering it renders, but it's not
+                // interactive.  I don't see any harm in providing the stuff
+                // to appease `isRequired` specs on the props.
+                var props = react.addons.update(memento.componentProps, {
+                    $merge : this.storeItemExclusions()
+                });
+                props.hostMemento = Store.emptyHostMemento();
+                props.key = this.props.key;
+
+                children = memento.component(props);
                 classes.push("visited");
             }
 
