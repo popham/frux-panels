@@ -5,13 +5,11 @@ define(['react', 'affine/2d/primitive', '../project'], function (
         var rect = this.getDOMNode().getBoundingClientRect();
         var size = new affine.Vector(rect.width, rect.height);
 
-        var orphanState = {
-            position : project(new affine.Point(rect.left, rect.top), size),
-            size : size,
-            isVisiting : false
-        };
-
-        this.props.orphansAct.install(orphanState, this.props.memento);
+        this.props.orphansAct.install(
+            project(new affine.Point(rect.left, rect.top), size),
+            size,
+            this.props.guestMemento
+        );
 
         e.stopPropagation();
         e.preventDefault();

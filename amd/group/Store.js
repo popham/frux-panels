@@ -11,11 +11,17 @@ define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList']
 
     Act.prototype._push = function () { this._store.push(); };
 
-    Act.prototype.install = function (key, Host, memento) {
+    Act.prototype.install = function (key, memento) {
         var oldBundle = this._list.value(key);
+
+        var hostMemento = {
+            component : Static,
+            componentProps : {}
+        };
+
         this._list.splice(key, 1, [
             oldBundle,
-            {Host:Host, memento:memento},
+            {hostMemento:hostMemento, memento:memento},
             oldBundle
         ]);
 
@@ -36,8 +42,14 @@ define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList']
         var priorBundle = this._list.value(p);
         var nextBundle = this._list.value(n);
 
-        var adjacentEmpties = priorBundle.Host === Empty && nextBundle.Host === Empty;
-        if (adjacentEmpties && priorBundle.memento === nextBundle.memento) {
+        // Fragile, but fast.  I'm using the same bundle to create all of a
+        // Group's insertion points, and on creation, the old bundle gets
+        // reused.  If another type of insertion point enters the fray, then
+        // I don't know whether they should collapse to a single on adjacency.
+        // This works under the current usage....
+        var adjacentEmpties = priorBundle === nextBundle
+                           && priorBundle.hostMemento.component === Empty;
+        if (adjacentEmpties) {
             this._list.remove(p, 2);
         } else {
             this._list.remove(key, 1);
