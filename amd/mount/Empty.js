@@ -56,7 +56,9 @@ define(['react', '../mixin/host', './Buttons'], function (
 
                 return (
                     react.DOM.li( {key:this.props.key,
-                        className:"mount visited-mount"}, 
+                        className:"mount visited-mount",
+                        onMouseOut:this.mouseOut,
+                        onMouseUp:this.mouseUp}, 
                       react.DOM.header( {className:"title-bar"}, 
                         Buttons(null ),
                         react.DOM.p(null, this.props.heading)
@@ -68,9 +70,7 @@ define(['react', '../mixin/host', './Buttons'], function (
                 return (
                     react.DOM.li( {key:this.props.key,
                         className:"mount empty-mount",
-                        onMouseEnter:this.mouseEnter,
-                        onMouseOut:this.mouseOut,
-                        onMouseUp:this.mouseUp}, 
+                        onMouseEnter:this.mouseEnter}, 
                       this.props.children
                     )
                 );
