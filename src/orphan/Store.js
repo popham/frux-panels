@@ -80,9 +80,17 @@ define(['react', 'signals', '../KeyedList'], function (
 
     Act.prototype._push = function () { this._store.push(); };
 
-    Act.prototype.install = function (hostInitialState, memento) {
+    Act.prototype.install = function (position, size, memento) {
+        var hostMemento = {
+            component : Orphan,
+            componentProps : {
+                initialState : { position:position, size:size },
+                isVisiting : false
+            }
+        };
+
         this._list.append([{
-            hostInitialState : hostInitialState,
+            hostMemento : hostMemento,
             memento : memento
         }]);
 

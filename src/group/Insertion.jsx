@@ -20,11 +20,7 @@ define(['react', '../mixin/storeItemExclusions', '../mount/Empty', '../mount/Sta
         render : function () {
             function installer(memento) {
                 return function (event) {
-                    this.props.panelsAct.install(
-                        this.props.key,
-                        Static,
-                        memento
-                    );
+                    this.props.panelsAct.install(this.props.key, memento);
                 }.bind(this);
             }
 

@@ -29,11 +29,7 @@ define(['react', '../mixin/host', './Static'], function (
 
             if (memento !== null) {
                 this.props.orphansAct.adoption.claim();
-                this.props.panelsAct.install(
-                    this.props.key,
-                    Static,
-                    memento
-                );
+                this.props.panelsAct.install(this.props.key, memento);
             }
         },
 
