@@ -26,7 +26,7 @@ define(['react', '../mixin/host', './Buttons'], function (
             });
         },
 
-        mouseOut : function (e) {
+        mouseLeave : function (e) {
             this.props.orphansAct.adoption.unvisit();
             this.setState({ orphanMemento : null });
         },
@@ -65,7 +65,7 @@ define(['react', '../mixin/host', './Buttons'], function (
                 return (
                     <li key={this.props.key}
                         className="mount visited-mount"
-                        onMouseOut={this.mouseOut}
+                        onMouseLeave={this.mouseLeave}
                         onMouseUp={this.mouseUp}>
                       <header className="title-bar">
                         <Buttons />
