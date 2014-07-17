@@ -40,6 +40,14 @@ define(['react', '../mixin/host', './Buttons'], function (
             }
         },
 
+        shouldComponentUpdate : function (nextProps, nextState) {
+            return this.props !== nextProps || this.state !== nextState;
+        },
+
+        componentDidUpdate : function () {
+            console.log('UPDATED EMPTY');
+        },
+
         render : function () {
             var memento = this.state.orphanMemento;
             if (memento !== null) {
