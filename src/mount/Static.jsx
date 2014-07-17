@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../mixin/host', './fork', './close', './Header'], function (
-         react,            host,     fork,     close,     Header) {
+define(['react', '../mixin/host', './fork', './close', './Buttons'], function (
+         react,            host,     fork,     close,     Buttons) {
 
     return react.createClass({
         displayName : 'Static',
@@ -24,13 +24,14 @@ define(['react', '../mixin/host', './fork', './close', './Header'], function (
             return (
                 <li key={this.props.key}
                     className="mount static-mount">
-                  <Header
-                      onUnmount={this.unmount}
-                      onFork={fork.bind(this)}
-                      onClose={close.bind(this)}>
-                    {this.props.heading}
-                  </Header>
-                  {this.props.children}
+                  <header className="title-bar">
+                    <Buttons
+                        onUnmount={this.unmount}
+                        onFork={fork.bind(this)}
+                        onClose={close.bind(this)} />
+                    <p>{this.props.heading}</p>
+                  </header>
+                  <p>{this.props.children}</p>
                 </li>
             );
         }

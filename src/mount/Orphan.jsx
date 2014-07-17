@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork', './close', './Header'], function (
-         react,   affine,                         host,      project,     fork,     close,     Header) {
+define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork', './close', './Buttons'], function (
+         react,   affine,                         host,      project,     fork,     close,     Buttons) {
 
     return react.createClass({
         displayName : 'Orphan',
@@ -22,11 +22,6 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
         getInitialState : function () { return {
             handleToOrigin : null
         }; },
-
-        unmount : function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-        },
 
         isDragging : function () {
             return this.state.handleToOrigin !== null;
@@ -100,6 +95,8 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
                 height : this.state.size.y
             };
 
+            var moveCursor = { cursor : "move" };
+
             if (this.isDragging()) style.pointerEvents = 'none';
             if (this.props.isVisiting) style.display = 'none';
 
@@ -109,13 +106,15 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
                     onMouseDown={this.mouseDown}
                     className="mount orphan-mount"
                     style={style}>
-                  <Header
-                      onUnmount={this.unmount}
-                      onFork={fork.bind(this)}
-                      onClose={close.bind(this)}>
-                    {this.props.heading}
-                  </Header>
-                  {this.props.children}
+                  <header
+                      style={moveCursor}
+                      className="title-bar">
+                    <Buttons
+                        onFork={fork.bind(this)}
+                        onClose={close.bind(this)} />
+                    <p style={moveCursor}>{this.props.heading}</p>
+                  </header>
+                  <p style={moveCursor}>{this.props.children}</p>
                 </li>
             );
         }
