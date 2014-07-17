@@ -39,7 +39,7 @@ define(['react', '../mixin/storeItemExclusions', '../mount/Empty', '../mount/Sta
             return (
                 <Empty
                     key={this.props.key}
-                    memento={this.memento()}
+                    guestMemento={this.memento()}
                     panelsAct={this.props.panelsAct}
                     orphansAct={this.props.orphansAct} >
                   <ul>{this.props.components.map(iconify.bind(this))}</ul>
