@@ -39,13 +39,12 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
 
             this.props.orphansAct.adoption.select(this.props.key);
 
-            e.preventDefault();
-            e.stopPropagation();
+//            e.preventDefault();
+//            e.stopPropagation();
         },
 
         drag : function (e) {
             var position = new affine.Point(e.clientX, e.clientY);
-
             this.setState({
                 position : project(
                     position.plus(this.state.handleToOrigin),
@@ -53,14 +52,18 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
                 )
             });
 
-            e.preventDefault();
+//            e.preventDefault();
+console.log('Drag');
+console.log(position);
+console.log(this.state.handleToOrigin);
+console.log(this.state.size);
         },
 
         dragEnd : function (e) {
             this.setState({ handleToOrigin : null });
 
-            e.preventDefault();
-            e.stopPropagation();
+//            e.preventDefault();
+//            e.stopPropagation();
         },
 
         render : function () {
@@ -86,7 +89,7 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
                     className:"mount orphan-mount",
                     style:style}, 
                   Header(
-                      {onUnmount:this.unmount.bind(this),
+                      {onUnmount:this.unmount,
                       onFork:fork.bind(this),
                       onClose:close.bind(this)}, 
                     this.props.heading
