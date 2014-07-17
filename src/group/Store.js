@@ -68,13 +68,21 @@ define(['react', 'signals', '../mount/Static', '../mount/Empty', '../KeyedList']
         this.publish.dispatch(this._list.items);
     };
 
-    Store.prototype.appendStatic = function (memento, storeItemExclusions) {
-        this._list.append([{Host:Static, memento:memento}]);
+    Store.prototype.appendStatic = function (memento) {
+        var host = {
+            component : Static,
+            componentProps : {}
+        };
+        this._list.append([{hostMemento:host, memento:memento}]);
         this.push();
     };
 
     Store.prototype.appendEmpty = function (memento) {
-        this._list.append([{Host:Empty, memento:memento}]);
+        var host = {
+            component : Empty,
+            componentProps : {}
+        };
+        this._list.append([{hostMemento:host, memento:memento}]);
         this.push();
     };
 
