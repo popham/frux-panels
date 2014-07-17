@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../mixin/host', './Button'], function (
-         react,            host,     Button) {
+define(['react', '../mixin/host', './Buttons'], function (
+         react,            host,     Buttons) {
 
     var Empty = react.createClass({
         displayName : 'Empty',
