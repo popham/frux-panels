@@ -31,7 +31,7 @@ define(['react', '../mixin/host', './fork', './close', './Buttons'], function (
                         onClose:close.bind(this)} ),
                     react.DOM.p(null, this.props.heading)
                   ),
-                  react.DOM.p(null, this.props.children)
+                  react.Children.only(this.props.children)
                 )
             );
         }

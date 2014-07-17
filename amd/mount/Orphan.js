@@ -114,7 +114,7 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
                         onClose:close.bind(this)} ),
                     react.DOM.p( {style:moveCursor}, this.props.heading)
                   ),
-                  react.DOM.p( {style:moveCursor}, this.props.children)
+                  react.Children.only(this.props.children)
                 )
             );
         }
