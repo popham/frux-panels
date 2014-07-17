@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', 'signals', '../KeyedList'], function (
-         react,   signals,      KeyedList) {
+define(['react', 'signals', '../mount/Orphan', '../KeyedList'], function (
+         react,   signals,            Orphan,      KeyedList) {
 
     var Adoption = function (store) {
         this._store = store;
