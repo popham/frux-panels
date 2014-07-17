@@ -14,7 +14,7 @@ define(['react', 'signals', '../KeyedList'], function (
         }
     });
 
-    Adoption.prototype._push = function () { this._store.push(); }
+    Adoption.prototype._push = function () { this._store.push(); };
 
     Object.defineProperty(Adoption.prototype, 'currentMemento', {
         get : function () {
@@ -103,7 +103,7 @@ define(['react', 'signals', '../KeyedList'], function (
 
     Store.prototype.push = function() {
         this.publish.dispatch(this._list.items);
-    }
+    };
 
     return Store;
 });
