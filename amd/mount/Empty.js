@@ -49,7 +49,6 @@ define(['react', '../mixin/host', './Identity', './Buttons'], function (
                     $merge : {hostMemento : Identity.hostMemento()}
                 });
                 props.key = this.props.key;
-                props.ref = 'wrapper';
 
                 style = {pointerEvents : 'none'};
 
@@ -60,7 +59,7 @@ define(['react', '../mixin/host', './Identity', './Buttons'], function (
                         onMouseUp:this.mouseUp}, 
                       react.DOM.header( {className:"title-bar", style:style}, 
                         Buttons(null ),
-                        react.DOM.p(null, this.refs.wrapper.heading())
+                        react.DOM.p(null)
                       ),
                       react.DOM.div( {style:style}, 
                         memento.component(props)

@@ -15,8 +15,6 @@ define(['react', './storeItemExclusions'], function (
             initialState : {}
         }; },
 
-        heading : function () { return this.props.heading; },
-
         componentWillMount : function () {
             this.setState(this.props.initialState);
         }
