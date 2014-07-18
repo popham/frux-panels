@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../mixin/host', './Buttons'], function (
-         react,            host,     Buttons) {
+define(['react', '../mixin/host', './Identity', './Buttons'], function (
+         react,            host,     Identity,     Buttons) {
 
     var Empty = react.createClass({
         displayName : 'Empty',
@@ -20,6 +20,8 @@ define(['react', '../mixin/host', './Buttons'], function (
         }; },
 
         mouseEnter : function (e) {
+            if (this.state.orphanMemento !== null) return;
+
             this.props.orphansAct.adoption.visit();
             this.setState({
                 orphanMemento : this.props.orphansAct.adoption.currentMemento
@@ -40,38 +42,28 @@ define(['react', '../mixin/host', './Buttons'], function (
             }
         },
 
-        shouldComponentUpdate : function (nextProps, nextState) {
-            return this.props !== nextProps || this.state !== nextState;
-        },
-
-        componentDidUpdate : function () {
-            console.log('UPDATED EMPTY');
-        },
-
         render : function () {
             var memento = this.state.orphanMemento;
             if (memento !== null) {
-                // Some of these props are unneeded since the panel is visiting.
-                // While hovering it renders, but it's not interactive.  I don't
-                // see any harm in providing the stuff to appease `isRequired`
-                // specs on the props.
-                var props = react.addons.update(memento.componentProps, {
-                    $merge : this.storeItemExclusions()
-                });
-                props.hostMemento = Empty.hostMemento();
-                props.pointerEvents = 'none';
-                props.key = this.props.key;
+                var props = {
+                    key : this.props.key,
+                    hostMemento : Identity.hostMemento()
+                };
+
+                style = {pointerEvents : 'none'};
 
                 return (
                     <li key={this.props.key}
                         className="mount visited-mount"
                         onMouseLeave={this.mouseLeave}
                         onMouseUp={this.mouseUp}>
-                      <header className="title-bar">
+                      <header className="title-bar" style={style}>
                         <Buttons />
                         <p>{this.props.heading}</p>
                       </header>
-                      {react.Children.only(memento.component(props))}
+                      <div style={style}>
+                        {memento.component(props)}
+                      </div>
                     </li>
                 );
             } else {
