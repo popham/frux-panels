@@ -6,7 +6,7 @@ define(['react', './storeItemExclusions'], function (
 
         propTypes : {
             guestMemento : react.PropTypes.object.isRequired,
-            heading : react.PropTypes.string
+            heading : react.PropTypes.string,
             initialState : react.PropTypes.object
         },
 

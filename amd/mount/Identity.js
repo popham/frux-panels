@@ -13,9 +13,7 @@ define(['react', '../mixin/host'], function (
             }; }
         },
 
-        render : function () {
-            return this.props.children;
-        }
+        render : function () { return this.props.children; }
     });
 
     return Identity;
