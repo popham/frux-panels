@@ -1,7 +1,7 @@
 {
   "name": "frux-panels",
   "version": "0.0.3",
-  "description": "Functional reactive panels UI under React's Flux architecture.",
+  "description": "Panels UI under React's Flux architecture.",
   "main": "cjs",
   "scripts": {
     "test": "./node_modules/.bin/jest",
