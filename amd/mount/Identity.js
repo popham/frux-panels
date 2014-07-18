@@ -6,10 +6,6 @@ define(['react', '../mixin/host'], function (
 
         mixins : [host],
 
-        propTypes : {
-            memento : react.PropTypes.object.isRequired
-        },
-
         statics : {
             hostMemento : function () { return {
                 component : Identity,
