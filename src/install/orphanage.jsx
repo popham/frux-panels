@@ -1,7 +1,7 @@
 /** @jsx react.DOM */
 
-define(['react', '../orphan/Orphanage', '../orphan/Store'], function (
-         react,             Orphanage,             Store) {
+define(['react', '../orphanage/Orphanage', '../orphanage/Store'], function (
+         react,                Orphanage,                Store) {
 
     return function (id) {
         var store = new Store();
