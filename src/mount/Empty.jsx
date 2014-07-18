@@ -45,10 +45,10 @@ define(['react', '../mixin/host', './Identity', './Buttons'], function (
         render : function () {
             var memento = this.state.orphanMemento;
             if (memento !== null) {
-                var props = {
-                    key : this.props.key,
-                    hostMemento : Identity.hostMemento()
-                };
+                var props = react.addons.update(Identity.hostMemento(), {
+                    $merge : this.storeItemExcludes()
+                });
+                props.key = this.props.key;
 
                 style = {pointerEvents : 'none'};
 
