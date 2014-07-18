@@ -45,8 +45,8 @@ define(['react', '../mixin/host', './Identity', './Buttons'], function (
         render : function () {
             var memento = this.state.orphanMemento;
             if (memento !== null) {
-                var props = react.addons.update(Identity.hostMemento(), {
-                    $merge : this.storeItemExcludes()
+                var props = react.addons.update(this.storeItemExclusions(), {
+                    $merge : {hostMemento : Identity.hostMemento()}
                 });
                 props.key = this.props.key;
 
