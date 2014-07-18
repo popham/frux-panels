@@ -1,6 +1,6 @@
 define(['affine/2d/primitive'], function (affine) {
 
-    return project = function (position, size) {
+    return function (position, size) {
         var bound = new affine.Point(window.innerWidth, window.innerHeight);
         var member = function (lower, point, upper) {
             return new affine.Point(
