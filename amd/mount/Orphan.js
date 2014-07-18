@@ -62,6 +62,8 @@ define(['react', 'affine/2d/primitive', '../mixin/host', '../project', './fork',
         mouseUp : function (e) {
             this.setState({ handleToOrigin : null });
 
+            this.props.orphansAct.adoption.unselect();
+
             e.preventDefault();
             e.stopPropagation();
         },

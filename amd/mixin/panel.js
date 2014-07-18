@@ -8,13 +8,11 @@ define(['react', './storeItemExclusions'], function (
 
         propTypes : {
             hostMemento : react.PropTypes.object.isRequired,
-            initialState : react.PropTypes.object,
-            pointerEvents : react.PropTypes.string
+            initialState : react.PropTypes.object
         },
 
         getDefaultProps : function () { return {
-            initialState : {},
-            pointerEvents : 'auto'
+            initialState : {}
         }; },
 
         host : function (heading, children) {
@@ -30,15 +28,9 @@ define(['react', './storeItemExclusions'], function (
                 }
             });
 
-            var style = { pointerEvents : this.props.pointerEvents };
-
             return host(
                 hostProps,
-                react.DOM.div(
-                    {className:"panel-content",
-                    style:style}, 
-                  children
-                )
+                react.DOM.div( {className:"panel-content"}, children)
             );
         },
 
