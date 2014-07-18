@@ -15,12 +15,14 @@ define(['react', './storeItemExclusions'], function (
             initialState : {}
         }; },
 
+        heading : function () { return this.refs.host.heading(); },
+
         host : function (heading, children) {
             var hostMemento = this.props.hostMemento;
-            var host = hostMemento.component;
             var hostProps = react.addons.update(hostMemento.componentProps, {
                 $merge : {
                     key : this.props.key,
+                    ref : 'host',
                     guestMemento : this.memento(),
                     heading : heading,
                     panelsAct : this.props.panelsAct,
@@ -28,7 +30,7 @@ define(['react', './storeItemExclusions'], function (
                 }
             });
 
-            return host(
+            return hostMemento.component(
                 hostProps,
                 <div className="panel-content">{children}</div>
             );
